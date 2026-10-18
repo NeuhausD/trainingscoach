@@ -1,0 +1,37 @@
+{
+  "today": "2026-07-06",
+  "season": "summer",
+  "goals": ["Allgemeine Fitness", "MTB-Ausdauer für Marathon Ende August", "Schnellkraft an Rampen"],
+  "sports": [
+    { "name": "Mountainbike", "category": "endurance", "seasonWeight": 9, "targetSessionsPerWeek": 3, "notes": "XC-Bike für Marathon, Trail-Bike für Feierabendrunden" },
+    { "name": "Jogging", "category": "endurance", "seasonWeight": 2, "targetSessionsPerWeek": null, "notes": null },
+    { "name": "Kraft Eisenhorn", "category": "strength", "seasonWeight": 5, "targetSessionsPerWeek": 1, "notes": "Zuhause, 45 min" },
+    { "name": "Kraft Studio", "category": "strength", "seasonWeight": 2, "targetSessionsPerWeek": null, "notes": "Fitline Plaffeien" }
+  ],
+  "equipment": [
+    { "name": "XC-Bike", "kind": "bike_xc" },
+    { "name": "Trail-Bike", "kind": "bike_trail" },
+    { "name": "Eisenhorn", "kind": "home_gym" }
+  ],
+  "recentWeeks": [
+    { "weekStart": "2026-06-08", "sessions": 3, "hours": 5.5, "load": 310, "bySport": { "Mountainbike": { "sessions": 2, "hours": 4.5 }, "Kraft Eisenhorn": { "sessions": 1, "hours": 1 } } },
+    { "weekStart": "2026-06-15", "sessions": 4, "hours": 7, "load": 390, "bySport": { "Mountainbike": { "sessions": 3, "hours": 6 }, "Kraft Eisenhorn": { "sessions": 1, "hours": 1 } } },
+    { "weekStart": "2026-06-22", "sessions": 4, "hours": 7.5, "load": 420, "bySport": { "Mountainbike": { "sessions": 3, "hours": 6.5 }, "Kraft Eisenhorn": { "sessions": 1, "hours": 1 } } },
+    { "weekStart": "2026-06-29", "sessions": 2, "hours": 3, "load": 170, "bySport": { "Mountainbike": { "sessions": 2, "hours": 3 } } }
+  ],
+  "bodyMetrics": { "weightKg": 78.4, "restingHr": 52 },
+  "performance": [
+    { "metric": "ftp_w", "value": 245, "unit": "W", "measuredOn": "2026-06-01" },
+    { "metric": "squat_1rm_kg", "value": 100, "unit": "kg", "measuredOn": "2026-04-20" }
+  ],
+  "forecast": [
+    { "date": "2026-07-06", "tempMaxC": 26, "tempMinC": 14, "precipitationMm": 0, "precipitationProbability": 5, "windMaxKmh": 12 },
+    { "date": "2026-07-07", "tempMaxC": 27, "tempMinC": 15, "precipitationMm": 0, "precipitationProbability": 10, "windMaxKmh": 10 },
+    { "date": "2026-07-08", "tempMaxC": 24, "tempMinC": 15, "precipitationMm": 8, "precipitationProbability": 70, "windMaxKmh": 25 },
+    { "date": "2026-07-09", "tempMaxC": 22, "tempMinC": 13, "precipitationMm": 2, "precipitationProbability": 40, "windMaxKmh": 15 },
+    { "date": "2026-07-10", "tempMaxC": 25, "tempMinC": 13, "precipitationMm": 0, "precipitationProbability": 5, "windMaxKmh": 8 },
+    { "date": "2026-07-11", "tempMaxC": 28, "tempMinC": 15, "precipitationMm": 0, "precipitationProbability": 0, "windMaxKmh": 6 },
+    { "date": "2026-07-12", "tempMaxC": 29, "tempMinC": 16, "precipitationMm": 0, "precipitationProbability": 10, "windMaxKmh": 10 }
+  ],
+  "constraints": ["Dienstagabend kein Training", "Wochenende: eine lange Tour möglich"]
+}
