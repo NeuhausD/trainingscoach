@@ -7,6 +7,7 @@ import {
   pgTable,
   text,
   timestamp,
+  uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -23,36 +24,54 @@ export const users = pgTable("users", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
-export const sports = pgTable("sports", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  name: text("name").notNull(),
-  category: text("category", { enum: ["endurance", "strength", "team", "other"] }).notNull(),
-  stravaTypes: text("strava_types").array().notNull().default([]),
-  active: boolean("active").notNull().default(true),
-});
+export const SPORT_CATEGORIES = ["endurance", "strength", "team", "other"] as const;
+export type SportCategory = (typeof SPORT_CATEGORIES)[number];
+
+export const sports = pgTable(
+  "sports",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    category: text("category", { enum: SPORT_CATEGORIES }).notNull(),
+    stravaTypes: text("strava_types").array().notNull().default([]),
+    active: boolean("active").notNull().default(true),
+  },
+  (t) => [uniqueIndex("sports_user_name_idx").on(t.userId, t.name)],
+);
 
 export const SEASONS = ["spring", "summer", "autumn", "winter"] as const;
 export type Season = (typeof SEASONS)[number];
 
-export const sportPreferences = pgTable("sport_preferences", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  sportId: uuid("sport_id").notNull().references(() => sports.id, { onDelete: "cascade" }),
-  season: text("season", { enum: SEASONS }).notNull(),
-  weight: integer("weight").notNull().default(5), // 0..10
-  targetSessionsPerWeek: integer("target_sessions_per_week"),
-  notes: text("notes"),
-});
+export const sportPreferences = pgTable(
+  "sport_preferences",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    sportId: uuid("sport_id").notNull().references(() => sports.id, { onDelete: "cascade" }),
+    season: text("season", { enum: SEASONS }).notNull(),
+    weight: integer("weight").notNull().default(5), // 0..10
+    targetSessionsPerWeek: integer("target_sessions_per_week"),
+    notes: text("notes"),
+  },
+  (t) => [uniqueIndex("sport_preferences_sport_season_idx").on(t.sportId, t.season)],
+);
 
-export const equipment = pgTable("equipment", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  name: text("name").notNull(),
-  kind: text("kind", { enum: ["bike_xc", "bike_trail", "shoes", "home_gym", "other"] }).notNull(),
-  stravaGearId: text("strava_gear_id").unique(),
-  retired: boolean("retired").notNull().default(false),
-  notes: text("notes"),
-});
+export const EQUIPMENT_KINDS = ["bike_xc", "bike_trail", "shoes", "home_gym", "other"] as const;
+export type EquipmentKind = (typeof EQUIPMENT_KINDS)[number];
+
+export const equipment = pgTable(
+  "equipment",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    kind: text("kind", { enum: EQUIPMENT_KINDS }).notNull(),
+    stravaGearId: text("strava_gear_id").unique(),
+    retired: boolean("retired").notNull().default(false),
+    notes: text("notes"),
+  },
+  (t) => [uniqueIndex("equipment_user_name_idx").on(t.userId, t.name)],
+);
 
 export const activities = pgTable("activities", {
   id: uuid("id").primaryKey().defaultRandom(),
