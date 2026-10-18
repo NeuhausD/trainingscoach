@@ -12,6 +12,6 @@
    - `AUTH_MICROSOFT_ENTRA_ID_SECRET` = Secret-Wert
    - `AUTH_MICROSOFT_ENTRA_ID_ISSUER` = `https://login.microsoftonline.com/<Directory (tenant) ID>/v2.0`
 5. «API permissions»: `openid`, `profile`, `email`, `User.Read` (Standard), Admin-Consent erteilen
-6. `ALLOWED_EMAILS` in der App auf die eigene Adresse setzen
+6. `ALLOWED_EMAILS` auf die Adresse setzen, mit der du dich im gewählten Tenant anmeldest (die Adresse, die Entra zurückgibt, nicht eine Alias-Adresse eines anderen Tenants)
 
 Wichtig: Der Issuer muss exakt dem Tenant-v2.0-Endpunkt entsprechen, sonst schlägt der Callback mit «invalid issuer» fehl.
