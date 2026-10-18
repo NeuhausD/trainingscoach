@@ -13,7 +13,8 @@ Trainingsvorschläge nach Saison, Wetter und Belastung.
 ```bash
 npm ci
 cp .env.example .env.local   # Werte eintragen, siehe docs/setup/
-npm run db:push              # Schema in die Neon-DB
+npm run db:migrate           # Migrationen in die Neon-DB
+npm run db:seed              # Stammdaten (Sportarten, Bikes) für die erste Adresse aus ALLOWED_EMAILS
 npm run dev                  # http://localhost:3000
 ```
 
@@ -24,8 +25,9 @@ npm run dev                  # http://localhost:3000
 | `npm run check` | Lint, Typecheck, Tests |
 | `npm run build` | Produktions-Build (wie Vercel) |
 | `npm run db:generate` / `db:migrate` / `db:push` / `db:studio` | Drizzle |
+| `npm run db:seed -- <email>` | Stammdaten anlegen (idempotent) |
 | `npm run coach:try -- summer-good-weather` | KI-Coach mit Beispielkontext aufrufen |
 
 ## Status
 
-Phase P0 (Fundament). Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).
+Phase P1 (Stammdaten) umgesetzt. Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).

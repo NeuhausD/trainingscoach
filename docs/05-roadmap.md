@@ -34,9 +34,10 @@ gantt
 - Fertig wenn: Login mit M365-Konto auf der Vercel-URL klappt, CI grün
 
 ### P1 – Stammdaten
-- Migrationen für alle Tabellen
-- Seiten: Sportarten (mit saisonaler Gewichtung), Geräte
-- Seed mit den bekannten Sportarten und zwei Bikes
+- [x] Migrationen für alle Tabellen (`drizzle/`, `npm run db:migrate`)
+- [x] Seiten: Sportarten (mit saisonaler Gewichtung), Geräte
+- [x] Seed mit den bekannten Sportarten und zwei Bikes (`npm run db:seed` oder Button «Stammdaten anlegen»)
+- [ ] Migration und Seed gegen die Neon-DB ausgeführt, Präferenzen in Production gepflegt
 - Fertig wenn: Präferenzen pro Saison gepflegt und persistiert
 
 ### P2 – Manuelle Erfassung

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { auth, signOut } from "@/auth";
 import { SEASON_LABELS } from "@/lib/domain/season";
 import { seasonForDate } from "@/lib/domain/season";
@@ -34,9 +35,14 @@ export default async function DashboardPage() {
       </header>
       <ul className="grid gap-3 sm:grid-cols-2">
         {sections.map((s) => (
-          <li key={s.href} className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
-            <h2 className="font-medium">{s.title}</h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{s.text}</p>
+          <li key={s.href}>
+            <Link
+              href={s.href}
+              className="block rounded-lg border border-zinc-200 bg-white p-4 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
+            >
+              <h2 className="font-medium">{s.title}</h2>
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{s.text}</p>
+            </Link>
           </li>
         ))}
       </ul>

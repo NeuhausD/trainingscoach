@@ -119,9 +119,26 @@ erDiagram
     }
 ```
 
+## Migrationen und Seed
+
+- Migrationen liegen in `drizzle/` und entstehen mit `npm run db:generate` aus
+  `src/db/schema.ts`; `npm run db:migrate` spielt sie ein (`db:push` nur für
+  Wegwerf-Datenbanken).
+- Eindeutigkeit: `sports(user_id, name)`, `equipment(user_id, name)` und
+  `sport_preferences(sport_id, season)`. Dadurch sind Seed und Speichern der
+  Präferenzen idempotente Upserts.
+- Der Benutzer wird beim ersten Seitenaufruf nach dem Login aus der Session
+  angelegt (`lib/users.ts`, Upsert über `entra_oid`).
+- Seed (`lib/domain/seed-data.ts`, Ausführung in `lib/master-data/seed.ts`):
+  Sportarten Mountainbike, Jogging, Kraft Studio, Kraft Eisenhorn, Eishockey
+  und «Sonstiges» mit Gewichtung je Saison sowie die Geräte «XC-Bike» und
+  «Trail-Bike». Läuft über `npm run db:seed -- <email>` oder den Button
+  «Stammdaten anlegen» auf der leeren Sportarten-Seite. Bestehende Einträge
+  (gleicher Name) werden nie überschrieben.
+
 ## Fachliche Regeln
 
-- **Saison** wird aus dem Datum abgeleitet (`lib/domain/season.ts`): Frühling März–Mai, Sommer Juni–August, Herbst September–November, Winter Dezember–Februar. Der Athlet kann die Gewichtung pro Sportart und Saison in `sport_preferences` setzen (0 = nie, 10 = Schwerpunkt).
+- **Saison** wird aus dem Datum abgeleitet (`lib/domain/season.ts`): Frühling März–Mai, Sommer Juni–August, Herbst September–November, Winter Dezember–Februar. Der Athlet kann die Gewichtung pro Sportart und Saison in `sport_preferences` setzen (0 = nie, 10 = Schwerpunkt; Validierung und Vervollständigung auf vier Saisons in `lib/domain/preferences.ts`). Fehlt ein Eintrag, gilt Gewichtung 5. Die Sportarten-Seite sortiert nach der Gewichtung der aktuellen Saison.
 - **Sportart-Zuordnung** beim Import: Strava `sport_type` → `sports.strava_types`. Nicht zuordenbare Aktivitäten landen in einer Sportart «Sonstiges» und können manuell umgehängt werden.
 - **Ausrüstung** beim Import: Strava `gear_id` → `equipment.strava_gear_id`. Unbekanntes Gear wird automatisch als neues Gerät angelegt (Name aus Strava), Typ wird nachträglich gesetzt.
 - **Belastung** (`training_load`): wenn Leistungsdaten vorhanden, TSS-ähnlich aus Leistung und FTP; sonst HF-basiert (TRIMP); bei Kraft und Eishockey aus Dauer × RPE. Berechnung in `lib/domain/load.ts`, bewusst einfach und nachvollziehbar.
