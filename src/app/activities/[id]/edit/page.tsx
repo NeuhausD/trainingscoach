@@ -34,7 +34,7 @@ export default async function EditActivityPage({ params }: { params: Promise<{ i
           rpe: activity.rpe,
           title: activity.title ?? "",
           notes: activity.notes ?? "",
-          distanceKm: activity.distanceM ? String(Number(activity.distanceM) / 1000) : "",
+          distanceKm: activity.distanceM ? String(Math.round(Number(activity.distanceM) / 10) / 100) : "",
           elevationM: activity.elevationGainM ? String(Math.round(Number(activity.elevationGainM))) : "",
           avgHr: activity.avgHr ? String(activity.avgHr) : "",
           maxHr: activity.maxHr ? String(activity.maxHr) : "",
