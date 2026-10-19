@@ -23,9 +23,14 @@ export function AppShell({ signedIn, children }: { signedIn: boolean; children: 
             Trainingscoach
           </Link>
           {signedIn && (
-            <nav aria-label="Hauptnavigation" className="hidden sm:block">
-              <NavLinks />
-            </nav>
+            <div className="flex items-center gap-3">
+              <nav aria-label="Hauptnavigation" className="hidden sm:block">
+                <NavLinks />
+              </nav>
+              <Link href="/settings/connectors" className="text-sm font-medium text-stone hover:text-moss">
+                Einstellungen
+              </Link>
+            </div>
           )}
         </div>
       </header>

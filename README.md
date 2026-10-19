@@ -30,4 +30,4 @@ npm run dev                  # http://localhost:3000
 
 ## Status
 
-Phasen P0 bis P2 (Stammdaten, Design, manuelle Erfassung) umgesetzt. Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).
+Phasen P0 bis P3 (Stammdaten, Design, manuelle Erfassung, Strava-Connector) umgesetzt. Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).

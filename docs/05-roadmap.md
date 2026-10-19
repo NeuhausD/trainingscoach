@@ -50,9 +50,10 @@ gantt
 - Fertig wenn: Eishockey-Abend und Studio-Training in 30 Sekunden erfasst
 
 ### P3 – Strava
-- OAuth-Flow, verschlüsselte Token-Ablage
-- Initial-Import (letzte 12 Monate), Webhook, nächtlicher Cron
-- Gear-Abgleich mit Geräten, Sportart-Mapping
+- [x] OAuth-Flow, verschlüsselte Token-Ablage, Trennen mit Deauthorize
+- [x] Initial-Import (letzte 12 Monate), Webhook mit `after()`, nächtlicher Cron (30 Tage)
+- [x] Gear-Abgleich mit Geräten (unbekanntes Gear wird angelegt), Sportart-Mapping über `strava_types`
+- [ ] In Production verbunden, Import ausgeführt, Webhook-Subscription angelegt, Gear-IDs der Bikes gesetzt
 - Fertig wenn: neue Garmin-Aktivität erscheint ohne Zutun in der App mit richtigem Bike
 
 ### P4 – FIT-Upload

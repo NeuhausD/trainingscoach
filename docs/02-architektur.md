@@ -86,7 +86,8 @@ src/
     metrics/              Körperwerte und Leistungswerte (Formulare und Listen; actions.ts)
     settings/connectors/  Strava verbinden, KI-Anbieter
     api/auth/[...nextauth] Auth.js Handler
-    api/strava/*          OAuth-Callback, Webhook, Sync
+    api/strava/*          connect (OAuth-Start), callback, webhook
+    settings/connectors/  Strava verbinden, importieren, trennen; actions.ts
     api/coach/*           KI-Vorschläge
     api/cron/*            geplante Jobs
   auth.ts                 Auth.js Konfiguration
@@ -96,7 +97,7 @@ src/
     users.ts              Session -> DB-Benutzer (Upsert)
     master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Aktivitäten, Sätze, Übungen, Werte, Seed
     domain/               reine Fachlogik (Saison, Zeit, Belastung, RPE, Präferenzen, Sätze, Werte, Kataloge), gut testbar
-    strava/               API-Client, Mapping Strava -> Activity
+    strava/               API-Client (client.ts), Import und Webhook-Verarbeitung (sync.ts)
     fit/                  FIT-Parser
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas
     weather/              Open-Meteo Client
@@ -143,12 +144,14 @@ sequenceDiagram
     participant DB as Postgres
     U->>G: Aktivität aufzeichnen
     G->>S: automatischer Upload (Garmin Connect -> Strava)
-    S->>A: Webhook: activity create
-    A->>S: GET /activities/{id} (mit gespeichertem Refresh-Token)
+    S->>A: Webhook: activity create (POST /api/strava/webhook)
+    A-->>S: 200 sofort, Verarbeitung mit after()
+    A->>S: Token erneuern falls < 5 min gültig
+    A->>S: GET /activities/{id}
     A->>S: GET /gear/{gear_id} (falls unbekannt)
     A->>DB: upsert activity, equipment
-    A->>A: Kennzahlen neu berechnen (Wochenvolumen, Belastung)
-    Note over A: Nachtlicher Cron holt zusätzlich die letzten 30 Tage als Sicherheitsnetz
+    A->>A: Belastung berechnen (Leistung mit FTP, sonst Puls)
+    Note over A: Nächtlicher Cron (/api/cron/strava-sync) holt die letzten 30 Tage als Sicherheitsnetz
 ```
 
 ## Ablauf: KI-Trainingsvorschlag

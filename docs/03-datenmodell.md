@@ -120,14 +120,16 @@ erDiagram
     }
     connectors {
         uuid id PK
-        uuid user_id FK
+        uuid user_id FK "unique mit provider"
         text provider "strava"
-        text external_athlete_id
-        text access_token_enc
-        text refresh_token_enc
+        text external_athlete_id "Strava-Athlete-ID, Schlüssel für Webhooks"
+        text athlete_name
+        text access_token_enc "AES-GCM"
+        text refresh_token_enc "AES-GCM"
         timestamptz expires_at
         timestamptz last_sync_at
-        text status
+        text last_error
+        text status "connected | error | disconnected"
     }
     training_suggestions {
         uuid id PK
@@ -173,7 +175,8 @@ erDiagram
 - **Manuelle Erfassung** (`lib/domain/activity-input.ts`): Datum und Startzeit werden in `Europe/Zurich` eingegeben und als UTC gespeichert (`lib/domain/time.ts`). Dauer in Minuten, RPE 1–10 (`lib/domain/rpe.ts`), optional Distanz, Höhenmeter, Puls. Die Belastung wird beim Speichern berechnet: HF-basiert, wenn Durchschnitts- und Maximalpuls sowie ein Ruhepuls aus `body_metrics` vorliegen, sonst aus Dauer × RPE.
 - **Kraftsätze** (`lib/domain/strength.ts`): je Satz Wiederholungen plus Gewicht in kg (Studio) oder Eisenhorn-Stufe; Kilogramm aus der Stufe über `equipment.settings.kgPerLevel`. `setsByMuscle()` zählt Sätze je Muskelgruppe (Primär 1, Sekundär 0.5) als Grundlage für Vorschläge in P6.
 - **Körper- und Leistungswerte** (`lib/domain/metrics.ts`): Gewicht und Ruhepuls pro Tag, Leistungswerte mit Einheit je Kennzahl; `weightTrend()` liefert das 7-Tage-Mittel.
-- **Ausrüstung** beim Import: Strava `gear_id` → `equipment.strava_gear_id`. Unbekanntes Gear wird automatisch als neues Gerät angelegt (Name aus Strava), Typ wird nachträglich gesetzt.
+- **Ausrüstung** beim Import: Strava `gear_id` → `equipment.strava_gear_id`. Unbekanntes Gear wird automatisch als neues Gerät angelegt (Name aus Strava, MTB-Rahmen → Trail-Bike als Vorschlag, sonst «Sonstiges»), Typ wird nachträglich gesetzt. Bestehende Geräte bekommen ihre Gear-ID im Geräteformular.
+- **Strava-Import** (`lib/domain/strava-mapping.ts`, `lib/strava/sync.ts`): `activities.external_id` = `strava:<id>`, Quelle `strava`. Beim Aktualisieren bleiben manuell gesetzte Sportart und Gerät erhalten, Messwerte und Titel werden übernommen. `raw_summary` enthält nur Strava-ID, Sporttyp, Gear-ID und Trainer-Flag, keine Streams. Belastung aus Leistung (nur `device_watts`) mit FTP aus `performance_metrics`, sonst Puls, sonst 0.
 - **Belastung** (`training_load`): wenn Leistungsdaten vorhanden, TSS-ähnlich aus Leistung und FTP; sonst HF-basiert (TRIMP); bei Kraft und Eishockey aus Dauer × RPE. Berechnung in `lib/domain/load.ts`, bewusst einfach und nachvollziehbar.
 - **Fortschritt**: Vergleich rollierender 4-Wochen-Fenster (Volumen, Belastung, Höhenmeter), Trend der `performance_metrics` je Metrik, Gewichtstrend als 7-Tage-Mittel.
 - **Vorschläge** werden nie automatisch zu Aktivitäten. Erst wenn eine passende Aktivität importiert wird oder der Athlet sie als erledigt markiert, wird `completed_activity_id` gesetzt.

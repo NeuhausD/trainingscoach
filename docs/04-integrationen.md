@@ -53,9 +53,12 @@ ohne Umbau ergänzt werden kann.
 | `GET /gear/{id}` | Name, Typ, Distanz der Ausrüstung |
 | Webhook Subscription `POST /push_subscriptions` | Neue Aktivität sofort übernehmen |
 
-Rate-Limits (Stand 2026: 200 Anfragen pro 15 Minuten, 2'000 pro Tag) sind für
-einen Benutzer unkritisch. Tokens laufen nach 6 Stunden ab und werden über den
-Refresh-Token erneuert; beide werden verschlüsselt gespeichert.
+Rate-Limits (Stand 2026: 200 Anfragen pro 15 Minuten, davon 100 lesend,
+2'000 pro Tag) sind für einen Benutzer unkritisch: der 12-Monats-Import
+braucht wenige Listen-Anfragen (200 Aktivitäten je Seite) plus eine Anfrage je
+unbekanntem Gear. Tokens laufen nach 6 Stunden ab und werden kurz vor Ablauf
+über den Refresh-Token erneuert; beide werden mit AES-GCM verschlüsselt
+gespeichert (`src/lib/crypto.ts`).
 
 ### API-Bedingungen und KI
 
