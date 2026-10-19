@@ -22,8 +22,9 @@ Saison als Kernkonzept sichtbar machen. Grundlage sind die Skills
 | `season-autumn` | `#C4622D` | `#E07D4B` | Herbst |
 | `season-winter` | `#4F8FC2` | `#74ADDA` | Winter |
 
-Saisonfarben markieren ausschliesslich die aktuelle Saison (Titel der
-Übersicht, Balken im Saisonprofil). Alles andere bleibt in Moos und Grau.
+Saisonfarben markieren ausschliesslich die aktuelle Saison (Saisonwort in
+der Statuszeile der Übersicht, Balken im Saisonprofil). Alles andere bleibt
+in Moos und Grau.
 
 ## Typografie
 
@@ -41,8 +42,7 @@ Pfeile in Buttons.
 `src/components/season-profile.tsx`. Vier Balken je Sportart, Höhe =
 Gewichtung 0..10 in der Reihenfolge Frühling, Sommer, Herbst, Winter. Die
 aktuelle Saison trägt ihre Saisonfarbe, die anderen Stein, Gewichtung 0
-Nebel. Erscheint in der Sportarten-Liste, auf der Übersicht und gross im
-Bearbeiten-Formular. Barrierefrei über `role="img"` mit textueller
+Nebel. Erscheint in der Sportarten-Liste und gross im Bearbeiten-Formular. Barrierefrei über `role="img"` mit textueller
 Beschreibung.
 
 ## Erfassungsformulare
@@ -68,6 +68,10 @@ Beschreibung.
   Übersicht, Training, Coach, Fortschritt, Sportarten; Geräte und Werte
   hängen unter Sportarten bzw. Fortschritt (Tab bleibt aktiv). Inhalte
   linksbündig, maximal `max-w-2xl`.
+- Übersicht: zuerst die Aussicht (nächste Einheit als Titel in Barlow
+  Condensed, folgende Tage als Zeilen), dann der Rückblick (vier Wochen mit
+  Balken, letzte Einheit). Saison und Schwerpunkte sind eine Statuszeile
+  unter der Begrüssung, kein Hero.
 - Listen als Zeilen mit `divide-y divide-mist`, keine Karten-Raster.
 - Formulare in Gruppen (`panel`), die aktuelle Saison mit Moos-Ring.
 - Gemeinsame Klassen in `src/components/ui.ts`.
