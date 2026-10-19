@@ -22,3 +22,11 @@ export const SEASON_LABELS: Record<Season, string> = {
   autumn: "Herbst",
   winter: "Winter",
 };
+
+/** Monatsspanne je Saison für die Anzeige. */
+export const SEASON_MONTHS: Record<Season, string> = {
+  spring: "März bis Mai",
+  summer: "Juni bis August",
+  autumn: "September bis November",
+  winter: "Dezember bis Februar",
+};

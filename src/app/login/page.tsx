@@ -1,4 +1,7 @@
 import { signIn } from "@/auth";
+import { buttonPrimary, errorBox } from "@/components/ui";
+
+export const metadata = { title: "Anmelden" };
 
 export default async function LoginPage({
   searchParams,
@@ -7,14 +10,14 @@ export default async function LoginPage({
 }) {
   const { callbackUrl, error } = await searchParams;
   return (
-    <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 px-4">
+    <div className="flex min-h-[60vh] max-w-sm flex-col justify-center gap-6">
       <div>
-        <h1 className="text-2xl font-semibold">Trainingscoach</h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">Anmeldung mit deinem Microsoft-365-Konto.</p>
+        <h1 className="text-5xl font-bold leading-none tracking-tight">Dein Training, deine Saison.</h1>
+        <p className="mt-3 text-stone">Anmeldung mit deinem Microsoft-365-Konto.</p>
       </div>
       {error && (
-        <p className="rounded-md bg-red-50 p-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
-          Anmeldung fehlgeschlagen ({error}). Ist deine E-Mail-Adresse freigeschaltet?
+        <p role="alert" className={errorBox}>
+          Anmeldung fehlgeschlagen ({error}). Prüfe, ob deine E-Mail-Adresse freigeschaltet ist.
         </p>
       )}
       <form
@@ -23,13 +26,10 @@ export default async function LoginPage({
           await signIn("microsoft-entra-id", { redirectTo: callbackUrl ?? "/dashboard" });
         }}
       >
-        <button
-          type="submit"
-          className="w-full rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-white dark:text-zinc-900"
-        >
+        <button type="submit" className={buttonPrimary}>
           Mit Microsoft anmelden
         </button>
       </form>
-    </main>
+    </div>
   );
 }

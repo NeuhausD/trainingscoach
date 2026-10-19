@@ -8,6 +8,7 @@
 | [04 Integrationen](04-integrationen.md) | Garmin, Strava, Entra ID, KI-Anbieter, Wetter |
 | [05 Roadmap](05-roadmap.md) | Phasen P0–P8 mit Fertig-Kriterien |
 | [06 Entwicklungsworkflow](06-entwicklungsworkflow.md) | Claude Code, GSD vs. Skills, Git, Qualität |
+| [07 Design](07-design.md) | Tokens, Typografie, Saisonprofil, Layout-Regeln |
 | [adr/](adr/) | Architekturentscheidungen |
 | [setup/](setup/) | Schritt-für-Schritt: GitHub, Vercel, Neon, Entra ID, Strava |
 

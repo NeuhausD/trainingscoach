@@ -21,7 +21,7 @@ Eingabe: $ARGUMENTS (Beschreibung oder Roadmap-Phase, z. B. "P3 Strava OAuth").
 ## 3. Umsetzen
 - Fachlogik zuerst mit Tests (Vitest), dann DB, dann Route Handler / Server Actions, dann UI.
 - Next.js 16: `proxy.ts` statt Middleware, Route Handler in `app/api/**/route.ts`; bei Unsicherheit `node_modules/next/dist/docs/` lesen.
-- UI auf Deutsch, Tailwind, mobil zuerst (die App wird oft am Handy genutzt).
+- UI auf Deutsch, Tailwind, mobil zuerst (die App wird oft am Handy genutzt). Tokens und Bausteine aus `docs/07-design.md` und `src/components/` verwenden; neue Seiten mit `/frontend-design` planen.
 - Neue Env-Variablen in `.env.example` und `docs/setup/` ergänzen.
 
 ## 4. Prüfen

@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
+/*
+  Design-Tokens des Trainingscoach (docs/07-design.md).
+  Papier/Tinte/Moos/Nebel/Stein bilden die Basis, die vier Saisonfarben
+  markieren ausschliesslich die aktuelle Saison.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #f2f4f1;
+  --paper-raised: #ffffff;
+  --ink: #16211c;
+  --moss: #2f5d46;
+  --moss-ink: #ffffff;
+  --mist: #d5dbd6;
+  --stone: #5e6b64;
+  --danger: #a33a2a;
+  --season-spring: #5fa052;
+  --season-summer: #d99a1c;
+  --season-autumn: #c4622d;
+  --season-winter: #4f8fc2;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #0f1512;
+    --paper-raised: #17201b;
+    --ink: #ecefea;
+    --moss: #7dbf9a;
+    --moss-ink: #0f1512;
+    --mist: #27332c;
+    --stone: #98a59e;
+    --danger: #e08a7a;
+    --season-spring: #7fc471;
+    --season-summer: #e9b347;
+    --season-autumn: #e07d4b;
+    --season-winter: #74adda;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-moss: var(--moss);
+  --color-moss-ink: var(--moss-ink);
+  --color-mist: var(--mist);
+  --color-stone: var(--stone);
+  --color-danger: var(--danger);
+  --color-season-spring: var(--season-spring);
+  --color-season-summer: var(--season-summer);
+  --color-season-autumn: var(--season-autumn);
+  --color-season-winter: var(--season-winter);
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), var(--font-barlow), system-ui, sans-serif;
+  --radius-control: 0.375rem;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: fine) {
+  html {
+    overscroll-behavior: none;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-feature-settings: "tnum";
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+select,
+input,
+textarea {
+  background-color: var(--paper-raised);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
