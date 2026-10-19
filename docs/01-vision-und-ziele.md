@@ -20,7 +20,7 @@ Ausrüstung) und macht daraus Planung und Auswertung.
 | Mountainbike Marathons | Sommer, einzelne Events | XC-Bike | Wettkampf, nur zum Spass |
 | Jogging | ganzjährig, gelegentlich | – | Grundlagenausdauer |
 | Krafttraining Studio | Herbst, Winter, Frühling | Fitline Studio Plaffeien | Kraft, Schnellkraft |
-| Krafttraining zuhause | ganzjährig | eigenes Gerät («Eisenhorn») | Kraft, Ergänzung |
+| Krafttraining zuhause | ganzjährig | Eisenhorn (Kraftstation, Kolben 16, 10 Stufen, ohne Seilzug) | Kraft, Ergänzung zum Studio, kurze Einheiten zwischendurch |
 | Eishockey (Plausch) | Winter | Halle | Intervall, Spass |
 
 ## Persönliche Ziele

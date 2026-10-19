@@ -1,0 +1,2371 @@
+{
+ "source": "https://eisenhorn.com/de-ch/training/kraftuebungen/",
+ "retrieved": "2026-10-19",
+ "note": "Nur Fakten (Nummer, Name, Muskelgruppen, Zubehör). Anleitung und Video beim Hersteller: https://eisenhorn.com/de-ch/training/kraftuebungen/<slug>/",
+ "muscles": [
+  "back",
+  "biceps",
+  "calves",
+  "chest",
+  "core",
+  "forearms",
+  "glutes",
+  "legs",
+  "neck",
+  "shoulders",
+  "triceps"
+ ],
+ "exercises": [
+  {
+   "number": 1,
+   "name": "Schulterdrücken vor dem Kopf",
+   "slug": "schulterdruecken",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 2,
+   "name": "Latzug in den Nacken",
+   "slug": "latzug-in-den-nacken",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 3,
+   "name": "Latzug zur Brust",
+   "slug": "latzug-zur-brust",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 4,
+   "name": "Brustdrücken stehend",
+   "slug": "brustdruecken-stehend",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 5,
+   "name": "Bizepscurls stehend",
+   "slug": "bizepscurls",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 6,
+   "name": "Aufrechtes Rudern mit engem Griff",
+   "slug": "aufrechtes-rudern-mit-engem-griff",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "neck"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 7,
+   "name": "Ruderzug seitlich stehend",
+   "slug": "ruderzug-seitlich-stehend",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 8,
+   "name": "Trizepsübung mit Griffstange",
+   "slug": "uebungen-fuer-den-trizeps",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 9,
+   "name": "Hängendes Beinheben",
+   "slug": "haengendes-beinheben-mit-angewinkelten-beinen",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "forearms"
+   ],
+   "accessories": [
+    "blocker",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 10,
+   "name": "Recrunch mit Griffband",
+   "slug": "recrunch-mit-griffband",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 11,
+   "name": "Trizepsübung mit Griffband kniend",
+   "slug": "011-trizepsuebung-mit-griffband-kniend",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 12,
+   "name": "Rumpfrotation",
+   "slug": "rumpfrotation",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 13,
+   "name": "Crunches",
+   "slug": "crunches",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "back",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 14,
+   "name": "Kreuzheben mit Griffstange",
+   "slug": "kreuzheben-mit-griffstange-deadlift",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 15,
+   "name": "Ausfallschritte",
+   "slug": "ausfallschritte",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "legs"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 16,
+   "name": "Einbeinige Kniebeuge mit Entlastung",
+   "slug": "einbeinige-kniebeuge-mit-entlastung",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 17,
+   "name": "Einbeinige Beinpresse",
+   "slug": "einbeinige-beinpresse",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 18,
+   "name": "Einbeinige rückwärtige Beinpresse",
+   "slug": "einbeinige-rueckwaertige-beinpresse",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "legs"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 19,
+   "name": "Stehendes Wadenheben",
+   "slug": "stehendes-wadenheben",
+   "primaryMuscles": [
+    "calves"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 20,
+   "name": "Beinbeuger liegend",
+   "slug": "beinbeuger-liegend",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 21,
+   "name": "Hackenschmidt Kniebeuge",
+   "slug": "hackenschmidt-kniebeuge",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 22,
+   "name": "Hängendes Beinheben mit gestreckten Beinen",
+   "slug": "haengendes-beinheben-mit-gestreckten-beinen",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "blocker",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 23,
+   "name": "Hüftheben seitlich",
+   "slug": "hueftheben-seitlich",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 24,
+   "name": "Progressives Kreuzheben mit Griffband",
+   "slug": "progressives-kreuzheben-mit-griffband",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 25,
+   "name": "Bankdrücken (Brustdrücken)",
+   "slug": "bankdruecken-brustdruecken",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 26,
+   "name": "Beinpresse",
+   "slug": "beinpresse",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 27,
+   "name": "Frontkniebeugen",
+   "slug": "kniebeugen",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "back"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 28,
+   "name": "Adduktion mit Griffband",
+   "slug": "adduktion-mit-griffband",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 29,
+   "name": "Rudern vorgebeugt mit Untergriff",
+   "slug": "rudern-vorgebeugt-mit-untergriff",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 30,
+   "name": "Klimmzug auf die Brust",
+   "slug": "klimmzug-auf-die-brust",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "blocker",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 31,
+   "name": "Einbeinige Kniebeuge am Horn",
+   "slug": "031-einbeinige-kniebeuge-am-horn",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 32,
+   "name": "Rudern seitlich einarmig",
+   "slug": "rudern-seitlich-einarmig",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 33,
+   "name": "Brustdrücken seitlich",
+   "slug": "brustdruecken-seitlich",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 34,
+   "name": "Innenrotation mit Seilzug",
+   "slug": "innenrotation-mit-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 35,
+   "name": "Hüftheben",
+   "slug": "hueftheben",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "legs"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 36,
+   "name": "Aussenrotation mit Seilzug",
+   "slug": "aussenrotation-mit-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 37,
+   "name": "Rudern vorgebeugt mit Obergriff",
+   "slug": "rudern-vorgebeugt-mit-obergriff",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 38,
+   "name": "Innenrotation seitlich mit Griffband",
+   "slug": "innenrotation-seitlich-mit-griffband",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 39,
+   "name": "Aussenrotation seitlich mit Griffband",
+   "slug": "aussenrotation-seitlich-mit-griffband",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 40,
+   "name": "Beckenheben liegend",
+   "slug": "beckenheben-liegend",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "legs"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 41,
+   "name": "Aufrechtes Rudern mit breitem Griff",
+   "slug": "aufrechtes-rudern-mit-breitem-griff",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "neck"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 42,
+   "name": "Trizepsübung mit Griffband",
+   "slug": "trizepsuebung-mit-griffband",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 43,
+   "name": "Schulterdrücken hinter dem Kopf",
+   "slug": "schulterdruecken-hinter-dem-kopf",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 44,
+   "name": "Liegestütze mit einem Bein im Griffband",
+   "slug": "liegestuetze-mit-einem-bein-im-griffband",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "triceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 45,
+   "name": "Einbeiniges Kreuzheben einarmig",
+   "slug": "einbeiniges-kreuzheben-einarmig",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 46,
+   "name": "Sumo-Kreuzheben (Deadlifts) mit Griffstange",
+   "slug": "sumo-kreuzheben-deadlifts-mit-griffstange",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 47,
+   "name": "Rumänisches Kreuzheben",
+   "slug": "kreuzheben-deadlifts-mit-gestreckten-beinen",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "back"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 48,
+   "name": "Plank to pike",
+   "slug": "plank-to-pike",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 49,
+   "name": "Ausfallschritte mit Griffband",
+   "slug": "ausfallschritte-mit-griffband",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 50,
+   "name": "Wadenheben sitzend",
+   "slug": "wadenheben-sitzend",
+   "primaryMuscles": [
+    "calves"
+   ],
+   "secondaryMuscles": [
+    "legs"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 51,
+   "name": "Unterarm-Curls mit Obergriff",
+   "slug": "unterarm-curls-mit-obergriff",
+   "primaryMuscles": [
+    "forearms"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 52,
+   "name": "Unterarm-Curls hinter dem Rücken",
+   "slug": "unterarm-curls-hinter-dem-ruecken",
+   "primaryMuscles": [
+    "forearms"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 53,
+   "name": "Negativ Bankdrücken mit angehobenen Beinen",
+   "slug": "negativ-bankdruecken-mit-angehobenen-beinen",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 54,
+   "name": "Dips mit Gewicht",
+   "slug": "dips-mit-gewicht",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 55,
+   "name": "Hängendes Beinheben mit angewinkelten Beinen",
+   "slug": "055-haengendes-beinheben-mit-angewinkelten-beinen",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "forearms"
+   ],
+   "accessories": [
+    "blocker",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 56,
+   "name": "Trizepsübung mit Griffband",
+   "slug": "trizepsuebung-mit-langem-griffband",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 57,
+   "name": "Schienbeinheben sitzend",
+   "slug": "schienbeinheben-sitzend",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 58,
+   "name": "Einbeinige Kniebeugen seitlich",
+   "slug": "einbeinige-kniebeugen-seitlich",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 59,
+   "name": "Crunches mit Griffband",
+   "slug": "crunches-mit-griffband",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "shoulders",
+    "triceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 60,
+   "name": "Butterfly",
+   "slug": "butterfly",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 61,
+   "name": "Dips mit Griffband",
+   "slug": "dips-mit-griffband",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 62,
+   "name": "Bauchcrunches seitlich",
+   "slug": "bauchcrunches-seitlich",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "back",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 63,
+   "name": "Recrunch mit Griffband",
+   "slug": "063-recrunch-mit-griffband",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 64,
+   "name": "Trizepsübung mit Griffband",
+   "slug": "trizepsuebung-mit-griffband-2",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 65,
+   "name": "Überkopf-Ausfallschritte",
+   "slug": "ueberkopf-ausfallschritte",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "back",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 66,
+   "name": "Trizepsübung mit Griffstange kniend",
+   "slug": "066-trizepsuebung-mit-griffstange-kniend",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 67,
+   "name": "Nackenheben hinten",
+   "slug": "nackenheben-hinten",
+   "primaryMuscles": [
+    "neck"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 68,
+   "name": "Rudern einarmig",
+   "slug": "rudern-einarmig",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps",
+    "shoulders"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 69,
+   "name": "Bizepscurls mit Körpergewicht",
+   "slug": "bizepscurls-mit-koerpergewicht",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 70,
+   "name": "Ausfallschritte nach vorne",
+   "slug": "ausfallschritte-nach-vorne",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 71,
+   "name": "Schulterheben hinten",
+   "slug": "schulterheben-hinten",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "neck"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 72,
+   "name": "Schulterdrücken hinter dem Kopf sitzend",
+   "slug": "072-schulterdruecken-hinter-dem-kopf",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 73,
+   "name": "Dips mit Griffband tief",
+   "slug": "073-dips-mit-griffband-tief",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 74,
+   "name": "Hammer Curls",
+   "slug": "hammer-curls",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [
+    "forearms"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 75,
+   "name": "Hängender Ruderzug mit angewinkelten Beinen",
+   "slug": "haengender-ruderzug-mit-angewinkelten-beinen",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 76,
+   "name": "Schulterdrücken hinter dem Kopf mit Griffband",
+   "slug": "schulterdruecken-hinter-dem-kopf-mit-griffband",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 77,
+   "name": "Ausfallschritte mit Griffstange",
+   "slug": "ausfallschritte-mit-griffstange",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 78,
+   "name": "Liegestütze mit Griffband",
+   "slug": "liegestuetze-mit-griffband",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 79,
+   "name": "Trizepsdrücken",
+   "slug": "trizepsdruecken",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 80,
+   "name": "Mountain Climbers",
+   "slug": "mountain-climbers",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband",
+    "karabiner"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 81,
+   "name": "Schulterdrücken sitzend",
+   "slug": "schulterdruecken-sitzend",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 82,
+   "name": "Rumpfbeugen seitlich",
+   "slug": "rumpfbeugen-seitlich",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 83,
+   "name": "Einarmige Bizepscurls",
+   "slug": "einarmige-bizepscurls",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 84,
+   "name": "Rudern mit Griffband",
+   "slug": "rudern-mit-griffband",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 85,
+   "name": "Bankdrücken in Brückenstellung",
+   "slug": "bankdruecken-in-brueckenstellung",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 86,
+   "name": "Trizepsübung mit Griffband einarmig",
+   "slug": "trizepsuebung-mit-griffband-einarmig",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 87,
+   "name": "Beinbeuger mit Griffband",
+   "slug": "beinbeuger-mit-griffband",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "back"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 88,
+   "name": "Plank Jacks",
+   "slug": "plank-jacks",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes",
+    "shoulders"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 89,
+   "name": "Schulterheben vorne",
+   "slug": "schulterheben-vorne",
+   "primaryMuscles": [
+    "neck"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 90,
+   "name": "Trizepsübung mit Griffstange Untergriff",
+   "slug": "trizepsuebung-mit-griffstange-im-untergriff",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 91,
+   "name": "Trizepsübung mit Griffband einarmig",
+   "slug": "trizepsuebung-mit-griffband-einarmig-2",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 92,
+   "name": "Wadenheben stehend exzentrisch",
+   "slug": "wadenheben-stehend-exzentrisch",
+   "primaryMuscles": [
+    "calves"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 93,
+   "name": "Unterarmstütz mit Griffband",
+   "slug": "unterarmstuetz-mit-griffband",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 94,
+   "name": "Trizepsübung mit Griffstange Untergriff kniend",
+   "slug": "094-trizepsuebung-mit-griffstange-untergriff-kniend",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 95,
+   "name": "Latzug mit Griffband",
+   "slug": "latzug-mit-griffband",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 96,
+   "name": "Einbeiniges Kreuzheben",
+   "slug": "einbeiniges-kreuzheben",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "back"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 97,
+   "name": "Bizepscurls mit Griffband",
+   "slug": "bizepscurls-mit-griffband",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 98,
+   "name": "Überkopf-Kniebeugen",
+   "slug": "ueberkopf-kniebeugen-overhead-squats",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 99,
+   "name": "Schulterdrücken sitzend mit angehobenen Füssen",
+   "slug": "schulterdruecken-sitzend-mit-angehobenen-fuessen",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 100,
+   "name": "Schulterdrücken mit engem Griff",
+   "slug": "schulterdruecken-mit-engem-griff",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 101,
+   "name": "Ausfallschritte mit Stufe",
+   "slug": "ausfallschritte-mit-stufe",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 102,
+   "name": "Laufschritt mit Griffband",
+   "slug": "laufschritt-mit-griffband",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "back"
+   ],
+   "accessories": [
+    "griffband"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 103,
+   "name": "Liegestütze mit Griffband und Griffstange",
+   "slug": "liegestuetze-mit-griffband-und-griffstange",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "core",
+    "triceps"
+   ],
+   "accessories": [
+    "griffband",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 104,
+   "name": "Bizepscurls mit Griffstange und Seilzug",
+   "slug": "bizepscurls-mit-griffstange-und-seilzug",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 105,
+   "name": "Einarmige Bizepscurls am Seilzug",
+   "slug": "einarmige-bizepscurls-am-seilzug",
+   "primaryMuscles": [
+    "biceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 106,
+   "name": "Seitenheben am Seilzug",
+   "slug": "seitenheben-am-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 107,
+   "name": "Flys einarmig am Seilzug",
+   "slug": "flys-einarmig-am-seilzug",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 108,
+   "name": "Einarmiges Trizepsdrücken",
+   "slug": "einarmiges-trizepsdruecken",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 109,
+   "name": "Rumpfrotation am Seilzug",
+   "slug": "rumpfrotation-am-seilzug",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 110,
+   "name": "Schulterdrücken mit engem Griff sitzend",
+   "slug": "110-schulterdruecken-mit-engem-griff-sitzend",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 111,
+   "name": "Latzug in den Nacken sitzend",
+   "slug": "111-latzug-in-den-nacken-sitzend",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 112,
+   "name": "Crossover Crunch am Seilzug",
+   "slug": "crossover-crunch-am-seilzug",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 113,
+   "name": "Russian Twist am Seilzug",
+   "slug": "russian-twist-am-seilzug",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 114,
+   "name": "Seitliche Crunches am Seilzug",
+   "slug": "seitliche-crunches-am-seilzug",
+   "primaryMuscles": [
+    "core"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 115,
+   "name": "Latzug zur Brust sitzend",
+   "slug": "115-latzug-zur-brust-sitzend",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 116,
+   "name": "Facepulls am Seilzug",
+   "slug": "facepulls-am-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 117,
+   "name": "Einarmiger Latzug am Seilzug",
+   "slug": "einarmiger-latzug-am-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 118,
+   "name": "Stehendes Rudern am Seilzug",
+   "slug": "stehendes-rudern-am-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 119,
+   "name": "Stehendes Rudern mit Untergriff am Seilzug",
+   "slug": "stehendes-rudern-mit-untergriff-am-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 120,
+   "name": "Einarmiges Rudern mit Obergriff am Seilzug",
+   "slug": "einarmiges-rudern-mit-obergriff-am-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 121,
+   "name": "Rudern im Ausfallschritt am Seilzug",
+   "slug": "rudern-im-ausfallschritt-am-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "biceps"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 122,
+   "name": "Stehender Ruderzug mit Seilzug",
+   "slug": "stehender-ruderzug-mit-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 124,
+   "name": "Kickbacks am Seilzug",
+   "slug": "kickbacks-am-seilzug",
+   "primaryMuscles": [
+    "glutes"
+   ],
+   "secondaryMuscles": [
+    "legs"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 125,
+   "name": "Abduktion am Seilzug",
+   "slug": "abduktion-am-seilzug",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 126,
+   "name": "Adduktion am Seilzug",
+   "slug": "adduktion-am-seilzug",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 127,
+   "name": "Beinstrecker am Seilzug",
+   "slug": "beinstrecker-am-seilzug",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 131,
+   "name": "Trizepsdrücken am Seilzug",
+   "slug": "trizepsdruecken-am-seilzug",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffstange",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 132,
+   "name": "Überkopf-Trizepsdrücken am Seilzug",
+   "slug": "ueberkopf-trizepsdruecken-am-seilzug",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "griffband",
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 200,
+   "name": "Schulterdrücken vor dem Kopf",
+   "slug": "200-schulterdruecken-vor-dem-kopf",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 201,
+   "name": "Vorgebeugtes Rudern mit Griffstange",
+   "slug": "201-vorgebeugtes-rudern-mit-griffstange",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps",
+    "shoulders"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 202,
+   "name": "Frontkniebeugen",
+   "slug": "202-frontkniebeugen",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 203,
+   "name": "Kniebeugen",
+   "slug": "203-kniebeugen",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 204,
+   "name": "Kreuzheben",
+   "slug": "204-kreuzheben",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 205,
+   "name": "Rumänisches Kreuzheben",
+   "slug": "205-rumaenisches-kreuzheben",
+   "primaryMuscles": [
+    "legs"
+   ],
+   "secondaryMuscles": [
+    "glutes"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 206,
+   "name": "Latzug mit Griff am Horn",
+   "slug": "206-latzug-mit-griff-am-horn",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 207,
+   "name": "Latzug alternierend mit Griff am Horn",
+   "slug": "207-latzug-alternierend-mit-griff-am-horn",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 208,
+   "name": "Latzug auf die Brust mit Griffstange",
+   "slug": "208-latzug-auf-die-brust-mit-griffstange",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 209,
+   "name": "Brustdruecken stehend mit Griffstange",
+   "slug": "209-brustdruecken-stehend-mit-griffstange",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 210,
+   "name": "Schulterdrücken am Horn alternierend",
+   "slug": "210-schulterdruecken-am-horn-alternierend",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 211,
+   "name": "Rudern vorgebeugt mit Griff am Horn",
+   "slug": "211-rudern-vorgebeugt-mit-griff-am-horn",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps",
+    "shoulders"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 212,
+   "name": "vorgebeugtes Rudern mit Griff am Horn alternierend",
+   "slug": "212-vorgebeugtes-rudern-mit-griff-am-horn-alternierend",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps",
+    "shoulders"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 213,
+   "name": "Explosives Brustdrücken am Horn alternierend",
+   "slug": "213-explosives-brustdruecken-am-horn-alternierend",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 214,
+   "name": "Dips",
+   "slug": "214-dips",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest"
+   ],
+   "accessories": [
+    "blocker"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 215,
+   "name": "Kreuzheben mit Griff am Horn",
+   "slug": "215-kreuzheben-mit-griff-am-horn",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 216,
+   "name": "Rumänisches Kreuzheben mit Griff am Horn",
+   "slug": "216-rumaenisches-kreuzheben-mit-griff-am-horn",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "legs",
+    "glutes"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 217,
+   "name": "Alternierende Dips stehend",
+   "slug": "217-alternierende-dips-stehend",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [
+    "chest"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 218,
+   "name": "Farmer's walk",
+   "slug": "218-farmers-walk",
+   "primaryMuscles": [
+    "neck"
+   ],
+   "secondaryMuscles": [
+    "forearms"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 219,
+   "name": "Wadenheben mit Griff am Horn",
+   "slug": "219-wadenheben-mit-griff-am-horn",
+   "primaryMuscles": [
+    "calves"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 220,
+   "name": "Shrugs alternierend mit Griff am Horn",
+   "slug": "220-shrugs-alternierend-mit-griff-am-horn",
+   "primaryMuscles": [
+    "neck"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 221,
+   "name": "Shrugs mit Griff am Horn",
+   "slug": "221-shrugs-mit-griff-am-horn",
+   "primaryMuscles": [
+    "neck"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 222,
+   "name": "Fliegende mit Seilzug von unten",
+   "slug": "222-fliegende-mit-seilzug-von-unten",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 223,
+   "name": "Überkopf-Trizeps-Extensions mit Seilzug",
+   "slug": "223-ueberkopf-trizeps-extensions-mit-seilzug",
+   "primaryMuscles": [
+    "triceps"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 224,
+   "name": "Reverse Flys vorgebeugt mit Seilzug",
+   "slug": "224-reverse-flys-vorgebeugt-mit-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 225,
+   "name": "Alternierendes Rudern vorgebeugt mit Seilzug",
+   "slug": "225-alterniederendes-rudern-vorgebeugt-mit-seilzug",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "shoulders"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 226,
+   "name": "Schulterrotatoren alternierend am Seilzug",
+   "slug": "226-schulterrotatoren-alternierend-am-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 227,
+   "name": "Reverse Flys asymmetrisch am Seilzug",
+   "slug": "227-reverse-flys-asymmetrisch-am-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [
+    "back"
+   ],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  },
+  {
+   "number": 228,
+   "name": "Klimmzug mit Griffstange",
+   "slug": "228-klimmzug-mit-griffstange",
+   "primaryMuscles": [
+    "back"
+   ],
+   "secondaryMuscles": [
+    "biceps"
+   ],
+   "accessories": [
+    "blocker",
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 229,
+   "name": "Bankdrücken mit Griffstange",
+   "slug": "229-bankdruecken-mit-griffstange",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [
+    "griffstange"
+   ],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 230,
+   "name": "Bankdrücken mit Griff am Horn",
+   "slug": "230-bankdruecken-mit-griff-am-horn",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 231,
+   "name": "Alternierendes Bankdrücken mit Griff am Horn",
+   "slug": "231-alternierendes-bankdruecken-mit-griff-am-horn",
+   "primaryMuscles": [
+    "chest"
+   ],
+   "secondaryMuscles": [
+    "triceps"
+   ],
+   "accessories": [],
+   "requiresCablePulley": false
+  },
+  {
+   "number": 232,
+   "name": "Schulterrotatoren parallel am Seilzug",
+   "slug": "232-schulterrotatoren-parallel-am-seilzug",
+   "primaryMuscles": [
+    "shoulders"
+   ],
+   "secondaryMuscles": [],
+   "accessories": [
+    "seilzug"
+   ],
+   "requiresCablePulley": true
+  }
+ ]
+}

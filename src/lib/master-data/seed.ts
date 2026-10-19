@@ -6,8 +6,9 @@ export type SeedResult = { sportsCreated: number; equipmentCreated: number };
 
 /**
  * Legt die Stammdaten aus src/lib/domain/seed-data.ts für einen Benutzer an.
- * Idempotent: bestehende Sportarten und Geräte (gleicher Name) bleiben unverändert,
- * auch ihre Präferenzen werden nicht überschrieben.
+ * Idempotent: bestehende Sportarten (gleicher Name) bleiben unverändert, auch
+ * ihre Präferenzen. Geräte werden nur angelegt, wenn der Benutzer noch kein
+ * Gerät dieses Typs hat, damit umbenannte Bikes nicht doppelt entstehen.
  */
 export async function seedMasterData(userId: string): Promise<SeedResult> {
   const result: SeedResult = { sportsCreated: 0, equipmentCreated: 0 };
@@ -34,10 +35,19 @@ export async function seedMasterData(userId: string): Promise<SeedResult> {
       .onConflictDoNothing();
   }
 
+  const existingKinds = new Set(
+    (
+      await db()
+        .select({ kind: schema.equipment.kind })
+        .from(schema.equipment)
+        .where(eq(schema.equipment.userId, userId))
+    ).map((r) => r.kind),
+  );
   for (const seed of SEED_EQUIPMENT) {
+    if (existingKinds.has(seed.kind)) continue;
     const [row] = await db()
       .insert(schema.equipment)
-      .values({ userId, name: seed.name, kind: seed.kind, notes: seed.notes ?? null })
+      .values({ userId, name: seed.name, kind: seed.kind, notes: seed.notes ?? null, settings: seed.settings ?? null })
       .onConflictDoNothing({ target: [schema.equipment.userId, schema.equipment.name] })
       .returning();
     if (row) result.equipmentCreated++;

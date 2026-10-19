@@ -38,11 +38,13 @@ gantt
 - [x] Seiten: Sportarten (mit saisonaler Gewichtung), Geräte
 - [x] Seed mit den bekannten Sportarten und zwei Bikes (`npm run db:seed` oder Button «Stammdaten anlegen»)
 - [x] Migration und Seed gegen die Neon-DB ausgeführt
-- [ ] Präferenzen nach dem ersten Login in Production geprüft und angepasst
+- [x] Präferenzen nach dem ersten Login in Production geprüft
+- [x] Geräteparameter (Eisenhorn: Kolben, Stufen, Zubehör) und Übungskatalog als Daten (ADR 0006)
 - Fertig wenn: Präferenzen pro Saison gepflegt und persistiert
 
 ### P2 – Manuelle Erfassung
-- Aktivität manuell erfassen (Sportart, Dauer, RPE, Gerät)
+- Aktivität manuell erfassen (Sportart, Dauer, RPE 1–10 mit Wortlabels, Gerät)
+- Kraftsätze je Übung erfassen (Tabelle `exercises` aus Katalog und free-exercise-db, `exercise_sets` mit Wiederholungen, kg oder Eisenhorn-Stufe)
 - Körpergewicht/Ruhepuls schnell erfassen, Leistungswerte erfassen
 - Fertig wenn: Eishockey-Abend und Studio-Training in 30 Sekunden erfasst
 
@@ -63,6 +65,7 @@ gantt
 ### P6 – KI-Vorschläge
 - Kontextaufbau (aggregiert), Prompt, Zod-Schema, Provider-Umschaltung
 - Wetter-Einbindung, Varianten (Indoor/Outdoor, kurz/lang)
+- Eisenhorn-Einheiten nach Muskelgruppe: 5–10 Minuten, 1–2 Übungen mit gleichem Aufbau, nur mit vorhandenem Zubehör, Muskeln, die zuletzt nicht dran waren (ADR 0006)
 - Fertig wenn: Wochenvorschlag passt zu Saison, Wetter und letzter Belastung
 
 ### P7 – Wochenplan

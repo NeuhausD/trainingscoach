@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { EQUIPMENT_KINDS } from "@/db";
 import type { ActionState } from "@/components/action-form";
+import { parseSettingsForm } from "@/lib/domain/equipment-settings";
 import {
   createEquipment,
   deleteEquipment,
@@ -36,12 +37,26 @@ function parseEquipment(formData: FormData): EquipmentInput {
   });
   if (!parsed.success) throw new Error(parsed.error.issues[0]?.message ?? "Ungültige Eingabe");
   const d = parsed.data;
+  // Geräteparameter nur für Heimtrainingsgeräte (z. B. Eisenhorn: Kolben, Stufen, Seilzug)
+  const settings =
+    d.kind === "home_gym"
+      ? parseSettingsForm({
+          model: text(formData, "model"),
+          piston: text(formData, "piston"),
+          levels: text(formData, "levels"),
+          halfSteps: formData.get("halfSteps") === "on",
+          cablePulley: formData.get("cablePulley") === "on",
+          accessories: text(formData, "accessories"),
+          kgPerLevel: text(formData, "kgPerLevel"),
+        })
+      : null;
   return {
     name: d.name,
     kind: d.kind,
     stravaGearId: d.stravaGearId || null,
     retired: d.retired,
     notes: d.notes || null,
+    settings,
   };
 }
 

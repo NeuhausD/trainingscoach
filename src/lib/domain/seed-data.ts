@@ -1,4 +1,4 @@
-import type { EquipmentKind, Season, SportCategory } from "@/db/schema";
+import type { EquipmentKind, EquipmentSettingsJson, Season, SportCategory } from "@/db/schema";
 
 /**
  * Stammdaten des Athleten (docs/01-vision-und-ziele.md, Tabelle «Sportarten»).
@@ -16,6 +16,7 @@ export type SeedEquipment = {
   name: string;
   kind: EquipmentKind;
   notes?: string;
+  settings?: EquipmentSettingsJson;
 };
 
 export const SEED_SPORTS: SeedSport[] = [
@@ -90,6 +91,19 @@ export const SEED_SPORTS: SeedSport[] = [
 export const SEED_EQUIPMENT: SeedEquipment[] = [
   { name: "XC-Bike", kind: "bike_xc", notes: "Marathon und lange Touren" },
   { name: "Trail-Bike", kind: "bike_trail", notes: "Trails und Feierabendrunden" },
+  {
+    name: "Eisenhorn",
+    kind: "home_gym",
+    notes: "Wandmontierte Kraftstation zuhause, Ergänzung zum Kraftraum; kurze, klare Einheiten ohne grossen Umbau.",
+    settings: {
+      model: "EISENHORN, ältere Generation",
+      piston: "16",
+      levels: 10,
+      halfSteps: false,
+      cablePulley: false,
+      accessories: ["Griffstange", "Griffband (2x)", "Blocker", "Karabiner"],
+    },
+  },
 ];
 
 /** Name der Auffang-Sportart für nicht zuordenbare Importe (docs/03-datenmodell.md). */
