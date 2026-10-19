@@ -38,7 +38,7 @@ export async function buildContextForUser(userId: string, now: Date, constraints
     today: utcToLocalParts(now).date,
     season: seasonForDate(now),
     goals: DEFAULT_GOALS,
-    sports: sports.map((s) => ({ name: s.name, category: s.category, active: s.active, notes: null, preferences: s.preferences })),
+    sports: sports.map((s) => ({ name: s.name, category: s.category, active: s.active, selfPlanned: s.selfPlanned, notes: null, preferences: s.preferences })),
     equipment: equipment.map((e) => ({ name: e.name, kind: e.kind, retired: e.retired, settings: e.settings ?? null })),
     activities,
     body: body[0] ? { weightKg: body[0].weightKg, restingHr: body[0].restingHr } : null,
@@ -51,10 +51,12 @@ export async function buildContextForUser(userId: string, now: Date, constraints
 }
 
 /** Plan in Vorschläge übersetzen; Sportart über den exakten Namen, Kurz-Einheiten auf die Eisenhorn-Sportart. */
-export function planToSuggestions(plan: WeekPlan, sports: { id: string; name: string; category: string }[], generatedAt: string): NewSuggestion[] {
+export function planToSuggestions(plan: WeekPlan, sports: { id: string; name: string; category: string; selfPlanned?: boolean }[], generatedAt: string): NewSuggestion[] {
   const byName = new Map(sports.map((s) => [s.name.toLowerCase(), s]));
   const planMeta = { summary: plan.summary, weeklyLoadTarget: plan.weeklyLoadTarget, generatedAt };
-  const items: NewSuggestion[] = plan.sessions.map((s) => ({
+  // Selbst geplante Sportarten (feste Termine) fallen auch dann weg, wenn das Modell sie trotzdem vorschlägt.
+  const sessions = plan.sessions.filter((s) => !byName.get(s.sport.toLowerCase())?.selfPlanned);
+  const items: NewSuggestion[] = sessions.map((s) => ({
     sportId: byName.get(s.sport.toLowerCase())?.id ?? null,
     plannedOn: s.plannedOn,
     title: s.title,

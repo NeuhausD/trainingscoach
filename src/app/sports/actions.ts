@@ -15,6 +15,7 @@ const sportSchema = z.object({
   category: z.enum(SPORT_CATEGORIES, { error: "Ungültige Kategorie" }),
   stravaTypes: z.string().default(""),
   active: z.boolean(),
+  selfPlanned: z.boolean(),
 });
 
 function text(formData: FormData, key: string): string | null {
@@ -28,6 +29,7 @@ function parseSport(formData: FormData): SportInput {
     category: text(formData, "category"),
     stravaTypes: text(formData, "stravaTypes") ?? "",
     active: formData.get("active") === "on",
+    selfPlanned: formData.get("selfPlanned") === "on",
   });
   if (!parsed.success) throw new Error(parsed.error.issues[0]?.message ?? "Ungültige Eingabe");
   const { stravaTypes, ...rest } = parsed.data;

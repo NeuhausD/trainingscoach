@@ -36,6 +36,8 @@ export const sports = pgTable(
     category: text("category", { enum: SPORT_CATEGORIES }).notNull(),
     stravaTypes: text("strava_types").array().notNull().default([]),
     active: boolean("active").notNull().default(true),
+    /** Feste Termine (z. B. Eishockey): der Athlet plant selbst, der Coach schlägt keine Einheiten vor. */
+    selfPlanned: boolean("self_planned").notNull().default(false),
   },
   (t) => [uniqueIndex("sports_user_name_idx").on(t.userId, t.name)],
 );

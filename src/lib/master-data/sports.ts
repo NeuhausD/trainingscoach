@@ -10,6 +10,7 @@ export type SportInput = {
   category: SportCategory;
   stravaTypes: string[];
   active: boolean;
+  selfPlanned: boolean;
 };
 
 export async function listSports(userId: string): Promise<SportWithPreferences[]> {

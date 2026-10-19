@@ -12,6 +12,7 @@ export type SportRow = {
   name: string;
   category: "endurance" | "strength" | "team" | "other";
   active: boolean;
+  selfPlanned?: boolean;
   notes: string | null;
   preferences: { season: Season; weight: number; targetSessionsPerWeek: number | null; notes: string | null }[];
 };
@@ -61,7 +62,7 @@ export type BuiltContext = {
   today: string;
   season: Season;
   goals: string[];
-  sports: { name: string; category: SportRow["category"]; seasonWeight: number; targetSessionsPerWeek: number | null; notes: string | null }[];
+  sports: { name: string; category: SportRow["category"]; seasonWeight: number; targetSessionsPerWeek: number | null; selfPlanned: boolean; notes: string | null }[];
   equipment: { name: string; kind: string }[];
   recentWeeks: { weekStart: string; sessions: number; hours: number; load: number; bySport: Record<string, { sessions: number; hours: number }> }[];
   bodyMetrics: { weightKg: number | null; restingHr: number | null };
@@ -162,6 +163,7 @@ export function buildCoachContext(input: CoachContextInput): BuiltContext {
         category: s.category,
         seasonWeight: pref?.weight ?? 0,
         targetSessionsPerWeek: pref?.targetSessionsPerWeek ?? null,
+        selfPlanned: s.selfPlanned ?? false,
         notes: [s.notes, pref?.notes].filter((n): n is string => !!n && n.trim().length > 0).join("; ") || null,
       };
     });

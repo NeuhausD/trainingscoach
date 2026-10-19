@@ -22,6 +22,7 @@ const input: CoachContextInput = {
     },
     { name: "Ski", category: "other", active: false, notes: null, preferences: [{ season: "autumn", weight: 5, targetSessionsPerWeek: null, notes: null }] },
     { name: "Kraft Eisenhorn", category: "strength", active: true, notes: null, preferences: [] },
+    { name: "Eishockey", category: "team", active: true, selfPlanned: true, notes: null, preferences: [{ season: "autumn", weight: 5, targetSessionsPerWeek: 1, notes: null }] },
   ],
   equipment: [
     { name: "Scott Spark", kind: "bike_xc", retired: false, settings: null },
@@ -101,8 +102,9 @@ describe("latestPerformance", () => {
 describe("buildCoachContext", () => {
   it("uses the season weight, skips inactive sports and retired equipment", () => {
     const ctx = buildCoachContext(input);
-    expect(ctx.sports.map((s) => s.name)).toEqual(["Mountainbike", "Kraft Eisenhorn"]);
-    expect(ctx.sports[0]).toMatchObject({ seasonWeight: 6, targetSessionsPerWeek: 2, notes: "Trails; nur trocken" });
+    expect(ctx.sports.map((s) => s.name)).toEqual(["Mountainbike", "Kraft Eisenhorn", "Eishockey"]);
+    expect(ctx.sports[0]).toMatchObject({ seasonWeight: 6, targetSessionsPerWeek: 2, selfPlanned: false, notes: "Trails; nur trocken" });
+    expect(ctx.sports[2]).toMatchObject({ seasonWeight: 5, selfPlanned: true });
     expect(ctx.sports[1]).toMatchObject({ seasonWeight: 0, targetSessionsPerWeek: null, notes: null });
     expect(ctx.equipment.map((e) => e.name)).toEqual(["Scott Spark", "Eisenhorn"]);
     expect(ctx.bodyMetrics).toEqual({ weightKg: 84, restingHr: null });

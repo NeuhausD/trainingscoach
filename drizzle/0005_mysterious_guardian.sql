@@ -1,0 +1,1 @@
+ALTER TABLE "sports" ADD COLUMN "self_planned" boolean DEFAULT false NOT NULL;

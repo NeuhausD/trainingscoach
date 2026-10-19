@@ -16,6 +16,7 @@ export const coachContextSchema = z.object({
       category: z.enum(["endurance", "strength", "team", "other"]),
       seasonWeight: z.number().min(0).max(10),
       targetSessionsPerWeek: z.number().nullable(),
+      selfPlanned: z.boolean().optional().describe("true: feste Termine, der Athlet plant selbst; keine Einheiten vorschlagen"),
       notes: z.string().nullable(),
     }),
   ),
