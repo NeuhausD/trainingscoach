@@ -104,6 +104,12 @@ export const activities = pgTable("activities", {
   title: text("title"),
   notes: text("notes"),
   rawSummary: jsonb("raw_summary"),
+  // Garmin-Zusatzwerte aus FIT-Dateien (P4); Strava liefert sie nicht.
+  aerobicTe: numeric("aerobic_te"),
+  anaerobicTe: numeric("anaerobic_te"),
+  garminLoad: numeric("garmin_load"),
+  caloriesKcal: integer("calories_kcal"),
+  fitUrl: text("fit_url"),
 });
 
 export const EXERCISE_SOURCES = ["eisenhorn", "free-exercise-db", "manual"] as const;

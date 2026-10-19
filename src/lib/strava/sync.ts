@@ -28,7 +28,7 @@ export async function ensureAccessToken(connector: Connector): Promise<string> {
   return fresh.accessToken;
 }
 
-async function mappingContext(userId: string) {
+export async function mappingContext(userId: string) {
   const [sports, equipment, perf, restingHr] = await Promise.all([
     db().select({ id: schema.sports.id, name: schema.sports.name, stravaTypes: schema.sports.stravaTypes }).from(schema.sports).where(eq(schema.sports.userId, userId)),
     db().select({ id: schema.equipment.id, stravaGearId: schema.equipment.stravaGearId }).from(schema.equipment).where(eq(schema.equipment.userId, userId)),

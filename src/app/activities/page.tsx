@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
-import { buttonPrimary, panel } from "@/components/ui";
+import { buttonPrimary, buttonSecondary, panel } from "@/components/ui";
 import { formatHours, groupByMonth } from "@/lib/domain/progress";
 import { RPE_LABELS } from "@/lib/domain/rpe";
 import { formatDateTime, formatDuration } from "@/lib/domain/time";
@@ -18,11 +18,16 @@ export default async function ActivitiesPage() {
     <>
       <PageHeader
         title="Aktivitäten"
-        subtitle="Manuell erfasst oder aus Strava importiert"
+        subtitle="Manuell, aus Strava oder aus FIT-Dateien"
         action={
-          <Link href="/activities/new" className={buttonPrimary}>
-            Erfassen
-          </Link>
+          <div className="flex gap-2">
+            <Link href="/activities/upload" className={buttonSecondary}>
+              FIT
+            </Link>
+            <Link href="/activities/new" className={buttonPrimary}>
+              Erfassen
+            </Link>
+          </div>
         }
       />
       {activities.length === 0 ? (
@@ -51,7 +56,7 @@ export default async function ActivitiesPage() {
                       <span className="min-w-0 flex-1">
                         <span className="block truncate font-semibold">{a.title ?? a.sportName ?? "Training"}</span>
                         <span className="block text-sm text-stone">
-                          {[formatDateTime(a.startedAt), a.title ? a.sportName : null, a.equipmentName, a.source === "strava" ? "Strava" : null]
+                          {[formatDateTime(a.startedAt), a.title ? a.sportName : null, a.equipmentName, a.source === "strava" ? "Strava" : a.source === "fit" ? "FIT" : null]
                             .filter(Boolean)
                             .join(", ")}
                         </span>

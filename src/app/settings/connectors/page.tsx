@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { DeleteButton } from "@/components/delete-button";
 import { buttonPrimary, buttonSecondary, errorBox, hint, panel, successBox } from "@/components/ui";
@@ -129,6 +130,19 @@ export default async function ConnectorsPage({
             )}
           </>
         )}
+      </section>
+
+      <section className={`${panel} mt-6 flex flex-col gap-2`} aria-labelledby="fit">
+        <h2 id="fit" className="text-2xl font-semibold">
+          Garmin FIT-Dateien
+        </h2>
+        <p className="text-stone">
+          Ohne Garmin-API liefern FIT-Dateien die Zusatzwerte der Uhr: Training Effect, Garmin-Belastung, Kalorien und
+          VO2max. Einheiten, die schon aus Strava da sind, werden erkannt und ergänzt.
+        </p>
+        <Link href="/activities/upload" className={`${buttonSecondary} self-start`}>
+          FIT-Dateien hochladen
+        </Link>
       </section>
 
       <section className={`${panel} mt-6 flex flex-col gap-2`} aria-labelledby="ki">
