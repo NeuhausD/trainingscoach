@@ -61,7 +61,9 @@ gantt
 - Fertig wenn: FIT-Datei liefert Zusatzwerte (Garmin-Belastung, VO2max)
 
 ### P5 – Fortschritt
-- Dashboard: Wochenvolumen je Sportart, Belastungstrend, Gewichtstrend, Leistungsmetriken
+- [x] Übersicht: letzte 4 Wochen je Sportart (Einheiten, Zeit, Belastung) als Balken
+- [x] Aktivitäten nach Monat gruppiert mit Summen je Sportart
+- [ ] Belastungstrend (rollierende 4 Wochen im Vergleich), Gewichtstrend, Leistungsmetriken
 - Fertig wenn: 4-Wochen-Vergleich und Jahresübersicht sichtbar
 
 ### P6 – KI-Vorschläge

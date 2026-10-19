@@ -44,7 +44,7 @@ export async function listActivities(userId: string, opts: { limit?: number; sin
         : eq(schema.activities.userId, userId),
     )
     .orderBy(desc(schema.activities.startedAt))
-    .limit(opts.limit ?? 100);
+    .limit(opts.limit ?? 2000);
   return rows.map((r) => ({ ...r.activity, sportName: r.sportName, equipmentName: r.equipmentName }));
 }
 
