@@ -1,7 +1,7 @@
 import { and, eq, like } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { FALLBACK_SPORT_NAME } from "@/lib/domain/seed-data";
-import { afterTimestamp, gearToEquipment, mapStravaActivity, stravaExternalId, type MappedActivity } from "@/lib/domain/strava-mapping";
+import { afterTimestamp, gearToEquipment, mapStravaActivity, shouldRemapSport, stravaExternalId, type MappedActivity } from "@/lib/domain/strava-mapping";
 import { tokenNeedsRefresh } from "@/lib/domain/strava-webhook";
 import {
   findStravaConnectorByAthlete,
@@ -36,7 +36,8 @@ async function mappingContext(userId: string) {
     latestRestingHr(userId),
   ]);
   const ftp = perf.find((p) => p.metric === "ftp_w");
-  return { sports, equipment, fallbackSportName: FALLBACK_SPORT_NAME, ftpW: ftp ? Number(ftp.value) : null, restingHr };
+  const fallbackSportId = sports.find((s) => s.name === FALLBACK_SPORT_NAME)?.id ?? null;
+  return { sports, equipment, fallbackSportName: FALLBACK_SPORT_NAME, fallbackSportId, ftpW: ftp ? Number(ftp.value) : null, restingHr };
 }
 
 /** Unbekanntes Gear als Gerät anlegen (Name aus Strava, Typ nachträglich pflegbar). */
@@ -81,7 +82,7 @@ async function ensureGear(userId: string, accessToken: string, gearId: string, c
  * bleiben bei bestehenden Zeilen erhalten; Messwerte und Titel werden
  * aktualisiert.
  */
-async function upsertActivity(userId: string, m: MappedActivity, equipmentId: string | null): Promise<"imported" | "updated"> {
+async function upsertActivity(userId: string, m: MappedActivity, equipmentId: string | null, fallbackSportId: string | null): Promise<"imported" | "updated"> {
   const [existing] = await db().select({ id: schema.activities.id, sportId: schema.activities.sportId, equipmentId: schema.activities.equipmentId }).from(schema.activities).where(eq(schema.activities.externalId, m.externalId)).limit(1);
   const measurements = {
     startedAt: m.startedAt,
@@ -98,7 +99,11 @@ async function upsertActivity(userId: string, m: MappedActivity, equipmentId: st
   if (existing) {
     await db()
       .update(schema.activities)
-      .set({ ...measurements, sportId: existing.sportId ?? m.sportId, equipmentId: existing.equipmentId ?? equipmentId })
+      .set({
+        ...measurements,
+        sportId: shouldRemapSport(existing.sportId, fallbackSportId, m.sportId) ? m.sportId : existing.sportId,
+        equipmentId: existing.equipmentId ?? equipmentId,
+      })
       .where(eq(schema.activities.id, existing.id));
     return "updated";
   }
@@ -121,7 +126,7 @@ async function importActivities(connector: Connector, accessToken: string, activ
         result.gearCreated++;
       }
     }
-    const outcome = await upsertActivity(connector.userId, mapped, equipmentId);
+    const outcome = await upsertActivity(connector.userId, mapped, equipmentId, ctx.fallbackSportId);
     result[outcome]++;
   }
   return result;
