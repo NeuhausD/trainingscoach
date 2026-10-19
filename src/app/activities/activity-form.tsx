@@ -154,7 +154,7 @@ export function ActivityForm({
             <label htmlFor="distanceKm" className={label}>
               Distanz in km
             </label>
-            <input id="distanceKm" name="distanceKm" type="number" inputMode="decimal" min={0} max={1000} step={0.1} autoComplete="off" defaultValue={defaults.distanceKm} className={input} />
+            <input id="distanceKm" name="distanceKm" type="number" inputMode="decimal" min={0} max={1000} step="any" autoComplete="off" defaultValue={defaults.distanceKm} className={input} />
           </div>
           <div>
             <label htmlFor="elevationM" className={label}>

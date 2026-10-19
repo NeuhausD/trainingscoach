@@ -85,6 +85,13 @@ export function SportForm({
           <input type="checkbox" name="active" defaultChecked={sport?.active ?? true} className="h-5 w-5 accent-moss" />
           Aktiv, wird bei Vorschlägen berücksichtigt
         </label>
+        <label className="flex items-start gap-3 py-1">
+          <input type="checkbox" name="selfPlanned" defaultChecked={sport?.selfPlanned ?? false} className="mt-0.5 h-5 w-5 shrink-0 accent-moss" />
+          <span>
+            Plane ich selbst
+            <span className="block text-sm text-stone">Feste Termine wie Eiszeiten. Der Coach schlägt keine Einheiten vor, rechnet die Belastung aber mit.</span>
+          </span>
+        </label>
       </section>
 
       <section className="flex flex-col gap-3" aria-labelledby="gewichtung">

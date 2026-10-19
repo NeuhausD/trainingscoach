@@ -36,6 +36,8 @@ export const sports = pgTable(
     category: text("category", { enum: SPORT_CATEGORIES }).notNull(),
     stravaTypes: text("strava_types").array().notNull().default([]),
     active: boolean("active").notNull().default(true),
+    /** Feste Termine (z. B. Eishockey): der Athlet plant selbst, der Coach schlägt keine Einheiten vor. */
+    selfPlanned: boolean("self_planned").notNull().default(false),
   },
   (t) => [uniqueIndex("sports_user_name_idx").on(t.userId, t.name)],
 );
@@ -205,6 +207,9 @@ export const INTENSITIES = [
   "power",
 ] as const;
 
+export const SUGGESTION_SOURCES = ["coach", "athlete"] as const;
+export type SuggestionSource = (typeof SUGGESTION_SOURCES)[number];
+
 export const trainingSuggestions = pgTable("training_suggestions", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
@@ -217,6 +222,19 @@ export const trainingSuggestions = pgTable("training_suggestions", {
   intensity: text("intensity", { enum: INTENSITIES }).notNull(),
   variants: jsonb("variants"),
   status: text("status", { enum: ["suggested", "accepted", "done", "skipped"] }).notNull().default("suggested"),
+  /** coach: vom Modell vorgeschlagen; athlete: selbst geplant. */
+  source: text("source", { enum: SUGGESTION_SOURCES }).notNull().default("coach"),
+  model: text("model"),
+  contextSnapshot: jsonb("context_snapshot"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+/** Prüfung des Wochenplans durch den Coach (P7): Gesamturteil, Hinweise, Verbesserungsvorschläge. */
+export const planReviews = pgTable("plan_reviews", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  weekStart: date("week_start").notNull(),
+  review: jsonb("review").notNull(),
   model: text("model"),
   contextSnapshot: jsonb("context_snapshot"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),

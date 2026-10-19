@@ -9,6 +9,7 @@ export type SeedSport = {
   name: string;
   category: SportCategory;
   stravaTypes: string[];
+  selfPlanned?: boolean;
   seasons: Record<Season, { weight: number; targetSessionsPerWeek: number | null; notes?: string }>;
 };
 
@@ -68,6 +69,7 @@ export const SEED_SPORTS: SeedSport[] = [
     name: "Eishockey",
     category: "team",
     stravaTypes: ["IceSkate"],
+    selfPlanned: true,
     seasons: {
       spring: { weight: 1, targetSessionsPerWeek: null, notes: "Saisonende im März" },
       summer: { weight: 0, targetSessionsPerWeek: null },

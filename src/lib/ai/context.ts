@@ -16,6 +16,7 @@ export const coachContextSchema = z.object({
       category: z.enum(["endurance", "strength", "team", "other"]),
       seasonWeight: z.number().min(0).max(10),
       targetSessionsPerWeek: z.number().nullable(),
+      selfPlanned: z.boolean().optional().describe("true: feste Termine, der Athlet plant selbst; keine Einheiten vorschlagen"),
       notes: z.string().nullable(),
     }),
   ),
@@ -44,6 +45,18 @@ export const coachContextSchema = z.object({
     }),
   ),
   constraints: z.array(z.string()).describe("z. B. 'Dienstag und Donnerstag kein Training'"),
+  plannedByAthlete: z
+    .array(
+      z.object({
+        plannedOn: z.string(),
+        sport: z.string(),
+        title: z.string(),
+        durationMin: z.number(),
+        intensity: z.string(),
+      }),
+    )
+    .optional()
+    .describe("Vom Athleten selbst geplante Einheiten der Woche: stehen fest, nicht ersetzen oder doppeln"),
   homeGym: z
     .object({
       name: z.string(),

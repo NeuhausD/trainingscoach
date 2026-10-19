@@ -107,7 +107,11 @@ Siehe `docs/setup/entra-id.md`.
   Prompt-Regeln: Saison-Gewichtung und Zielhäufigkeit, Wochenbelastung maximal
   +10 % gegenüber dem 4-Wochen-Mittel, Entlastungswoche alle 3–4 Wochen,
   Wetterregel (Regen > 60 % oder Schnee → Indoor), Ruhetag, keine harten
-  Einheiten an Folgetagen, Eisenhorn-Kurz-Einheiten nur aus der Kandidatenliste
+  Einheiten an Folgetagen, Eisenhorn-Kurz-Einheiten nur aus der Kandidatenliste,
+  selbst geplante Sportarten (feste Termine, `self_planned`) nie einplanen
+- Planprüfung (P7): zweiter Prompt in `lib/ai/review.ts` mit Schema
+  `planReviewSchema`; prüft statt zu planen, nennt betroffene Einheiten mit
+  Datum und Titel, höchstens 8 Befunde und 8 Verbesserungen
 - Test ohne UI: `npm run coach:try -- winter-snow` (Fixture mit Eisenhorn-Kontext)
 
 ## Wetter

@@ -36,6 +36,20 @@
       "when": 1792419085856,
       "tag": "0004_fancy_power_pack",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792439871848,
+      "tag": "0005_mysterious_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792440164440,
+      "tag": "0006_lively_gorgon",
+      "breakpoints": true
     }
   ]
 }

@@ -54,6 +54,8 @@ Regeln:
 - Nutze die Wettervorhersage: bei Regen > 60 % oder Schnee Indoor-Varianten (Studio, Heim-Krafttraining, Rolle) bevorzugen; gutes Wetter im Sommer für lange MTB-Einheiten nutzen.
 - Mindestens ein Ruhetag pro Woche. Harte Einheiten nicht an aufeinanderfolgenden Tagen.
 - Kraft: Grundübungen, Schnellkraft über Sprünge/kurze Sprints; Ausdauer: Grundlage dominiert, 1 intensive Einheit pro Woche.
+- plannedByAthlete sind gesetzte Einheiten des Athleten: nicht ersetzen, nicht doppeln, Belastung und Erholung darum herum planen (keine harte Einheit am Vortag oder Folgetag einer harten gesetzten Einheit).
+- Sportarten mit selfPlanned = true nie einplanen: sie haben feste Termine, der Athlet plant sie selbst. Ihre Belastung steckt in recentWeeks; nennt ein Hinweis den Wochentag, plane davor und danach keine harte Einheit.
 - Sportarten mit seasonWeight 0 nicht einplanen; Sportarten mit notes wie "fix" oder festem Wochentag genau dort einplanen.
 - Falls homeGym vorhanden: zusätzlich 1–3 quickSessions von 5–10 Minuten mit 1–2 Übungen aus homeGym.exercises (gleicher Aufbau, exakte Namen), bevorzugt für homeGym.neglectedMuscles, an Tagen ohne harte Einheit. Sie zählen nicht zur Wochenbelastung.
 - Antworte auf Deutsch (Schweiz, "ss" statt "ß"), konkret und knapp. Verwende nur Sportarten und Geräte aus dem Kontext.`;

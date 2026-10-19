@@ -7,9 +7,17 @@ import { sinceDays, weekStartKey } from "@/lib/domain/progress";
 import { formatDate, formatDateTime, utcToLocalParts } from "@/lib/domain/time";
 import { listActivities } from "@/lib/master-data/activities";
 import { listSuggestions, readMeta, type SuggestionRow } from "@/lib/master-data/suggestions";
+import { listSports } from "@/lib/master-data/sports";
+import { currentPlanReview } from "@/lib/ai/plan";
 import { requireUser } from "@/lib/users";
+import { EntryForm } from "./entry-form";
 import { PlanForm } from "./plan-form";
-import { moveSuggestionAction, reconcileAction, setStatusAction } from "./actions";
+import { ReviewForm } from "./review-form";
+import { deleteEntryAction, moveSuggestionAction, reconcileAction, setStatusAction } from "./actions";
+
+const VERDICT_LABEL = { gut: "Passt", "mit Anpassungen gut": "Passt mit Anpassungen", ueberarbeiten: "Überarbeiten" } as const;
+const VERDICT_TONE = { gut: "text-moss", "mit Anpassungen gut": "text-ink", ueberarbeiten: "text-danger" } as const;
+const ACTION_LABEL = { verschieben: "Verschieben", kuerzen: "Kürzen", verlaengern: "Verlängern", lockerer: "Lockerer", haerter: "Härter", ersetzen: "Ersetzen", hinzufuegen: "Hinzufügen", streichen: "Streichen" } as const;
 
 export const metadata = { title: "Coach" };
 export const maxDuration = 90;
@@ -44,7 +52,13 @@ export default async function CoachPage() {
   const now = new Date();
   const today = utcToLocalParts(now).date;
   const weekStart = weekStartKey(now);
-  const [rows, weekActivities] = await Promise.all([listSuggestions(user.id, weekStart), listActivities(user.id, { since: sinceDays(now, 7) })]);
+  const [rows, weekActivities, sports, planReview] = await Promise.all([
+    listSuggestions(user.id, weekStart),
+    listActivities(user.id, { since: sinceDays(now, 7) }),
+    listSports(user.id),
+    currentPlanReview(user.id, now),
+  ]);
+  const sportOptions = sports.filter((s) => s.active).map((s) => ({ id: s.id, name: s.name, selfPlanned: s.selfPlanned }));
   const planMeta = rows.map((r) => readMeta(r).plan).find((p) => p);
   const week = planVsActual(
     weekStart,
@@ -59,8 +73,14 @@ export default async function CoachPage() {
 
   return (
     <>
-      <PageHeader title="Coach" subtitle="Wochenplan aus Saison, Belastung, Wetter und Eisenhorn. Nur Aggregate gehen an das Modell." />
+      <PageHeader title="Coach" subtitle="Plane selbst oder lass den Coach planen; er prüft die Woche gegen Belastung, Erholung, Saison und Wetter. Nur Aggregate gehen an das Modell." />
       <PlanForm hasPlan={rows.some((r) => r.plannedOn >= today)} />
+      <details className={`${panel} mt-4`}>
+        <summary className="cursor-pointer text-lg font-semibold">Eigene Einheit planen</summary>
+        <div className="mt-4">
+          <EntryForm sports={sportOptions} defaultDate={today} />
+        </div>
+      </details>
 
       <section className="mt-8" aria-labelledby="woche">
         <div className="flex items-baseline justify-between gap-4">
@@ -116,6 +136,67 @@ export default async function CoachPage() {
         </form>
       </section>
 
+      <section className="mt-8" aria-labelledby="pruefung">
+        <h2 id="pruefung" className="text-2xl font-semibold">
+          Prüfung durch den Coach
+        </h2>
+        {planReview ? (
+          <div className="mt-2">
+            <p>
+              <span className={`font-semibold ${VERDICT_TONE[planReview.review.verdict]}`}>{VERDICT_LABEL[planReview.review.verdict]}.</span>{" "}
+              <span className="text-stone">{planReview.review.summary}</span>
+            </p>
+            <p className="mt-1 text-sm text-stone">
+              Geschätzte Belastung <span className="font-semibold text-ink tabular-nums">{Math.round(planReview.review.weeklyLoadEstimate)}</span>, geprüft{" "}
+              {formatDateTime(planReview.createdAt)}
+              {planReview.model ? ` (${planReview.model})` : ""}
+            </p>
+            {planReview.review.findings.length > 0 && (
+              <ul className="mt-3 flex flex-col gap-2">
+                {planReview.review.findings.map((f, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className={`mt-0.5 shrink-0 rounded-control px-2 py-0.5 text-xs font-semibold ${f.severity === "wichtig" ? "bg-danger/10 text-danger" : "bg-mist/60 text-stone"}`}>
+                      {f.severity === "wichtig" ? "Wichtig" : "Hinweis"}
+                    </span>
+                    <span>
+                      {f.plannedOn || f.title ? (
+                        <span className="text-sm text-stone">
+                          {f.plannedOn ? formatDate(f.plannedOn, { weekday: "short", day: "numeric", month: "short" }) : ""}
+                          {f.plannedOn && f.title ? ", " : ""}
+                          {f.title ?? ""}
+                          {": "}
+                        </span>
+                      ) : null}
+                      {f.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {planReview.review.improvements.length > 0 && (
+              <ol className="mt-4 divide-y divide-mist border-t border-mist">
+                {planReview.review.improvements.map((imp, i) => (
+                  <li key={i} className="py-3">
+                    <p className="font-semibold">
+                      {ACTION_LABEL[imp.action]}
+                      {imp.plannedOn ? `, ${formatDate(imp.plannedOn, { weekday: "short", day: "numeric", month: "short" })}` : ""}
+                      {imp.title ? `: ${imp.title}` : ""}
+                      {imp.durationMin ? ` (${imp.durationMin} min)` : ""}
+                    </p>
+                    <p className="text-sm text-stone">{imp.text}</p>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        ) : (
+          <p className="mt-2 text-stone">Noch nicht geprüft. Plane die Woche, dann prüft der Coach sie auf Belastung, Erholung, Saison und Wetter.</p>
+        )}
+        <div className="mt-4">
+          <ReviewForm />
+        </div>
+      </section>
+
       {rows.length === 0 ? (
         <p className={`${panel} mt-8 text-stone`}>Noch kein Plan. «Woche planen» erstellt Vorschläge für die nächsten sieben Tage.</p>
       ) : (
@@ -139,6 +220,7 @@ export default async function CoachPage() {
                             {r.sportName ?? "Sportart offen"}
                             {meta.equipment ? `, ${meta.equipment}` : ""}
                             {meta.quick ? ", zwischendurch" : ""}
+                            {r.source === "athlete" ? ", selbst geplant" : ""}
                           </p>
                           <h4 className="text-xl font-semibold leading-tight">{r.title}</h4>
                         </div>
@@ -202,6 +284,14 @@ export default async function CoachPage() {
                           <StatusButton id={r.id} status="suggested">
                             Zurücksetzen
                           </StatusButton>
+                        )}
+                        {r.source === "athlete" && r.status !== "done" && (
+                          <form action={deleteEntryAction}>
+                            <input type="hidden" name="id" value={r.id} />
+                            <button type="submit" className="text-sm font-medium text-stone hover:text-danger">
+                              Löschen
+                            </button>
+                          </form>
                         )}
                         {r.status !== "done" && (
                           <details className="w-full sm:w-auto">

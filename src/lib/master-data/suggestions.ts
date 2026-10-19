@@ -68,6 +68,7 @@ export async function replacePlan(userId: string, fromDate: string, items: NewSu
       and(
         eq(schema.trainingSuggestions.userId, userId),
         gte(schema.trainingSuggestions.plannedOn, fromDate),
+        eq(schema.trainingSuggestions.source, "coach"),
         inArray(schema.trainingSuggestions.status, ["suggested", "skipped"]),
       ),
     );
@@ -189,4 +190,41 @@ export async function reconcileSuggestions(userId: string, activities: ActivityF
     count++;
   }
   return count;
+}
+
+// --- Eigene Einheiten und Planprüfung (P7) ---------------------------------
+
+export type PlanReviewRow = typeof schema.planReviews.$inferSelect;
+
+/** Eigene Einheit des Athleten: gilt als angenommen, wird vom Coach-Plan nie ersetzt. */
+export async function createAthleteEntry(
+  userId: string,
+  e: { sportId: string; plannedOn: string; durationMin: number; intensity: Suggestion["intensity"]; title: string; description: string },
+): Promise<Suggestion> {
+  const meta: SuggestionMeta = { variants: [], rationale: null, equipment: null };
+  const [row] = await db()
+    .insert(schema.trainingSuggestions)
+    .values({ userId, ...e, variants: meta, status: "accepted", source: "athlete" })
+    .returning();
+  return row;
+}
+
+export async function deleteSuggestion(userId: string, id: string): Promise<void> {
+  await db().delete(schema.trainingSuggestions).where(and(eq(schema.trainingSuggestions.id, id), eq(schema.trainingSuggestions.userId, userId)));
+}
+
+export async function savePlanReview(userId: string, weekStart: string, review: unknown, model: string, contextSnapshot: unknown): Promise<PlanReviewRow> {
+  const [row] = await db().insert(schema.planReviews).values({ userId, weekStart, review, model, contextSnapshot }).returning();
+  return row;
+}
+
+/** Neueste Prüfung ab `weekStart`. */
+export async function latestPlanReview(userId: string, weekStart: string): Promise<PlanReviewRow | null> {
+  const [row] = await db()
+    .select()
+    .from(schema.planReviews)
+    .where(and(eq(schema.planReviews.userId, userId), gte(schema.planReviews.weekStart, weekStart)))
+    .orderBy(desc(schema.planReviews.createdAt))
+    .limit(1);
+  return row ?? null;
 }

@@ -16,7 +16,7 @@ export async function seedMasterData(userId: string): Promise<SeedResult> {
   for (const seed of SEED_SPORTS) {
     const [sport] = await db()
       .insert(schema.sports)
-      .values({ userId, name: seed.name, category: seed.category, stravaTypes: seed.stravaTypes, active: true })
+      .values({ userId, name: seed.name, category: seed.category, stravaTypes: seed.stravaTypes, active: true, selfPlanned: seed.selfPlanned ?? false })
       .onConflictDoNothing({ target: [schema.sports.userId, schema.sports.name] })
       .returning();
     if (!sport) continue;
