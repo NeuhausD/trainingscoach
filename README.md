@@ -24,7 +24,7 @@ npm run dev                  # http://localhost:3000
 |---|---|
 | `npm run check` | Lint, Typecheck, Tests |
 | `npm run build` | Produktions-Build (wie Vercel) |
-| `npm run db:generate` / `db:migrate` / `db:push` / `db:studio` | Drizzle |
+| `npm run db:generate` / `db:migrate` / `db:push` / `db:studio` | Drizzle (Migration generieren, einspielen, Schema pushen, Studio) |
 | `npm run db:seed -- <email>` | Stammdaten anlegen (idempotent) |
 | `npm run coach:try -- summer-good-weather` | KI-Coach mit Beispielkontext aufrufen |
 

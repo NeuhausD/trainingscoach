@@ -5,7 +5,8 @@
 3. «Storage» → Blob Store anlegen (Name `trainingscoach-files`, Region Frankfurt, Zugriff Private, für FIT-Uploads). Der Store wird per OIDC verbunden; Vercel setzt `BLOB_STORE_ID`, ein Token ist nicht nötig.
 4. Env-Variablen gemäss `.env.example` setzen (Production, Preview, Development):
    `AUTH_SECRET` (`openssl rand -base64 32`), Entra-Werte, `ALLOWED_EMAILS`, `AI_PROVIDER`, `ANTHROPIC_API_KEY` oder `OPENAI_API_KEY`, `TOKEN_ENCRYPTION_KEY`.
-5. Migrationen: lokal oder in der Session `npm run db:migrate` mit `DATABASE_URL` der Neon-DB (spielt `drizzle/*.sql` ein; `db:push` nur für Wegwerf-Branches). Danach Stammdaten: `npm run db:seed -- <deine E-Mail>` oder nach dem ersten Login auf `/sports` «Stammdaten anlegen».
+5. Migrationen: `npm run db:migrate` mit `DATABASE_URL` der Neon-DB (spielt `drizzle/*.sql` über den Neon-HTTP-Treiber ein; `db:push` nur für Wegwerf-Branches). Danach Stammdaten: `npm run db:seed -- <deine E-Mail>` oder nach dem ersten Login auf `/sports` «Stammdaten anlegen».
+   In Claude-Code-Cloud-Sessions: `DATABASE_URL` als Umgebungsvariable der Cloud-Umgebung setzen und `*.neon.tech` unter «Allowed domains» freigeben. Die npm-Skripte setzen `NODE_USE_ENV_PROXY=1`, damit Node den Proxy der Session nutzt; `drizzle-kit migrate` selbst (WebSocket) funktioniert dort nicht.
 6. Eigene Domain optional; die Redirect-URI in Entra muss zur produktiven URL passen.
 7. Settings → Functions → Function Region auf Frankfurt (fra1) stellen, damit die Functions neben der Neon-DB (eu-central-1) laufen.
 8. Settings → Git muss `NeuhausD/trainingscoach` zeigen, sonst baut Vercel nicht.

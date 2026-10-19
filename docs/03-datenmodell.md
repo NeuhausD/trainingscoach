@@ -122,8 +122,8 @@ erDiagram
 ## Migrationen und Seed
 
 - Migrationen liegen in `drizzle/` und entstehen mit `npm run db:generate` aus
-  `src/db/schema.ts`; `npm run db:migrate` spielt sie ein (`db:push` nur für
-  Wegwerf-Datenbanken).
+  `src/db/schema.ts`; `npm run db:migrate` (`scripts/migrate.ts`, Neon-HTTP-Treiber,
+  läuft auch in Cloud-Sessions) spielt sie ein (`db:push` nur für Wegwerf-Datenbanken).
 - Eindeutigkeit: `sports(user_id, name)`, `equipment(user_id, name)` und
   `sport_preferences(sport_id, season)`. Dadurch sind Seed und Speichern der
   Präferenzen idempotente Upserts.
