@@ -43,9 +43,10 @@ gantt
 - Fertig wenn: Präferenzen pro Saison gepflegt und persistiert
 
 ### P2 – Manuelle Erfassung
-- Aktivität manuell erfassen (Sportart, Dauer, RPE 1–10 mit Wortlabels, Gerät)
-- Kraftsätze je Übung erfassen (Tabelle `exercises` aus Katalog und free-exercise-db, `exercise_sets` mit Wiederholungen, kg oder Eisenhorn-Stufe)
-- Körpergewicht/Ruhepuls schnell erfassen, Leistungswerte erfassen
+- [x] Aktivität manuell erfassen (Sportart, Dauer, RPE 1–10 mit Wortlabels, Gerät), bearbeiten, löschen
+- [x] Kraftsätze je Übung erfassen (Tabelle `exercises` aus Eisenhorn-Katalog und kuratierten Studio-Übungen, `exercise_sets` mit Wiederholungen, kg oder Eisenhorn-Stufe)
+- [x] Körpergewicht/Ruhepuls schnell erfassen, Leistungswerte erfassen
+- [ ] Erste echte Einheiten in Production erfasst (Eishockey, Studio, Eisenhorn)
 - Fertig wenn: Eishockey-Abend und Studio-Training in 30 Sekunden erfasst
 
 ### P3 – Strava

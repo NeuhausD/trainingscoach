@@ -79,11 +79,11 @@ src/
   app/                    Routen (App Router)
     (auth)/login          Login-Seite
     dashboard/            Übersicht, Fortschritt
-    activities/           Aktivitätenliste, Detail, manuelle Erfassung, FIT-Upload
+    activities/           Liste, Erfassen (new), Detail mit Kraftsätzen ([id]), Bearbeiten ([id]/edit); actions.ts
     plan/                 Wochenplan und KI-Vorschläge
     sports/               Sportarten und saisonale Präferenzen (Liste, new, [id]; actions.ts)
     equipment/            Sportgeräte (Liste, new, [id]; actions.ts)
-    metrics/              Körpergewicht, Leistungswerte
+    metrics/              Körperwerte und Leistungswerte (Formulare und Listen; actions.ts)
     settings/connectors/  Strava verbinden, KI-Anbieter
     api/auth/[...nextauth] Auth.js Handler
     api/strava/*          OAuth-Callback, Webhook, Sync
@@ -94,8 +94,8 @@ src/
   db/                     Drizzle Schema, Client, Migrationen
   lib/
     users.ts              Session -> DB-Benutzer (Upsert)
-    master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Seed
-    domain/               reine Fachlogik (Saison, Belastung, Präferenzen, Seed-Daten), gut testbar
+    master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Aktivitäten, Sätze, Übungen, Werte, Seed
+    domain/               reine Fachlogik (Saison, Zeit, Belastung, RPE, Präferenzen, Sätze, Werte, Kataloge), gut testbar
     strava/               API-Client, Mapping Strava -> Activity
     fit/                  FIT-Parser
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas

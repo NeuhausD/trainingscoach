@@ -17,6 +17,9 @@ erDiagram
     sports ||--o{ training_suggestions : "betrifft"
     equipment o|--o{ activities : "verwendet in"
     activities o|--o{ training_suggestions : "erfüllt"
+    activities ||--o{ exercise_sets : "besteht aus"
+    exercises o|--o{ exercise_sets : "Übung"
+    users o|--o{ exercises : "eigene Übungen (user_id NULL = Katalog)"
 
     users {
         uuid id PK
@@ -73,6 +76,29 @@ erDiagram
         text title
         text notes
         jsonb raw_summary
+    }
+    exercises {
+        uuid id PK
+        uuid user_id FK "NULL = gemeinsamer Katalog"
+        text name
+        text source "eisenhorn | free-exercise-db | manual"
+        text external_ref UK "Eisenhorn-Nummer oder free-exercise-db-ID"
+        text[] primary_muscles
+        text[] secondary_muscles
+        text[] accessories "griffstange, griffband, blocker, karabiner, seilzug"
+        bool requires_cable_pulley
+        text url
+    }
+    exercise_sets {
+        uuid id PK
+        uuid activity_id FK
+        uuid exercise_id FK
+        int position
+        int reps
+        numeric weight_kg
+        numeric level "Eisenhorn-Stufe"
+        int rpe
+        text notes
     }
     body_metrics {
         uuid id PK
@@ -143,7 +169,10 @@ erDiagram
 - **Saison** wird aus dem Datum abgeleitet (`lib/domain/season.ts`): Frühling März–Mai, Sommer Juni–August, Herbst September–November, Winter Dezember–Februar. Der Athlet kann die Gewichtung pro Sportart und Saison in `sport_preferences` setzen (0 = nie, 10 = Schwerpunkt; Validierung und Vervollständigung auf vier Saisons in `lib/domain/preferences.ts`). Fehlt ein Eintrag, gilt Gewichtung 5. Die Sportarten-Seite sortiert nach der Gewichtung der aktuellen Saison.
 - **Sportart-Zuordnung** beim Import: Strava `sport_type` → `sports.strava_types`. Nicht zuordenbare Aktivitäten landen in einer Sportart «Sonstiges» und können manuell umgehängt werden.
 - **Geräteparameter** (`equipment.settings`, Validierung in `lib/domain/equipment-settings.ts`): nur für Heimtrainingsgeräte wie das Eisenhorn. Modell, Kolben, Anzahl Stufen, Halbstufen, Seilzug, Zubehör und optional die Tabelle Stufe → Kilogramm. Die Widerstandsstufe wird je Kraftsatz erfasst (P2) und über die Tabelle in Kilogramm umgerechnet.
-- **Übungskatalog** (`lib/domain/eisenhorn-catalog.json`, ADR 0006): 161 Eisenhorn-Übungen mit Nummer, Muskelgruppen (elf Schlüssel: back, biceps, calves, chest, core, forearms, glutes, legs, neck, shoulders, triceps) und nötigem Zubehör. `feasibleExercises()` filtert nach vorhandenem Zubehör, `setupEffort()` bewertet den Umbau. Tabelle `exercises` und `exercise_sets` folgen in P2.
+- **Übungskatalog** (ADR 0006): Tabelle `exercises` mit `user_id NULL` für den gemeinsamen Katalog: 161 Eisenhorn-Übungen aus `lib/domain/eisenhorn-catalog.json` (Nummer, Muskelgruppen, Zubehör) und kuratierte Studio-Übungen aus `lib/domain/gym-exercises.ts` (Muskelzuordnung aus free-exercise-db). Elf Muskel-Schlüssel: back, biceps, calves, chest, core, forearms, glutes, legs, neck, shoulders, triceps. Eigene Übungen entstehen beim Erfassen eines Satzes («Neue Übung»). Der Katalog wird mit `npm run db:seed` oder dem Button «Übungskatalog anlegen» befüllt; `feasibleExercises()` filtert Eisenhorn-Übungen nach vorhandenem Zubehör.
+- **Manuelle Erfassung** (`lib/domain/activity-input.ts`): Datum und Startzeit werden in `Europe/Zurich` eingegeben und als UTC gespeichert (`lib/domain/time.ts`). Dauer in Minuten, RPE 1–10 (`lib/domain/rpe.ts`), optional Distanz, Höhenmeter, Puls. Die Belastung wird beim Speichern berechnet: HF-basiert, wenn Durchschnitts- und Maximalpuls sowie ein Ruhepuls aus `body_metrics` vorliegen, sonst aus Dauer × RPE.
+- **Kraftsätze** (`lib/domain/strength.ts`): je Satz Wiederholungen plus Gewicht in kg (Studio) oder Eisenhorn-Stufe; Kilogramm aus der Stufe über `equipment.settings.kgPerLevel`. `setsByMuscle()` zählt Sätze je Muskelgruppe (Primär 1, Sekundär 0.5) als Grundlage für Vorschläge in P6.
+- **Körper- und Leistungswerte** (`lib/domain/metrics.ts`): Gewicht und Ruhepuls pro Tag, Leistungswerte mit Einheit je Kennzahl; `weightTrend()` liefert das 7-Tage-Mittel.
 - **Ausrüstung** beim Import: Strava `gear_id` → `equipment.strava_gear_id`. Unbekanntes Gear wird automatisch als neues Gerät angelegt (Name aus Strava), Typ wird nachträglich gesetzt.
 - **Belastung** (`training_load`): wenn Leistungsdaten vorhanden, TSS-ähnlich aus Leistung und FTP; sonst HF-basiert (TRIMP); bei Kraft und Eishockey aus Dauer × RPE. Berechnung in `lib/domain/load.ts`, bewusst einfach und nachvollziehbar.
 - **Fortschritt**: Vergleich rollierender 4-Wochen-Fenster (Volumen, Belastung, Höhenmeter), Trend der `performance_metrics` je Metrik, Gewichtstrend als 7-Tage-Mittel.
