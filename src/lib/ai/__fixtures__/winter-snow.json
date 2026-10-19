@@ -1,38 +1,291 @@
 {
   "today": "2027-01-11",
   "season": "winter",
-  "goals": ["Allgemeine Fitness", "Kraft und Schnellkraft aufbauen", "Grundlage für MTB-Saison halten"],
+  "goals": [
+    "Allgemeine Fitness",
+    "Kraft und Schnellkraft aufbauen",
+    "Grundlage für MTB-Saison halten"
+  ],
   "sports": [
-    { "name": "Mountainbike", "category": "endurance", "seasonWeight": 1, "targetSessionsPerWeek": null, "notes": "nur bei trockenen Wegen" },
-    { "name": "Jogging", "category": "endurance", "seasonWeight": 6, "targetSessionsPerWeek": 1, "notes": null },
-    { "name": "Kraft Studio", "category": "strength", "seasonWeight": 8, "targetSessionsPerWeek": 2, "notes": "Fitline Plaffeien, Mo/Do möglich" },
-    { "name": "Kraft Eisenhorn", "category": "strength", "seasonWeight": 5, "targetSessionsPerWeek": 1, "notes": null },
-    { "name": "Eishockey", "category": "team", "seasonWeight": 7, "targetSessionsPerWeek": 1, "notes": "Plausch, Freitagabend, fix" }
+    {
+      "name": "Mountainbike",
+      "category": "endurance",
+      "seasonWeight": 1,
+      "targetSessionsPerWeek": null,
+      "notes": "nur bei trockenen Wegen"
+    },
+    {
+      "name": "Jogging",
+      "category": "endurance",
+      "seasonWeight": 6,
+      "targetSessionsPerWeek": 1,
+      "notes": null
+    },
+    {
+      "name": "Kraft Studio",
+      "category": "strength",
+      "seasonWeight": 8,
+      "targetSessionsPerWeek": 2,
+      "notes": "Fitline Plaffeien, Mo/Do möglich"
+    },
+    {
+      "name": "Kraft Eisenhorn",
+      "category": "strength",
+      "seasonWeight": 5,
+      "targetSessionsPerWeek": 1,
+      "notes": null
+    },
+    {
+      "name": "Eishockey",
+      "category": "team",
+      "seasonWeight": 7,
+      "targetSessionsPerWeek": 1,
+      "notes": "Plausch, Freitagabend, fix"
+    }
   ],
   "equipment": [
-    { "name": "Trail-Bike", "kind": "bike_trail" },
-    { "name": "Eisenhorn", "kind": "home_gym" },
-    { "name": "Laufschuhe", "kind": "shoes" }
+    {
+      "name": "Trail-Bike",
+      "kind": "bike_trail"
+    },
+    {
+      "name": "Eisenhorn",
+      "kind": "home_gym"
+    },
+    {
+      "name": "Laufschuhe",
+      "kind": "shoes"
+    }
   ],
   "recentWeeks": [
-    { "weekStart": "2026-12-14", "sessions": 3, "hours": 3.5, "load": 240, "bySport": { "Kraft Studio": { "sessions": 2, "hours": 2 }, "Eishockey": { "sessions": 1, "hours": 1.5 } } },
-    { "weekStart": "2026-12-21", "sessions": 2, "hours": 2.5, "load": 160, "bySport": { "Kraft Eisenhorn": { "sessions": 1, "hours": 1 }, "Eishockey": { "sessions": 1, "hours": 1.5 } } },
-    { "weekStart": "2026-12-28", "sessions": 1, "hours": 1, "load": 60, "bySport": { "Jogging": { "sessions": 1, "hours": 1 } } },
-    { "weekStart": "2027-01-04", "sessions": 3, "hours": 3.5, "load": 230, "bySport": { "Kraft Studio": { "sessions": 2, "hours": 2 }, "Eishockey": { "sessions": 1, "hours": 1.5 } } }
+    {
+      "weekStart": "2026-12-14",
+      "sessions": 3,
+      "hours": 3.5,
+      "load": 240,
+      "bySport": {
+        "Kraft Studio": {
+          "sessions": 2,
+          "hours": 2
+        },
+        "Eishockey": {
+          "sessions": 1,
+          "hours": 1.5
+        }
+      }
+    },
+    {
+      "weekStart": "2026-12-21",
+      "sessions": 2,
+      "hours": 2.5,
+      "load": 160,
+      "bySport": {
+        "Kraft Eisenhorn": {
+          "sessions": 1,
+          "hours": 1
+        },
+        "Eishockey": {
+          "sessions": 1,
+          "hours": 1.5
+        }
+      }
+    },
+    {
+      "weekStart": "2026-12-28",
+      "sessions": 1,
+      "hours": 1,
+      "load": 60,
+      "bySport": {
+        "Jogging": {
+          "sessions": 1,
+          "hours": 1
+        }
+      }
+    },
+    {
+      "weekStart": "2027-01-04",
+      "sessions": 3,
+      "hours": 3.5,
+      "load": 230,
+      "bySport": {
+        "Kraft Studio": {
+          "sessions": 2,
+          "hours": 2
+        },
+        "Eishockey": {
+          "sessions": 1,
+          "hours": 1.5
+        }
+      }
+    }
   ],
-  "bodyMetrics": { "weightKg": 80.1, "restingHr": 55 },
+  "bodyMetrics": {
+    "weightKg": 80.1,
+    "restingHr": 55
+  },
   "performance": [
-    { "metric": "squat_1rm_kg", "value": 95, "unit": "kg", "measuredOn": "2026-12-01" },
-    { "metric": "deadlift_1rm_kg", "value": 120, "unit": "kg", "measuredOn": "2026-12-01" }
+    {
+      "metric": "squat_1rm_kg",
+      "value": 95,
+      "unit": "kg",
+      "measuredOn": "2026-12-01"
+    },
+    {
+      "metric": "deadlift_1rm_kg",
+      "value": 120,
+      "unit": "kg",
+      "measuredOn": "2026-12-01"
+    }
   ],
   "forecast": [
-    { "date": "2027-01-11", "tempMaxC": -1, "tempMinC": -6, "precipitationMm": 6, "precipitationProbability": 80, "windMaxKmh": 20 },
-    { "date": "2027-01-12", "tempMaxC": 0, "tempMinC": -5, "precipitationMm": 4, "precipitationProbability": 70, "windMaxKmh": 15 },
-    { "date": "2027-01-13", "tempMaxC": 2, "tempMinC": -4, "precipitationMm": 0, "precipitationProbability": 10, "windMaxKmh": 10 },
-    { "date": "2027-01-14", "tempMaxC": 3, "tempMinC": -3, "precipitationMm": 0, "precipitationProbability": 5, "windMaxKmh": 8 },
-    { "date": "2027-01-15", "tempMaxC": 1, "tempMinC": -4, "precipitationMm": 1, "precipitationProbability": 30, "windMaxKmh": 12 },
-    { "date": "2027-01-16", "tempMaxC": -2, "tempMinC": -8, "precipitationMm": 10, "precipitationProbability": 90, "windMaxKmh": 30 },
-    { "date": "2027-01-17", "tempMaxC": -3, "tempMinC": -9, "precipitationMm": 3, "precipitationProbability": 60, "windMaxKmh": 25 }
+    {
+      "date": "2027-01-11",
+      "tempMaxC": -1,
+      "tempMinC": -6,
+      "precipitationMm": 6,
+      "precipitationProbability": 80,
+      "windMaxKmh": 20
+    },
+    {
+      "date": "2027-01-12",
+      "tempMaxC": 0,
+      "tempMinC": -5,
+      "precipitationMm": 4,
+      "precipitationProbability": 70,
+      "windMaxKmh": 15
+    },
+    {
+      "date": "2027-01-13",
+      "tempMaxC": 2,
+      "tempMinC": -4,
+      "precipitationMm": 0,
+      "precipitationProbability": 10,
+      "windMaxKmh": 10
+    },
+    {
+      "date": "2027-01-14",
+      "tempMaxC": 3,
+      "tempMinC": -3,
+      "precipitationMm": 0,
+      "precipitationProbability": 5,
+      "windMaxKmh": 8
+    },
+    {
+      "date": "2027-01-15",
+      "tempMaxC": 1,
+      "tempMinC": -4,
+      "precipitationMm": 1,
+      "precipitationProbability": 30,
+      "windMaxKmh": 12
+    },
+    {
+      "date": "2027-01-16",
+      "tempMaxC": -2,
+      "tempMinC": -8,
+      "precipitationMm": 10,
+      "precipitationProbability": 90,
+      "windMaxKmh": 30
+    },
+    {
+      "date": "2027-01-17",
+      "tempMaxC": -3,
+      "tempMinC": -9,
+      "precipitationMm": 3,
+      "precipitationProbability": 60,
+      "windMaxKmh": 25
+    }
   ],
-  "constraints": ["Eishockey Freitag 20:00 fix", "Studio nur Montag und Donnerstag"]
+  "constraints": [
+    "Eishockey Freitag 20:00 fix",
+    "Studio nur Montag und Donnerstag"
+  ],
+  "homeGym": {
+    "name": "Eisenhorn",
+    "recentSetsByMuscle": {
+      "Beine": 0,
+      "Po": 0,
+      "Waden": 0,
+      "Rücken": 2,
+      "Brust": 4,
+      "Schultern": 1,
+      "Bizeps": 1,
+      "Trizeps": 2,
+      "Bauch und Rumpf": 0,
+      "Unterarme": 0,
+      "Nacken": 0
+    },
+    "neglectedMuscles": [
+      "Beine",
+      "Po",
+      "Waden",
+      "Bauch und Rumpf",
+      "Unterarme",
+      "Nacken"
+    ],
+    "exercises": [
+      {
+        "name": "Kniebeuge",
+        "muscles": [
+          "Beine",
+          "Po"
+        ],
+        "accessories": [
+          "griffstange"
+        ],
+        "setup": "gering"
+      },
+      {
+        "name": "Wadenheben",
+        "muscles": [
+          "Waden"
+        ],
+        "accessories": [
+          "griffstange"
+        ],
+        "setup": "gering"
+      },
+      {
+        "name": "Kreuzheben",
+        "muscles": [
+          "Rücken",
+          "Po",
+          "Beine"
+        ],
+        "accessories": [
+          "griffstange"
+        ],
+        "setup": "gering"
+      },
+      {
+        "name": "Rumpfbeugen",
+        "muscles": [
+          "Bauch und Rumpf"
+        ],
+        "accessories": [
+          "griffband"
+        ],
+        "setup": "gering"
+      },
+      {
+        "name": "Ausfallschritt",
+        "muscles": [
+          "Beine",
+          "Po"
+        ],
+        "accessories": [],
+        "setup": "ohne"
+      },
+      {
+        "name": "Schulterdrücken",
+        "muscles": [
+          "Schultern",
+          "Trizeps"
+        ],
+        "accessories": [
+          "griffstange"
+        ],
+        "setup": "gering"
+      }
+    ]
+  }
 }

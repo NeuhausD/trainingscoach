@@ -44,6 +44,23 @@ export const coachContextSchema = z.object({
     }),
   ),
   constraints: z.array(z.string()).describe("z. B. 'Dienstag und Donnerstag kein Training'"),
+  homeGym: z
+    .object({
+      name: z.string(),
+      recentSetsByMuscle: z.record(z.string(), z.number()).describe("Sätze je Muskelgruppe in den letzten 14 Tagen"),
+      neglectedMuscles: z.array(z.string()),
+      exercises: z.array(
+        z.object({
+          name: z.string(),
+          muscles: z.array(z.string()),
+          accessories: z.array(z.string()),
+          setup: z.enum(["ohne", "gering", "umbau"]),
+        }),
+      ),
+    })
+    .nullable()
+    .optional()
+    .describe("Heim-Kraftstation (Eisenhorn): nur Übungen aus dieser Liste vorschlagen (ADR 0006)"),
 });
 
 export type CoachContext = z.infer<typeof coachContextSchema>;
@@ -64,5 +81,6 @@ export function emptyContext(today: string, season: Season): CoachContext {
     performance: [],
     forecast: [],
     constraints: [],
+    homeGym: null,
   };
 }

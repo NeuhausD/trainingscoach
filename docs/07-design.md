@@ -64,7 +64,9 @@ Beschreibung.
 ## Layout
 
 - App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke,
-  Tab-Navigation unten am Handy (mit Safe-Area), oben ab `sm`. Inhalte
+  Tab-Navigation unten am Handy (mit Safe-Area), oben ab `sm`. Fünf Tabs:
+  Übersicht, Training, Coach, Fortschritt, Sportarten; Geräte und Werte
+  hängen unter Sportarten bzw. Fortschritt (Tab bleibt aktiv). Inhalte
   linksbündig, maximal `max-w-2xl`.
 - Listen als Zeilen mit `divide-y divide-mist`, keine Karten-Raster.
 - Formulare in Gruppen (`panel`), die aktuelle Saison mit Moos-Ring.

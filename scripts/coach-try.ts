@@ -19,6 +19,11 @@ async function main() {
     for (const v of s.variants) console.log(`  Variante: ${v.label} (${v.durationMin} min) – ${v.description}`);
     console.log();
   }
+  for (const q of plan.quickSessions ?? []) {
+    console.log(`${q.plannedOn}  Zwischendurch · ${q.title} (${q.durationMin} min, ${q.muscles.join(", ")})`);
+    for (const e of q.exercises) console.log(`  ${e.name}: ${e.sets} × ${e.reps}`);
+    console.log(`  Warum: ${q.rationale}\n`);
+  }
 }
 
 main().catch((e) => {

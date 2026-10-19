@@ -70,10 +70,11 @@ gantt
 - Fertig wenn: 4-Wochen-Vergleich und Jahresübersicht sichtbar
 
 ### P6 – KI-Vorschläge
-- Kontextaufbau (aggregiert), Prompt, Zod-Schema, Provider-Umschaltung
-- Wetter-Einbindung, Varianten (Indoor/Outdoor, kurz/lang)
-- Eisenhorn-Einheiten nach Muskelgruppe: 5–10 Minuten, 1–2 Übungen mit gleichem Aufbau, nur mit vorhandenem Zubehör, Muskeln, die zuletzt nicht dran waren (ADR 0006)
-- Fertig wenn: Wochenvorschlag passt zu Saison, Wetter und letzter Belastung
+- [x] Kontextaufbau aus der DB (`lib/domain/coach-context.ts`, `lib/ai/plan.ts`): Saison-Gewichtung, Wochen-Aggregate der letzten 4 Wochen, Geräte, Werte, Wetter, Hinweise
+- [x] Prompt und Zod-Schema mit Varianten (Indoor/Outdoor, kurz/lang), Provider-Umschaltung (ADR 0005)
+- [x] Eisenhorn-Kurz-Einheiten nach Muskelgruppe: 5–10 Minuten, 1–2 Übungen ohne grossen Umbau, nur mit vorhandenem Zubehör, Muskeln, die in 14 Tagen nicht dran waren (ADR 0006)
+- [x] Seite «Coach»: Plan erzeugen, Tage mit Einheiten, Annehmen/Überspringen; Übersicht zeigt die nächsten Vorschläge
+- Fertig wenn: Wochenvorschlag passt zu Saison, Wetter und letzter Belastung (mit echtem Key prüfen)
 
 ### P7 – Wochenplan
 - Vorschläge annehmen, verschieben, erledigen; automatische Erfüllung durch importierte Aktivität
