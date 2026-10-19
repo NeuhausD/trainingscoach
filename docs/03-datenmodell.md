@@ -63,7 +63,7 @@ erDiagram
         uuid sport_id FK
         uuid equipment_id FK
         text source "strava | fit | manual"
-        text external_id UK "strava activity id"
+        text external_id UK "strava:<id> | fit:<serial>:<created>"
         timestamptz started_at
         int duration_s
         numeric distance_m
@@ -76,6 +76,11 @@ erDiagram
         text title
         text notes
         jsonb raw_summary
+        numeric aerobic_te "Garmin Training Effect 0-5"
+        numeric anaerobic_te
+        numeric garmin_load
+        int calories_kcal
+        text fit_url "Vercel Blob, optional"
     }
     exercises {
         uuid id PK
@@ -177,6 +182,7 @@ erDiagram
 - **Körper- und Leistungswerte** (`lib/domain/metrics.ts`): Gewicht und Ruhepuls pro Tag, Leistungswerte mit Einheit je Kennzahl; `weightTrend()` liefert das 7-Tage-Mittel.
 - **Ausrüstung** beim Import: Strava `gear_id` → `equipment.strava_gear_id`. Unbekanntes Gear wird automatisch als neues Gerät angelegt (Name aus Strava, MTB-Rahmen → Trail-Bike als Vorschlag, sonst «Sonstiges»), Typ wird nachträglich gesetzt. Bestehende Geräte bekommen ihre Gear-ID im Geräteformular über die Auswahl «Aus Strava übernehmen» (Bikes und Schuhe aus dem Strava-Profil); die Namen müssen nicht übereinstimmen. Heisst ein Gerät trotzdem gleich wie das Strava-Gear, trägt der Import die Gear-ID automatisch nach.
 - **Strava-Import** (`lib/domain/strava-mapping.ts`, `lib/strava/sync.ts`): `activities.external_id` = `strava:<id>`, Quelle `strava`. Beim Aktualisieren bleiben manuell gesetzte Sportart und Gerät erhalten, Messwerte und Titel werden übernommen; nur die Auffang-Sportart «Sonstiges» wird ersetzt, sobald eine Sportart den Strava-Typ abdeckt. `raw_summary` enthält nur Strava-ID, Sporttyp, Gear-ID und Trainer-Flag, keine Streams. Belastung aus Leistung (nur `device_watts`) mit FTP aus `performance_metrics`, sonst Puls (Ruhepuls aus `body_metrics`, Rückfall 60), sonst 0. Ein erneuter Abgleich berechnet die Belastung neu.
+- **FIT-Upload** (`lib/domain/fit-mapping.ts`, `lib/fit/`): `external_id` = `fit:<Seriennummer>:<Erstellzeit>`, Quelle `fit`. Sportart über den Strava-Typ, auf den Garmin-Sport und -Unterart abgebildet werden (`cycling/mountain` → `MountainBikeRide`), Belastung wie beim Strava-Import. Eine bestehende Aktivität mit Start innerhalb von drei Minuten und Dauer innerhalb von 25 % oder 10 Minuten wird ergänzt (Garmin-Werte, fehlende Messwerte), nicht doppelt angelegt. VO2max aus der Datei landet als `performance_metrics.vo2max` am Tag der Aktivität, höchstens einmal pro Tag (ADR 0007).
 - **Belastung** (`training_load`): wenn Leistungsdaten vorhanden, TSS-ähnlich aus Leistung und FTP; sonst HF-basiert (TRIMP); bei Kraft und Eishockey aus Dauer × RPE. Berechnung in `lib/domain/load.ts`, bewusst einfach und nachvollziehbar.
 - **Fortschritt** (`lib/domain/progress.ts`): Vergleich der letzten 28 Tage mit den 28 davor (Einheiten, Zeit, Belastung, Höhenmeter), Belastung je Kalenderwoche ab Montag (Zürich), Stunden je Monat und Sportart über 12 Monate, Gewichtsreihe mit 7-Tage-Mittel, Veränderung je Leistungskennzahl gegenüber der vorherigen Messung.
 - **Vorschläge** werden nie automatisch zu Aktivitäten. Erst wenn eine passende Aktivität importiert wird oder der Athlet sie als erledigt markiert, wird `completed_activity_id` gesetzt.

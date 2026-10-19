@@ -4,6 +4,7 @@ import { DeleteButton } from "@/components/delete-button";
 import { PageHeader } from "@/components/page-header";
 import { buttonSecondary, panel, successBox } from "@/components/ui";
 import { feasibleExercises } from "@/lib/domain/eisenhorn-catalog";
+import { describeTrainingEffect } from "@/lib/domain/fit-mapping";
 import { MUSCLE_LABELS } from "@/lib/domain/eisenhorn-catalog";
 import { RPE_LABELS } from "@/lib/domain/rpe";
 import { describeSet, setVolumeKg, setsByMuscle } from "@/lib/domain/strength";
@@ -65,6 +66,11 @@ export default async function ActivityDetailPage({
   if (activity.avgHr) facts.push(["Puls", `Ø ${activity.avgHr}${activity.maxHr ? `, max. ${activity.maxHr}` : ""}`]);
   if (activity.avgPowerW) facts.push(["Leistung", `Ø ${activity.avgPowerW} W`]);
   const stravaId = activity.source === "strava" && activity.externalId ? activity.externalId.replace("strava:", "") : null;
+  const garmin: [string, string][] = [];
+  if (activity.aerobicTe !== null) garmin.push(["Aerob", `${Number(activity.aerobicTe).toFixed(1)}, ${describeTrainingEffect(Number(activity.aerobicTe))}`]);
+  if (activity.anaerobicTe !== null) garmin.push(["Anaerob", `${Number(activity.anaerobicTe).toFixed(1)}, ${describeTrainingEffect(Number(activity.anaerobicTe))}`]);
+  if (activity.garminLoad !== null) garmin.push(["Garmin-Belastung", `${Math.round(Number(activity.garminLoad))}`]);
+  if (activity.caloriesKcal !== null) garmin.push(["Kalorien", `${activity.caloriesKcal} kcal`]);
 
   return (
     <>
@@ -93,6 +99,22 @@ export default async function ActivityDetailPage({
         ))}
       </dl>
       {activity.notes && <p className="mt-4 whitespace-pre-line text-stone">{activity.notes}</p>}
+      {garmin.length > 0 && (
+        <section className="mt-6" aria-labelledby="garmin-titel">
+          <h2 id="garmin-titel" className="text-sm text-stone">
+            Aus der FIT-Datei (Garmin)
+          </h2>
+          <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
+            {garmin.map(([k, v]) => (
+              <div key={k}>
+                <dt className="text-sm text-stone">{k}</dt>
+                <dd className="font-semibold tabular-nums">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+      {activity.source === "fit" && <p className="mt-4 text-sm text-stone">Aus einer FIT-Datei der Garmin-Uhr übernommen.</p>}
       {stravaId && (
         <p className="mt-4 text-sm text-stone">
           Aus Strava importiert.{" "}

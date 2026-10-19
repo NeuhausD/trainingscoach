@@ -57,7 +57,10 @@ gantt
 - Fertig wenn: neue Garmin-Aktivität erscheint ohne Zutun in der App mit richtigem Bike
 
 ### P4 – FIT-Upload
-- Upload nach Vercel Blob, Parsing, Dedup gegen Strava-Import
+- [x] Upload unter `/activities/upload` (bis 10 Dateien, 4 MB), Parsing mit dem Garmin FIT SDK (ADR 0007)
+- [x] Dedup: gleiche Datei → aktualisieren, gleiche Einheit aus Strava → ergänzen, sonst neue Aktivität
+- [x] Zusatzwerte Training Effect, Garmin-Belastung, Kalorien auf der Aktivität; VO2max als Leistungswert
+- [x] Ablage in Vercel Blob, wenn `BLOB_READ_WRITE_TOKEN` gesetzt ist
 - Fertig wenn: FIT-Datei liefert Zusatzwerte (Garmin-Belastung, VO2max)
 
 ### P5 – Fortschritt

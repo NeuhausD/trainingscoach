@@ -99,7 +99,7 @@ src/
     master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Aktivitäten, Sätze, Übungen, Werte, Seed
     domain/               reine Fachlogik (Saison, Zeit, Belastung, RPE, Präferenzen, Sätze, Werte, Kataloge), gut testbar
     strava/               API-Client (client.ts), Import und Webhook-Verarbeitung (sync.ts)
-    fit/                  FIT-Parser
+    fit/                  FIT-Parser (Garmin FIT SDK) und Import mit Dedup
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas
     weather/              Open-Meteo Client
   components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, SportBars, Columns, LineChart, PageHeader, SubmitButton, DeleteButton, ui.ts)
@@ -153,6 +153,28 @@ sequenceDiagram
     A->>DB: upsert activity, equipment
     A->>A: Belastung berechnen (Leistung mit FTP, sonst Puls)
     Note over A: Nächtlicher Cron (/api/cron/strava-sync) holt die letzten 30 Tage als Sicherheitsnetz
+```
+
+## Ablauf: FIT-Upload
+
+```mermaid
+sequenceDiagram
+    participant U as Athlet
+    participant G as Garmin Connect
+    participant A as Trainingscoach
+    participant DB as Postgres
+    participant B as Vercel Blob
+    U->>G: Aktivität → «Original exportieren»
+    U->>A: FIT-Dateien hochladen (/activities/upload, Server Action)
+    A->>A: Dekodieren (Garmin FIT SDK), nur Session-Summen behalten
+    A->>DB: gleiche Datei (fit:<serial>:<created>)? → Garmin-Werte auffrischen
+    A->>DB: gleiche Einheit aus Strava (Start ±3 min, ähnliche Dauer)? → ergänzen
+    A->>DB: sonst neue Aktivität mit Sportart und Belastung
+    A->>DB: VO2max als Leistungswert (einmal pro Tag)
+    opt BLOB_READ_WRITE_TOKEN gesetzt
+        A->>B: Datei privat ablegen
+    end
+    A-->>U: Ergebnis je Datei: Neu, Ergänzt, Aktualisiert, Fehler
 ```
 
 ## Ablauf: KI-Trainingsvorschlag
