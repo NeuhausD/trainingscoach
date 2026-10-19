@@ -47,6 +47,11 @@ export function PlanForm({ hasPlan }: { hasPlan: boolean }) {
           {state.created} Vorschläge erstellt ({state.modelId}). Offene Vorschläge wurden ersetzt, angenommene bleiben.
         </p>
       )}
+      {state.forecastError && (
+        <p role="alert" className={errorBox}>
+          Ohne Wettervorhersage geplant, Open-Meteo war nicht erreichbar: {state.forecastError}
+        </p>
+      )}
       <Submit hasPlan={hasPlan} />
     </form>
   );

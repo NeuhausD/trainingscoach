@@ -2,6 +2,7 @@ import { and, desc, eq, gte, inArray } from "drizzle-orm";
 import { db, schema } from "@/db";
 import type { ActivityValues } from "@/lib/domain/activity-input";
 import type { SetValues } from "@/lib/domain/strength";
+import { fulfilSuggestionForActivity, reopenByActivity } from "./suggestions";
 
 export type Activity = typeof schema.activities.$inferSelect;
 export type ExerciseSet = typeof schema.exerciseSets.$inferSelect;
@@ -61,6 +62,7 @@ export async function getActivity(userId: string, id: string): Promise<ActivityR
 
 export async function createActivity(userId: string, values: ActivityValues): Promise<Activity> {
   const [row] = await db().insert(schema.activities).values(toInsert(userId, values)).returning();
+  await fulfilSuggestionForActivity(userId, row);
   return row;
 }
 
@@ -77,6 +79,7 @@ export async function updateActivity(userId: string, id: string, values: Activit
 }
 
 export async function deleteActivity(userId: string, id: string): Promise<void> {
+  await reopenByActivity(userId, id);
   await db().delete(schema.activities).where(and(eq(schema.activities.id, id), eq(schema.activities.userId, userId)));
 }
 

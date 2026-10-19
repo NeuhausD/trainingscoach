@@ -152,6 +152,7 @@ sequenceDiagram
     A->>S: GET /gear/{gear_id} (falls unbekannt)
     A->>DB: upsert activity, equipment
     A->>A: Belastung berechnen (Leistung mit FTP, sonst Puls)
+    A->>DB: passenden offenen Vorschlag als erledigt markieren (gleiche Sportart, ±1 Tag)
     Note over A: Nächtlicher Cron (/api/cron/strava-sync) holt die letzten 30 Tage als Sicherheitsnetz
 ```
 
@@ -193,7 +194,8 @@ sequenceDiagram
     A->>L: generateObject(schema: Wochenplan)
     L-->>A: strukturierter Plan (Einheiten mit Sportart, Dauer, Intensität, Variante)
     A->>DB: offene Vorschläge ab heute ersetzen, neue speichern (Status: vorgeschlagen, Kontext als Snapshot)
-    A-->>U: Plan je Tag anzeigen, annehmen / überspringen, Varianten aufklappen
+    A-->>U: Plan je Tag anzeigen, annehmen / überspringen / verschieben / erledigen, Varianten aufklappen
+    Note over A: Wochenbilanz Plan gegen Ist aus Vorschlägen und Aktivitäten der Kalenderwoche
 ```
 
 Wichtig: Der KI-Kontext enthält **nur aggregierte und selbst berechnete

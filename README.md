@@ -30,4 +30,4 @@ npm run dev                  # http://localhost:3000
 
 ## Status
 
-Phasen P0 bis P6 (Stammdaten, Design, manuelle Erfassung, Strava-Connector, FIT-Upload, Fortschritt, KI-Wochenplan) umgesetzt. Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).
+Phasen P0 bis P7 (Stammdaten, Design, manuelle Erfassung, Strava-Connector, FIT-Upload, Fortschritt, KI-Wochenplan, Plan gegen Ist) umgesetzt. Nächste Schritte in [`docs/05-roadmap.md`](docs/05-roadmap.md).
