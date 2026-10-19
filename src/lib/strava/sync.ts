@@ -14,7 +14,7 @@ import {
   type Connector,
 } from "@/lib/master-data/connectors";
 import { listPerformanceMetrics, latestRestingHr } from "@/lib/master-data/metrics";
-import { getActivity, getGear, listActivities, refreshTokens } from "./client";
+import { getActivity, getAthleteGear, getGear, listActivities, refreshTokens, type StravaAthleteGear } from "./client";
 
 export type SyncResult = { imported: number; updated: number; gearCreated: number };
 
@@ -181,4 +181,15 @@ export async function countStravaActivities(userId: string): Promise<number> {
     .from(schema.activities)
     .where(and(eq(schema.activities.userId, userId), like(schema.activities.externalId, "strava:%")));
   return rows.length;
+}
+
+/** Gear-Liste aus Strava für das Geräteformular; leer, wenn nicht verbunden oder Fehler. */
+export async function listStravaGear(userId: string): Promise<StravaAthleteGear[]> {
+  const connector = await getStravaConnector(userId);
+  if (!connector || connector.status === "disconnected") return [];
+  try {
+    return await getAthleteGear(await ensureAccessToken(connector));
+  } catch {
+    return [];
+  }
 }

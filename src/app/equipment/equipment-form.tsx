@@ -8,15 +8,20 @@ import { errorBox, hint, input, label, panel } from "@/components/ui";
 import { formatKgPerLevel } from "@/lib/domain/equipment-settings";
 import { KIND_LABELS, type Equipment } from "@/lib/master-data/equipment";
 
+export type StravaGearOption = { id: string; name: string; kind: "bike" | "shoes"; retired: boolean };
+
 export function EquipmentForm({
   action,
   item,
+  stravaGear = [],
 }: {
   action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
   item?: Equipment;
+  stravaGear?: StravaGearOption[];
 }) {
   const [state, formAction] = useActionState(action, initialActionState);
   const [kind, setKind] = useState<EquipmentKind>(item?.kind ?? "bike_trail");
+  const [gearId, setGearId] = useState(item?.stravaGearId ?? "");
   const s = item?.settings ?? undefined;
 
   return (
@@ -66,16 +71,36 @@ export function EquipmentForm({
           <label htmlFor="stravaGearId" className={label}>
             Strava-Gear-ID
           </label>
+          {stravaGear.length > 0 && (
+            <select
+              aria-label="Aus Strava übernehmen"
+              value={stravaGear.some((g) => g.id === gearId) ? gearId : ""}
+              onChange={(e) => setGearId(e.target.value)}
+              className={`${input} mb-2`}
+            >
+              <option value="">Aus Strava übernehmen…</option>
+              {stravaGear.map((g) => (
+                <option key={g.id} value={g.id}>
+                  {g.name} ({g.kind === "bike" ? "Bike" : "Schuhe"}
+                  {g.retired ? ", ausgemustert" : ""}, {g.id})
+                </option>
+              ))}
+            </select>
+          )}
           <input
             id="stravaGearId"
             name="stravaGearId"
             autoComplete="off"
             spellCheck={false}
-            defaultValue={item?.stravaGearId ?? ""}
+            value={gearId}
+            onChange={(e) => setGearId(e.target.value)}
             placeholder="b1234567…"
             className={input}
           />
-          <p className={hint}>Optional. Ab Phase P3 gleicht der Strava-Import Aktivitäten darüber dem Gerät zu.</p>
+          <p className={hint}>
+            Der Strava-Import ordnet Aktivitäten über diese ID dem Gerät zu. Die Namen in Strava und hier dürfen sich
+            unterscheiden.
+          </p>
         </div>
         <div>
           <label htmlFor="notes" className={label}>

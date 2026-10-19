@@ -109,3 +109,13 @@ export async function getActivity(accessToken: string, id: number): Promise<Stra
 export async function getGear(accessToken: string, gearId: string): Promise<StravaGear> {
   return get<StravaGear>(accessToken, `/gear/${gearId}`);
 }
+
+export type StravaAthleteGear = { id: string; name: string; kind: "bike" | "shoes"; retired: boolean };
+
+/** Bikes und Schuhe aus dem Athletenprofil, zur Zuordnung im Geräteformular. */
+export async function getAthleteGear(accessToken: string): Promise<StravaAthleteGear[]> {
+  const athlete = await get<{ bikes?: StravaGear[]; shoes?: StravaGear[] }>(accessToken, "/athlete");
+  const map = (list: StravaGear[] | undefined, kind: "bike" | "shoes") =>
+    (list ?? []).map((g) => ({ id: g.id, name: (g.nickname ?? g.name ?? g.id).trim(), kind, retired: !!g.retired }));
+  return [...map(athlete.bikes, "bike"), ...map(athlete.shoes, "shoes")];
+}
