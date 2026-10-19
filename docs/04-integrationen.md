@@ -113,3 +113,10 @@ Seite `/settings/connectors`:
 - Garmin: Hinweis «nicht verfügbar», FIT-Upload-Link
 - KI: aktiver Anbieter und Modell anzeigen (nur lesend; Keys sind Env-Variablen)
 - Wetter: Heimatort und Koordinaten
+
+## Eisenhorn (Hersteller-Inhalte)
+
+Keine API. Der Übungskatalog (Nummer, Name, Muskelgruppen, Zubehör) liegt als
+Fakten in `src/lib/domain/eisenhorn-catalog.json`; Anleitung und Video werden
+auf `eisenhorn.com/de-ch/training/kraftuebungen/<slug>/` verlinkt, nie
+kopiert. Aktualisierung manuell, siehe ADR 0006.
