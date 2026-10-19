@@ -1,0 +1,66 @@
+# 07 – Design
+
+Die App wird meist am Handy genutzt, auf Deutsch, von einem Athleten in den
+Freiburger Voralpen. Das Design soll ruhig und sportlich wirken und die
+Saison als Kernkonzept sichtbar machen. Grundlage sind die Skills
+`frontend-design` (Anthropic) und `web-design-guidelines` (Vercel) in
+`.claude/skills/`. Quelle der Tokens ist `src/app/globals.css`.
+
+## Tokens
+
+| Token | Hell | Dunkel | Verwendung |
+|---|---|---|---|
+| `paper` | `#F2F4F1` | `#0F1512` | Seitenhintergrund (kühles Steingrau, bewusst keine Creme) |
+| `paper-raised` | `#FFFFFF` | `#17201B` | Formulargruppen, Eingabefelder |
+| `ink` | `#16211C` | `#ECEFEA` | Text |
+| `moss` | `#2F5D46` | `#7DBF9A` | Einzige Aktionsfarbe: Buttons, Links, Fokus, aktive Navigation |
+| `mist` | `#D5DBD6` | `#27332C` | Trennlinien, Rahmen |
+| `stone` | `#5E6B64` | `#98A59E` | Sekundärtext |
+| `danger` | `#A33A2A` | `#E08A7A` | Fehler, Löschen |
+| `season-spring` | `#5FA052` | `#7FC471` | Frühling |
+| `season-summer` | `#D99A1C` | `#E9B347` | Sommer |
+| `season-autumn` | `#C4622D` | `#E07D4B` | Herbst |
+| `season-winter` | `#4F8FC2` | `#74ADDA` | Winter |
+
+Saisonfarben markieren ausschliesslich die aktuelle Saison (Titel der
+Übersicht, Balken im Saisonprofil). Alles andere bleibt in Moos und Grau.
+
+## Typografie
+
+Eine Familie, zwei Weiten, geladen über `next/font/google`:
+
+- **Barlow** 400/500/600 für Text, Formulare, Navigation
+- **Barlow Condensed** 500/600/700 für Titel, Saisonname und grosse Zahlen
+
+Zahlen sind tabellarisch (`font-feature-settings: "tnum"`), Titel werden mit
+`text-wrap: balance` umbrochen. Keine Versalien-Labels, keine Eyebrows, keine
+Pfeile in Buttons.
+
+## Leitelement: Saisonprofil
+
+`src/components/season-profile.tsx`. Vier Balken je Sportart, Höhe =
+Gewichtung 0..10 in der Reihenfolge Frühling, Sommer, Herbst, Winter. Die
+aktuelle Saison trägt ihre Saisonfarbe, die anderen Stein, Gewichtung 0
+Nebel. Erscheint in der Sportarten-Liste, auf der Übersicht und gross im
+Bearbeiten-Formular. Barrierefrei über `role="img"` mit textueller
+Beschreibung.
+
+## Layout
+
+- App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke,
+  Tab-Navigation unten am Handy (mit Safe-Area), oben ab `sm`. Inhalte
+  linksbündig, maximal `max-w-2xl`.
+- Listen als Zeilen mit `divide-y divide-mist`, keine Karten-Raster.
+- Formulare in Gruppen (`panel`), die aktuelle Saison mit Moos-Ring.
+- Gemeinsame Klassen in `src/components/ui.ts`.
+
+## Verhalten und Qualität
+
+- Fokus sichtbar über `:focus-visible` (Moos, 2 px).
+- `prefers-reduced-motion` schaltet Übergänge ab; es gibt keine
+  Einblend-Animationen, nur Farbübergänge bei Hover und Navigation.
+- Dark Mode über `prefers-color-scheme`, `color-scheme` und
+  `theme-color` passen sich an.
+- Sprache: Sätze statt Labels, aktive Verben auf Buttons («Änderungen
+  speichern», «Gerät anlegen»), Fehlermeldungen nennen den nächsten Schritt.
+- Vor dem Ship: `/web-design-guidelines` auf die geänderten UI-Dateien.

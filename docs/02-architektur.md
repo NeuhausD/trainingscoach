@@ -100,7 +100,7 @@ src/
     fit/                  FIT-Parser
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas
     weather/              Open-Meteo Client
-  components/             UI-Bausteine (PageHeader, SubmitButton, DeleteButton, Tailwind-Klassen)
+  components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, PageHeader, SubmitButton, DeleteButton, ui.ts)
 drizzle/                  generierte SQL-Migrationen (db:generate / db:migrate)
 docs/                     Architektur, ADRs, Setup
 .claude/                  Projekt-Skills und Einstellungen für Claude Code
