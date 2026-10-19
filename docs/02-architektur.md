@@ -96,11 +96,11 @@ src/
   db/                     Drizzle Schema, Client, Migrationen
   lib/
     users.ts              Session -> DB-Benutzer (Upsert)
-    master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Aktivitäten, Sätze, Übungen, Werte, Seed
+    master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Aktivitäten, Sätze, Übungen, Werte, Vorschläge, Seed
     domain/               reine Fachlogik (Saison, Zeit, Belastung, RPE, Präferenzen, Sätze, Werte, Kataloge), gut testbar
     strava/               API-Client (client.ts), Import und Webhook-Verarbeitung (sync.ts)
     fit/                  FIT-Parser (Garmin FIT SDK) und Import mit Dedup
-    ai/                   Provider-Auswahl, Prompts, Zod-Schemas
+    ai/                   Provider-Auswahl, Kontext-Schema, Prompt und Zod-Schema (coach.ts), Planlauf (plan.ts)
     weather/              Open-Meteo Client
   components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, SportBars, Columns, LineChart, PageHeader, SubmitButton, DeleteButton, ui.ts)
 drizzle/                  generierte SQL-Migrationen (db:generate / db:migrate)
@@ -186,14 +186,14 @@ sequenceDiagram
     participant DB as Postgres
     participant W as Open-Meteo
     participant L as LLM (Anthropic/OpenAI)
-    U->>A: "Vorschläge für diese Woche"
-    A->>DB: Präferenzen (Saison), Geräte, aggregierte Belastung 4 Wochen, Ziele, letzte Leistungswerte
+    U->>A: «Woche planen» auf /coach (optional Hinweise)
+    A->>DB: Präferenzen (Saison), Geräte, aggregierte Belastung 4 Wochen, Ziele, letzte Werte, Sätze je Muskel (Eisenhorn)
     A->>W: 7-Tage-Vorhersage für Standort
     A->>A: Kontext zusammenstellen (nur aggregierte Kennzahlen, keine Rohdaten)
     A->>L: generateObject(schema: Wochenplan)
     L-->>A: strukturierter Plan (Einheiten mit Sportart, Dauer, Intensität, Variante)
-    A->>DB: Vorschläge speichern (Status: vorgeschlagen)
-    A-->>U: Plan anzeigen, annehmen / verwerfen / variieren
+    A->>DB: offene Vorschläge ab heute ersetzen, neue speichern (Status: vorgeschlagen, Kontext als Snapshot)
+    A-->>U: Plan je Tag anzeigen, annehmen / überspringen, Varianten aufklappen
 ```
 
 Wichtig: Der KI-Kontext enthält **nur aggregierte und selbst berechnete

@@ -101,6 +101,14 @@ Siehe `docs/setup/entra-id.md`.
 - Strukturierte Ausgabe (Zod-Schema) statt Freitext, damit Vorschläge
   speicherbar und in den Wochenplan übernehmbar sind
 - Keys: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` nur als Vercel-Env
+- Ablauf (P6): Seite `/coach` → Server Action → `lib/ai/plan.ts` baut den Kontext
+  (nur Aggregate, ADR 0004), holt das Wetter, ruft `generateObject` mit dem
+  Wochenplan-Schema und speichert die Einheiten als `training_suggestions`.
+  Prompt-Regeln: Saison-Gewichtung und Zielhäufigkeit, Wochenbelastung maximal
+  +10 % gegenüber dem 4-Wochen-Mittel, Entlastungswoche alle 3–4 Wochen,
+  Wetterregel (Regen > 60 % oder Schnee → Indoor), Ruhetag, keine harten
+  Einheiten an Folgetagen, Eisenhorn-Kurz-Einheiten nur aus der Kandidatenliste
+- Test ohne UI: `npm run coach:try -- winter-snow` (Fixture mit Eisenhorn-Kontext)
 
 ## Wetter
 

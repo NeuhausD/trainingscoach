@@ -9,24 +9,23 @@ import { sortByWeightForSeason, weightLabel } from "@/lib/domain/preferences";
 import { SEASON_LABELS, SEASON_MONTHS, seasonForDate } from "@/lib/domain/season";
 import { listEquipment } from "@/lib/master-data/equipment";
 import { listSports } from "@/lib/master-data/sports";
+import { listSuggestions } from "@/lib/master-data/suggestions";
+import { formatDate, utcToLocalParts } from "@/lib/domain/time";
 import { requireUser } from "@/lib/users";
 
 export const metadata = { title: "Übersicht" };
-
-const upcoming = [
-  { title: "FIT-Upload", text: "Zusatzwerte aus Garmin Connect (Trainingsbelastung, VO2max)", phase: "P4" },
-  { title: "Wochenplan", text: "KI-Vorschläge nach Saison, Wetter und Belastung", phase: "P6 und P7" },
-];
 
 export default async function DashboardPage() {
   const user = await requireUser();
   const now = new Date();
   const season = seasonForDate(now);
-  const [sports, equipment, recent] = await Promise.all([
+  const [sports, equipment, recent, suggestions] = await Promise.all([
     listSports(user.id),
     listEquipment(user.id),
     listActivities(user.id, { since: sinceDays(now, 28) }),
+    listSuggestions(user.id, utcToLocalParts(now).date),
   ]);
+  const upcoming = suggestions.filter((s) => s.status !== "skipped").slice(0, 4);
   const bySport = summarizeBySport(recent);
   const sum = totals(recent);
   const ranked = sortByWeightForSeason(
@@ -137,20 +136,42 @@ export default async function DashboardPage() {
       </section>
 
       <section aria-labelledby="demnaechst">
-        <h2 id="demnaechst" className="text-2xl font-semibold">
-          Demnächst
-        </h2>
-        <ul className="mt-3 divide-y divide-mist">
-          {upcoming.map((item) => (
-            <li key={item.title} className="flex items-baseline justify-between gap-4 py-3">
-              <span className="min-w-0">
-                <span className="block font-semibold">{item.title}</span>
-                <span className="block text-sm text-stone">{item.text}</span>
-              </span>
-              <span className="shrink-0 text-sm text-stone">{item.phase}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 id="demnaechst" className="text-2xl font-semibold">
+            Demnächst
+          </h2>
+          <Link href="/coach" className="text-sm font-medium text-moss hover:underline">
+            Coach
+          </Link>
+        </div>
+        {upcoming.length === 0 ? (
+          <p className="mt-3 text-stone">
+            Noch kein Wochenplan.{" "}
+            <Link href="/coach" className="font-medium text-moss hover:underline">
+              Woche planen
+            </Link>
+          </p>
+        ) : (
+          <ul className="mt-3 divide-y divide-mist">
+            {upcoming.map((item) => (
+              <li key={item.id}>
+                <Link href="/coach" className="flex items-baseline justify-between gap-4 py-3 hover:text-moss">
+                  <span className="min-w-0">
+                    <span className="block truncate font-semibold">{item.title}</span>
+                    <span className="block text-sm text-stone">
+                      {formatDate(item.plannedOn, { weekday: "short", day: "numeric", month: "short" })}, {item.sportName ?? "Sportart offen"}
+                      {item.status === "accepted" ? ", angenommen" : ""}
+                    </span>
+                  </span>
+                  <span className="shrink-0 font-display text-2xl font-semibold tabular-nums">
+                    {item.durationMin}
+                    <span className="text-sm font-medium text-stone"> min</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <form

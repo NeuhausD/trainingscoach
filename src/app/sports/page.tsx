@@ -21,9 +21,14 @@ export default async function SportsPage() {
         title="Sportarten"
         subtitle={`Nach Gewichtung für ${SEASON_LABELS[season]} sortiert`}
         action={
-          <Link href="/sports/new" className={buttonSecondary}>
-            Neue Sportart
-          </Link>
+          <div className="flex gap-2">
+            <Link href="/equipment" className={buttonSecondary}>
+              Geräte
+            </Link>
+            <Link href="/sports/new" className={buttonSecondary}>
+              Neue Sportart
+            </Link>
+          </div>
         }
       />
 
