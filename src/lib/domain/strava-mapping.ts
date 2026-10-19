@@ -115,3 +115,14 @@ export function gearToEquipment(gear: StravaGear): { name: string; kind: "bike_x
 export function afterTimestamp(now: Date, days: number): number {
   return Math.floor((now.getTime() - days * 86400000) / 1000);
 }
+
+/**
+ * Sportart einer bestehenden Aktivität beim Abgleich neu setzen? Manuelle
+ * Zuordnungen bleiben; nur die Auffang-Sportart («Sonstiges») darf durch eine
+ * jetzt passende Zuordnung ersetzt werden, etwa nach dem Anlegen von «Wandern».
+ */
+export function shouldRemapSport(existingSportId: string | null, fallbackSportId: string | null, mappedSportId: string | null): boolean {
+  if (!existingSportId) return true;
+  if (!mappedSportId || mappedSportId === existingSportId) return false;
+  return existingSportId === fallbackSportId;
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { afterTimestamp, gearToEquipment, mapStravaActivity, resolveEquipment, resolveSport } from "./strava-mapping";
+import { afterTimestamp, gearToEquipment, mapStravaActivity, resolveEquipment, resolveSport, shouldRemapSport } from "./strava-mapping";
 
 const ctx = {
   sports: [
@@ -90,5 +90,15 @@ describe("gearToEquipment / afterTimestamp", () => {
 
   it("berechnet den after-Parameter in Sekunden", () => {
     expect(afterTimestamp(new Date("2026-10-19T00:00:00Z"), 30)).toBe(Math.floor(new Date("2026-09-19T00:00:00Z").getTime() / 1000));
+  });
+});
+
+describe("shouldRemapSport", () => {
+  it("ersetzt nur die Auffang-Sportart, nie manuelle Zuordnungen", () => {
+    expect(shouldRemapSport(null, "other", "hike")).toBe(true);
+    expect(shouldRemapSport("other", "other", "hike")).toBe(true);
+    expect(shouldRemapSport("mtb", "other", "hike")).toBe(false);
+    expect(shouldRemapSport("other", "other", null)).toBe(false);
+    expect(shouldRemapSport("other", "other", "other")).toBe(false);
   });
 });
