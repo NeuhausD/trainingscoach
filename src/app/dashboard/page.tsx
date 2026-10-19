@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { signOut } from "@/auth";
 import { SeasonProfile, SEASON_TEXT_COLOR } from "@/components/season-profile";
+import { SportBars } from "@/components/sport-bars";
 import { buttonPrimary } from "@/components/ui";
-import { RPE_LABELS } from "@/lib/domain/rpe";
-import { formatDateTime, formatDuration } from "@/lib/domain/time";
+import { formatHours, sinceDays, summarizeBySport, totals } from "@/lib/domain/progress";
 import { listActivities } from "@/lib/master-data/activities";
 import { sortByWeightForSeason, weightLabel } from "@/lib/domain/preferences";
 import { SEASON_LABELS, SEASON_MONTHS, seasonForDate } from "@/lib/domain/season";
@@ -21,8 +21,15 @@ const upcoming = [
 
 export default async function DashboardPage() {
   const user = await requireUser();
-  const season = seasonForDate(new Date());
-  const [sports, equipment, recent] = await Promise.all([listSports(user.id), listEquipment(user.id), listActivities(user.id, { limit: 3 })]);
+  const now = new Date();
+  const season = seasonForDate(now);
+  const [sports, equipment, recent] = await Promise.all([
+    listSports(user.id),
+    listEquipment(user.id),
+    listActivities(user.id, { since: sinceDays(now, 28) }),
+  ]);
+  const bySport = summarizeBySport(recent);
+  const sum = totals(recent);
   const ranked = sortByWeightForSeason(
     sports.filter((s) => s.active),
     season,
@@ -44,34 +51,28 @@ export default async function DashboardPage() {
         </Link>
       </section>
 
-      <section aria-labelledby="zuletzt">
+      <section aria-labelledby="vier-wochen">
         <div className="flex items-baseline justify-between gap-4">
-          <h2 id="zuletzt" className="text-2xl font-semibold">
-            Zuletzt
+          <h2 id="vier-wochen" className="text-2xl font-semibold">
+            Letzte 4 Wochen
           </h2>
           <Link href="/activities" className="text-sm font-medium text-moss hover:underline">
             Alle Aktivitäten
           </Link>
         </div>
         {recent.length === 0 ? (
-          <p className="mt-3 text-stone">Noch keine Aktivität erfasst.</p>
+          <p className="mt-3 text-stone">Noch keine Aktivität in den letzten vier Wochen.</p>
         ) : (
-          <ul className="mt-3 divide-y divide-mist">
-            {recent.map((a) => (
-              <li key={a.id}>
-                <Link href={`/activities/${a.id}`} className="flex items-center gap-4 py-3 hover:text-moss">
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate font-semibold">{a.title ?? a.sportName ?? "Training"}</span>
-                    <span className="block text-sm text-stone">{formatDateTime(a.startedAt)}</span>
-                  </span>
-                  <span className="shrink-0 text-right">
-                    <span className="block font-display text-2xl font-semibold tabular-nums">{formatDuration(a.durationS)}</span>
-                    {a.rpe && <span className="block text-sm text-stone">{RPE_LABELS[a.rpe]}</span>}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <>
+            <p className="mt-1 text-stone">
+              <span className="font-display text-2xl font-semibold text-ink tabular-nums">{sum.sessions}</span> Einheiten,{" "}
+              <span className="font-display text-2xl font-semibold text-ink tabular-nums">{formatHours(sum.seconds)}</span>, Belastung{" "}
+              <span className="font-display text-2xl font-semibold text-ink tabular-nums">{sum.load}</span>
+            </p>
+            <div className="mt-4">
+              <SportBars rows={bySport} caption="Zeit je Sportart in den letzten vier Wochen" />
+            </div>
+          </>
         )}
       </section>
 

@@ -12,9 +12,13 @@ export type LoadInput = {
   rpe?: number | null; // 1..10
 };
 
+/** Rückfall, wenn kein Ruhepuls erfasst ist; ein gemessener Wert unter Werte macht die Belastung genauer. */
+export const DEFAULT_RESTING_HR = 60;
+
 export function trainingLoad(input: LoadInput): number {
   const hours = input.durationS / 3600;
   if (hours <= 0) return 0;
+  const restingHr = input.restingHr ?? DEFAULT_RESTING_HR;
 
   // 1) Leistungsbasiert (TSS-ähnlich, ohne Normalized Power)
   if (input.avgPowerW && input.ftpW && input.ftpW > 0) {
@@ -23,8 +27,8 @@ export function trainingLoad(input: LoadInput): number {
   }
 
   // 2) Herzfrequenzbasiert (HR-Reserve, TRIMP-ähnlich auf 100/h an der Schwelle skaliert)
-  if (input.avgHr && input.restingHr && input.maxHr && input.maxHr > input.restingHr) {
-    const hrr = (input.avgHr - input.restingHr) / (input.maxHr - input.restingHr);
+  if (input.avgHr && input.maxHr && input.maxHr > restingHr) {
+    const hrr = (input.avgHr - restingHr) / (input.maxHr - restingHr);
     const clamped = Math.min(Math.max(hrr, 0), 1);
     // Schwelle ≈ 0.85 HRR → Faktor 1.0
     const factor = clamped / 0.85;

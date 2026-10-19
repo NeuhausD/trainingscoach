@@ -52,6 +52,11 @@ Beschreibung.
 - Dauer mit Schnellauswahl (30, 45, 60, 90, 120 min), Datum und Startzeit sind vorbelegt (heute, jetzt auf 5 min gerundet), Dauer und Gerät aus der letzten Einheit derselben Sportart.
 - Selten gebrauchte Felder (Titel, Distanz, Puls, Notiz) in einem zugeklappten `<details>`.
 
+## Diagramme
+
+- Balken je Sportart (`src/components/sport-bars.tsx`): Zeit als Länge, Einheiten als Beschriftung am Balkenende, 20 px dick, 4 px Rundung nur am Datenende, eine Farbe (Moos), Text in Tinte und Stein. Keine zweite Achse, keine Legende bei einer Grösse; die Aktivitätenliste ist die Tabellensicht.
+- Mehrere Serien erst, wenn nötig; dann feste Farbreihenfolge und Legende (Dataviz-Skill).
+
 ## Layout
 
 - App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke,

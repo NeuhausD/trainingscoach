@@ -27,3 +27,12 @@ describe("trainingLoad", () => {
     expect(trainingLoad({ durationS: 0, rpe: 8 })).toBe(0);
   });
 });
+
+describe("trainingLoad ohne Ruhepuls", () => {
+  it("nutzt den Standard-Ruhepuls, sobald Durchschnitts- und Maximalpuls vorliegen", () => {
+    const withDefault = trainingLoad({ durationS: 3600, avgHr: 150, maxHr: 180 });
+    const withMeasured = trainingLoad({ durationS: 3600, avgHr: 150, maxHr: 180, restingHr: 60 });
+    expect(withDefault).toBeGreaterThan(0);
+    expect(withDefault).toBe(withMeasured);
+  });
+});
