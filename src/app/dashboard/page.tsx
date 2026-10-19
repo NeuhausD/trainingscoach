@@ -15,7 +15,6 @@ export const metadata = { title: "Übersicht" };
 
 const upcoming = [
   { title: "FIT-Upload", text: "Zusatzwerte aus Garmin Connect (Trainingsbelastung, VO2max)", phase: "P4" },
-  { title: "Fortschritt", text: "Wochenvolumen, Belastungstrend, Gewichtstrend", phase: "P5" },
   { title: "Wochenplan", text: "KI-Vorschläge nach Saison, Wetter und Belastung", phase: "P6 und P7" },
 ];
 
@@ -56,8 +55,8 @@ export default async function DashboardPage() {
           <h2 id="vier-wochen" className="text-2xl font-semibold">
             Letzte 4 Wochen
           </h2>
-          <Link href="/activities" className="text-sm font-medium text-moss hover:underline">
-            Alle Aktivitäten
+          <Link href="/progress" className="text-sm font-medium text-moss hover:underline">
+            Fortschritt
           </Link>
         </div>
         {recent.length === 0 ? (

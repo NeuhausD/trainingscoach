@@ -63,7 +63,7 @@ gantt
 ### P5 – Fortschritt
 - [x] Übersicht: letzte 4 Wochen je Sportart (Einheiten, Zeit, Belastung) als Balken
 - [x] Aktivitäten nach Monat gruppiert mit Summen je Sportart
-- [ ] Belastungstrend (rollierende 4 Wochen im Vergleich), Gewichtstrend, Leistungsmetriken
+- [x] Seite Fortschritt: 4 Wochen gegenüber den 4 davor (Einheiten, Zeit, Belastung, Höhenmeter), Belastung je Woche (12 Wochen), Jahresübersicht je Sportart und Monat, Gewicht 90 Tage mit 7-Tage-Mittel, Leistungswerte mit Veränderung
 - Fertig wenn: 4-Wochen-Vergleich und Jahresübersicht sichtbar
 
 ### P6 – KI-Vorschläge

@@ -25,7 +25,7 @@ export default async function MetricsPage({ searchParams }: { searchParams: Prom
 
   return (
     <>
-      <PageHeader title="Werte" subtitle="Körperwerte schnell notieren, Leistungswerte nach Tests festhalten" />
+      <PageHeader title="Werte erfassen" subtitle="Körperwerte schnell notieren, Leistungswerte nach Tests festhalten" backHref="/progress" backLabel="Fortschritt" />
       {saved && (
         <p role="status" aria-live="polite" className={`${successBox} mb-4`}>
           Gespeichert.

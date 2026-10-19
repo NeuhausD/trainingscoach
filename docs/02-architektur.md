@@ -83,7 +83,8 @@ src/
     plan/                 Wochenplan und KI-Vorschläge
     sports/               Sportarten und saisonale Präferenzen (Liste, new, [id]; actions.ts)
     equipment/            Sportgeräte (Liste, new, [id]; actions.ts)
-    metrics/              Körperwerte und Leistungswerte (Formulare und Listen; actions.ts)
+    progress/             Fortschritt: Vergleich, Wochen-Belastung, Jahresübersicht, Gewicht, Leistungswerte
+    metrics/              Körperwerte und Leistungswerte erfassen (Formulare und Listen; actions.ts)
     settings/connectors/  Strava verbinden, KI-Anbieter
     api/auth/[...nextauth] Auth.js Handler
     api/strava/*          connect (OAuth-Start), callback, webhook
@@ -101,7 +102,7 @@ src/
     fit/                  FIT-Parser
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas
     weather/              Open-Meteo Client
-  components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, PageHeader, SubmitButton, DeleteButton, ui.ts)
+  components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, SportBars, Columns, LineChart, PageHeader, SubmitButton, DeleteButton, ui.ts)
 drizzle/                  generierte SQL-Migrationen (db:generate / db:migrate)
 docs/                     Architektur, ADRs, Setup
 .claude/                  Projekt-Skills und Einstellungen für Claude Code
