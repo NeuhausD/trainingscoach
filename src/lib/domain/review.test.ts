@@ -50,7 +50,7 @@ describe("reviewWindow", () => {
     const current = [...Array(14)].map(() => ride(60, 50));
     const r = reviewWindow(current, [], [sports[0], sports[3]]);
     expect(r.sports.find((s) => s.sport === "Mountainbike")?.verdict).toBe("mehr als geplant");
-    expect(r.sports.find((s) => s.sport === "Eishockey")?.verdict).toBe("zu wenig");
+    expect(r.sports.find((s) => s.sport === "Eishockey")).toMatchObject({ verdict: "offen", hint: "0 × von 4" });
     expect(r.overall).toBe("gut");
   });
 

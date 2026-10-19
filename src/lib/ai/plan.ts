@@ -7,7 +7,11 @@ import { listActivities, recentSetsWithMuscles } from "@/lib/master-data/activit
 import { listEquipment } from "@/lib/master-data/equipment";
 import { listBodyMetrics, listPerformanceMetrics } from "@/lib/master-data/metrics";
 import { listSports } from "@/lib/master-data/sports";
-import { replacePlan, type NewSuggestion } from "@/lib/master-data/suggestions";
+import { latestPlanReview, listSuggestionsBetween, replacePlan, savePlanReview, type NewSuggestion } from "@/lib/master-data/suggestions";
+import { weekStartKey } from "@/lib/domain/progress";
+import { shiftDay } from "@/lib/domain/plan-match";
+import { INTENSITY_LABELS } from "@/lib/domain/intensity";
+import { generatePlanReview, type PlanReview, type PlannedSessionForReview } from "./review";
 import { fetchForecast } from "@/lib/weather/open-meteo";
 import { generateWeekPlan, type WeekPlan } from "./coach";
 import { coachContextSchema, type CoachContext } from "./context";
@@ -15,7 +19,8 @@ import { eq } from "drizzle-orm";
 
 /** Kontext für den Coach aus der DB zusammenstellen (nur Aggregate, ADR 0004). */
 export async function buildContextForUser(userId: string, now: Date, constraints: string[]): Promise<{ context: CoachContext; forecastError: string | null }> {
-  const [sports, equipment, activities, body, performance, recentSets, user] = await Promise.all([
+  const today = utcToLocalParts(now).date;
+  const [sports, equipment, activities, body, performance, recentSets, user, planned] = await Promise.all([
     listSports(userId),
     listEquipment(userId),
     listActivities(userId, { since: sinceDays(now, 28) }),
@@ -23,7 +28,11 @@ export async function buildContextForUser(userId: string, now: Date, constraints
     listPerformanceMetrics(userId, 100),
     recentSetsWithMuscles(userId, sinceDays(now, 14)),
     db().select({ lat: schema.users.homeLat, lon: schema.users.homeLon }).from(schema.users).where(eq(schema.users.id, userId)).limit(1),
+    listSuggestionsBetween(userId, today, shiftDay(today, 7)),
   ]);
+  const plannedByAthlete = planned
+    .filter((s) => s.source === "athlete" && s.status !== "skipped")
+    .map((s) => ({ plannedOn: s.plannedOn, sport: s.sportName ?? "Sportart offen", title: s.title, durationMin: s.durationMin, intensity: s.intensity }));
   const lat = Number(user[0]?.lat ?? process.env.HOME_LAT ?? 46.743);
   const lon = Number(user[0]?.lon ?? process.env.HOME_LON ?? 7.288);
   let forecastError: string | null = null;
@@ -35,7 +44,7 @@ export async function buildContextForUser(userId: string, now: Date, constraints
 
   const built = buildCoachContext({
     now,
-    today: utcToLocalParts(now).date,
+    today,
     season: seasonForDate(now),
     goals: DEFAULT_GOALS,
     sports: sports.map((s) => ({ name: s.name, category: s.category, active: s.active, selfPlanned: s.selfPlanned, notes: null, preferences: s.preferences })),
@@ -47,7 +56,37 @@ export async function buildContextForUser(userId: string, now: Date, constraints
     constraints,
     recentSets,
   });
-  return { context: coachContextSchema.parse(built), forecastError };
+  return { context: coachContextSchema.parse({ ...built, plannedByAthlete }), forecastError };
+}
+
+export type ReviewResult = { review: PlanReview; modelId: string; forecastError: string | null };
+
+/** Geplante Woche (ab Montag, eigene und Coach-Einheiten) vom Modell prüfen lassen und speichern. */
+export async function createPlanReview(userId: string, now: Date, constraints: string[]): Promise<ReviewResult> {
+  const weekStart = weekStartKey(now);
+  const { context, forecastError } = await buildContextForUser(userId, now, constraints);
+  const rows = await listSuggestionsBetween(userId, weekStart, shiftDay(context.today, 7));
+  const plan: PlannedSessionForReview[] = rows
+    .filter((r) => r.status !== "skipped")
+    .map((r) => ({
+      plannedOn: r.plannedOn,
+      sport: r.sportName ?? "Sportart offen",
+      title: r.title,
+      durationMin: r.durationMin,
+      intensity: `${r.intensity} (${INTENSITY_LABELS[r.intensity]})`,
+      status: r.status,
+      source: r.source,
+      description: r.description.slice(0, 300),
+    }));
+  if (plan.length === 0) throw new Error("Noch keine Einheit geplant. Plane zuerst eigene Einheiten oder lass den Coach planen.");
+  const { review, modelId } = await generatePlanReview(context, plan);
+  await savePlanReview(userId, weekStart, review, modelId, { context, plan });
+  return { review, modelId, forecastError };
+}
+
+export async function currentPlanReview(userId: string, now: Date): Promise<{ review: PlanReview; createdAt: Date; model: string | null } | null> {
+  const row = await latestPlanReview(userId, weekStartKey(now));
+  return row ? { review: row.review as PlanReview, createdAt: row.createdAt, model: row.model } : null;
 }
 
 /** Plan in Vorschläge übersetzen; Sportart über den exakten Namen, Kurz-Einheiten auf die Eisenhorn-Sportart. */

@@ -100,7 +100,7 @@ src/
     domain/               reine Fachlogik (Saison, Zeit, Belastung, RPE, Präferenzen, Sätze, Werte, Kataloge), gut testbar
     strava/               API-Client (client.ts), Import und Webhook-Verarbeitung (sync.ts)
     fit/                  FIT-Parser (Garmin FIT SDK) und Import mit Dedup
-    ai/                   Provider-Auswahl, Kontext-Schema, Prompt und Zod-Schema (coach.ts), Planlauf (plan.ts)
+    ai/                   Provider-Auswahl, Kontext-Schema, Prompt und Zod-Schema (coach.ts), Planprüfung (review.ts), Planlauf (plan.ts)
     weather/              Open-Meteo Client
   components/             UI-Bausteine (AppShell, NavLinks, SeasonProfile, SportBars, Columns, LineChart, PageHeader, SubmitButton, DeleteButton, ui.ts)
 drizzle/                  generierte SQL-Migrationen (db:generate / db:migrate)
@@ -195,6 +195,9 @@ sequenceDiagram
     L-->>A: strukturierter Plan (Einheiten mit Sportart, Dauer, Intensität, Variante)
     A->>DB: offene Vorschläge ab heute ersetzen, neue speichern (Status: vorgeschlagen, Kontext als Snapshot)
     A-->>U: Plan je Tag anzeigen, annehmen / überspringen / verschieben / erledigen, Varianten aufklappen
+    U->>A: eigene Einheiten planen (source athlete) und «Plan prüfen lassen»
+    A->>L: generateObject(schema: Planprüfung) mit Kontext und geplanter Woche
+    A->>DB: Prüfung speichern (plan_reviews)
     Note over A: Wochenbilanz Plan gegen Ist aus Vorschlägen und Aktivitäten der Kalenderwoche
 ```
 

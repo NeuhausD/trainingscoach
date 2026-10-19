@@ -45,6 +45,18 @@ export const coachContextSchema = z.object({
     }),
   ),
   constraints: z.array(z.string()).describe("z. B. 'Dienstag und Donnerstag kein Training'"),
+  plannedByAthlete: z
+    .array(
+      z.object({
+        plannedOn: z.string(),
+        sport: z.string(),
+        title: z.string(),
+        durationMin: z.number(),
+        intensity: z.string(),
+      }),
+    )
+    .optional()
+    .describe("Vom Athleten selbst geplante Einheiten der Woche: stehen fest, nicht ersetzen oder doppeln"),
   homeGym: z
     .object({
       name: z.string(),

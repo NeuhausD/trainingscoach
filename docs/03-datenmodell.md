@@ -12,6 +12,7 @@ erDiagram
     users ||--o{ performance_metrics : "erfasst"
     users ||--o{ connectors : "verbindet"
     users ||--o{ training_suggestions : "erhält"
+    users ||--o{ plan_reviews : "lässt prüfen"
     sports ||--o{ sport_preferences : "hat saisonale Gewichtung"
     sports ||--o{ activities : "klassifiziert"
     sports ||--o{ training_suggestions : "betrifft"
@@ -149,7 +150,16 @@ erDiagram
         text intensity "recovery | endurance | tempo | threshold | vo2max | strength | power"
         jsonb variants
         text status "suggested | accepted | done | skipped"
+        text source "coach | athlete"
         text model "z. B. claude-sonnet-5-5"
+        jsonb context_snapshot
+    }
+    plan_reviews {
+        uuid id PK
+        uuid user_id FK
+        date week_start
+        jsonb review "Urteil, Befunde, Verbesserungen"
+        text model
         jsonb context_snapshot
     }
 ```
@@ -185,9 +195,10 @@ erDiagram
 - **Strava-Import** (`lib/domain/strava-mapping.ts`, `lib/strava/sync.ts`): `activities.external_id` = `strava:<id>`, Quelle `strava`. Beim Aktualisieren bleiben manuell gesetzte Sportart und Gerät erhalten, Messwerte und Titel werden übernommen; nur die Auffang-Sportart «Sonstiges» wird ersetzt, sobald eine Sportart den Strava-Typ abdeckt. `raw_summary` enthält nur Strava-ID, Sporttyp, Gear-ID und Trainer-Flag, keine Streams. Belastung aus Leistung (nur `device_watts`) mit FTP aus `performance_metrics`, sonst Puls (Ruhepuls aus `body_metrics`, Rückfall 60), sonst 0. Ein erneuter Abgleich berechnet die Belastung neu.
 - **FIT-Upload** (`lib/domain/fit-mapping.ts`, `lib/fit/`): `external_id` = `fit:<Seriennummer>:<Erstellzeit>`, Quelle `fit`. Sportart über den Strava-Typ, auf den Garmin-Sport und -Unterart abgebildet werden (`cycling/mountain` → `MountainBikeRide`), Belastung wie beim Strava-Import. Eine bestehende Aktivität mit Start innerhalb von drei Minuten und Dauer innerhalb von 25 % oder 10 Minuten wird ergänzt (Garmin-Werte, fehlende Messwerte), nicht doppelt angelegt. VO2max aus der Datei landet als `performance_metrics.vo2max` am Tag der Aktivität, höchstens einmal pro Tag (ADR 0007).
 - **Belastung** (`training_load`): wenn Leistungsdaten vorhanden, TSS-ähnlich aus Leistung und FTP; sonst HF-basiert (TRIMP); bei Kraft und Eishockey aus Dauer × RPE. Berechnung in `lib/domain/load.ts`, bewusst einfach und nachvollziehbar.
-- **Rückblick-Bewertung** (`lib/domain/review.ts`): je Sportart Einheiten der letzten 4 Wochen gegen das Saisonziel (Einheiten pro Woche × 4): unter 75 % «zu wenig», über 150 % «mehr als geplant», sonst «gut»; Schwerpunkte (Gewicht ≥ 7) ohne Ziel und ohne Einheit gelten als «zu wenig». Gegen die 4 Wochen davor: mittlere Dauer unter 80 % → «kürzer als zuvor», Belastung je Stunde unter 80 % → «weniger intensiv». Gesamturteil: gut, teilweise unter Ziel, unter Ziel (mindestens die Hälfte der bewerteten Sportarten zu wenig); selbst geplante Sportarten zählen nicht als zu wenig.
+- **Rückblick-Bewertung** (`lib/domain/review.ts`): je Sportart Einheiten der letzten 4 Wochen gegen das Saisonziel (Einheiten pro Woche × 4): unter 75 % «zu wenig», über 150 % «mehr als geplant», sonst «gut»; Schwerpunkte (Gewicht ≥ 7) ohne Ziel und ohne Einheit gelten als «zu wenig». Gegen die 4 Wochen davor: mittlere Dauer unter 80 % → «kürzer als zuvor», Belastung je Stunde unter 80 % → «weniger intensiv». Gesamturteil: gut, teilweise unter Ziel, unter Ziel (mindestens die Hälfte der bewerteten Sportarten zu wenig); selbst geplante Sportarten zeigen den Zähler, werden aber nicht bewertet.
 - **Fortschritt** (`lib/domain/progress.ts`): Vergleich der letzten 28 Tage mit den 28 davor (Einheiten, Zeit, Belastung, Höhenmeter), Belastung je Kalenderwoche ab Montag (Zürich), Stunden je Monat und Sportart über 12 Monate, Gewichtsreihe mit 7-Tage-Mittel, Veränderung je Leistungskennzahl gegenüber der vorherigen Messung.
 - **Selbst geplante Sportarten** (`sports.self_planned`): feste Termine wie Eiszeiten plant der Athlet selbst. Der Coach bekommt die Sportart mit `selfPlanned: true` im Kontext, schlägt dafür keine Einheiten vor und rechnet ihre Belastung über die Wochen-Aggregate mit; schlägt das Modell sie trotzdem vor, werden diese Einheiten beim Speichern verworfen.
 - **KI-Wochenplan** (`lib/domain/coach-context.ts`, `lib/ai/plan.ts`, `lib/master-data/suggestions.ts`): Der Kontext enthält aktive Sportarten mit Gewicht der aktuellen Saison, aktive Geräte, die letzten 4 Kalenderwochen als Summen je Sportart, neueste Körper- und Leistungswerte, 7-Tage-Wetter, Hinweise aus dem Formular und den Eisenhorn-Kontext (Sätze je Muskelgruppe der letzten 14 Tage, vernachlässigte Muskeln, bis 24 machbare Übungen ohne grossen Umbau). Der Plan wird als Zeilen in `training_suggestions` gespeichert: `variants` trägt Varianten, Begründung, Gerät, bei Kurz-Einheiten die Übungen und die Plan-Zusammenfassung; `context_snapshot` den vollständigen Kontext (ADR 0004). Ein neuer Plan ersetzt offene und übersprungene Vorschläge ab heute, angenommene und erledigte bleiben.
 - **Vorschläge** werden nie automatisch zu Aktivitäten. Erst wenn eine passende Aktivität importiert wird oder der Athlet sie als erledigt markiert, wird `completed_activity_id` gesetzt.
+- **Eigene Einheiten** (`lib/domain/plan-entry.ts`): `training_suggestions.source = athlete`, Status direkt `accepted`; der Coach-Plan ersetzt nur `source = coach`, bekommt eigene Einheiten der nächsten 7 Tage als `plannedByAthlete` im Kontext und plant um sie herum. **Planprüfung** (`lib/ai/review.ts`): die Woche ab Montag (eigene und Coach-Einheiten, ohne übersprungene) geht mit dem üblichen Kontext ans Modell; Ergebnis mit Urteil, Befunden (wichtig/hinweis, Datum, Titel) und Verbesserungen (verschieben, kürzen, verlängern, lockerer, härter, ersetzen, hinzufügen, streichen) wird in `plan_reviews` gespeichert, die neueste Prüfung der Woche erscheint auf der Coach-Seite.
 - **Erfüllung** (`lib/domain/plan-match.ts`, `lib/master-data/suggestions.ts`): Nach dem Anlegen einer Aktivität (manuell, Strava-Import, FIT-Upload) wird der passende offene Vorschlag gesucht: gleiche Sportart, geplanter Tag innerhalb ±1 Tag des Aktivitätstags (Zürich), Status vorgeschlagen oder angenommen. Bei mehreren gewinnt der gleiche Tag, dann die nächste Dauer. Treffer → Status `done` mit `completed_activity_id`. Wird die Aktivität gelöscht, geht der Vorschlag auf `accepted` zurück. Die Wochenbilanz zählt Vorschläge und Aktivitäten der Kalenderwoche ab Montag (Zürich); übersprungene zählen nicht als geplant.

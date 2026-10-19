@@ -71,7 +71,10 @@ export function reviewWindow(current: ReviewActivity[], previous: ReviewActivity
     const target = sport?.active && sport.targetSessionsPerWeek ? sport.targetSessionsPerWeek * weeks : null;
     let verdict: Verdict = "offen";
     let hint: string | null = null;
-    if (target !== null) {
+    if (target !== null && sport?.selfPlanned) {
+      // Feste Termine: zählen, aber nicht bewerten
+      hint = `${agg.sessions} × von ${target}`;
+    } else if (target !== null) {
       const share = agg.sessions / target;
       verdict = share < LOW_SHARE ? "zu wenig" : share > HIGH_SHARE ? "mehr als geplant" : "gut";
       hint = `${agg.sessions} × von ${target}`;
@@ -94,7 +97,7 @@ export function reviewWindow(current: ReviewActivity[], previous: ReviewActivity
   }
   rows.sort((a, b) => b.seconds - a.seconds || (b.targetSessions ?? 0) - (a.targetSessions ?? 0) || a.sport.localeCompare(b.sport));
 
-  const judged = rows.filter((r) => r.verdict !== "offen" && !(bySport.get(r.sport)?.selfPlanned && r.verdict === "zu wenig"));
+  const judged = rows.filter((r) => r.verdict !== "offen");
   const low = judged.filter((r) => r.verdict === "zu wenig");
   const withNotes = rows.filter((r) => r.notes.length > 0);
   let overall: Review["overall"];
