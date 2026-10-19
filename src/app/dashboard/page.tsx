@@ -5,7 +5,8 @@ import { SportBars } from "@/components/sport-bars";
 import { buttonPrimary, buttonSecondary } from "@/components/ui";
 import { INTENSITY_LABELS } from "@/lib/domain/intensity";
 import { sortByWeightForSeason } from "@/lib/domain/preferences";
-import { formatHours, sinceDays, summarizeBySport, totals } from "@/lib/domain/progress";
+import { formatHours, sinceDays, totals } from "@/lib/domain/progress";
+import { reviewWindow } from "@/lib/domain/review";
 import { SEASON_LABELS, seasonForDate } from "@/lib/domain/season";
 import { formatDate, formatDateTime, formatDuration, utcToLocalParts } from "@/lib/domain/time";
 import { listActivities } from "@/lib/master-data/activities";
@@ -20,16 +21,35 @@ export default async function DashboardPage() {
   const now = new Date();
   const season = seasonForDate(now);
   const today = utcToLocalParts(now).date;
-  const [sports, recent, suggestions] = await Promise.all([
+  const [sports, eightWeeks, suggestions] = await Promise.all([
     listSports(user.id),
-    listActivities(user.id, { since: sinceDays(now, 28) }),
+    listActivities(user.id, { since: sinceDays(now, 56) }),
     listSuggestions(user.id, today),
   ]);
+  const windowStart = sinceDays(now, 28).getTime();
+  const recent = eightWeeks.filter((a) => a.startedAt.getTime() >= windowStart);
+  const previous = eightWeeks.filter((a) => a.startedAt.getTime() < windowStart);
   const open = suggestions.filter((s) => s.status === "suggested" || s.status === "accepted");
   const next = open[0] ?? null;
   const following = open.slice(1, 5);
-  const bySport = summarizeBySport(recent);
+  const review = reviewWindow(
+    recent,
+    previous,
+    sports.map((s) => {
+      const pref = s.preferences.find((p) => p.season === season);
+      return { name: s.name, active: s.active, selfPlanned: s.selfPlanned, weight: pref?.weight ?? 0, targetSessionsPerWeek: pref?.targetSessionsPerWeek ?? null };
+    }),
+  );
+  const bars = review.sports.map((s) => ({
+    sport: s.sport,
+    sessions: s.sessions,
+    seconds: s.seconds,
+    load: s.load,
+    hint: s.hint,
+    tone: s.verdict === "gut" ? ("ok" as const) : s.verdict === "zu wenig" ? ("low" as const) : ("neutral" as const),
+  }));
   const sum = totals(recent);
+  const reviewTone = { gut: "text-moss", mittel: "text-ink", "zu wenig": "text-danger", offen: "text-stone" }[review.overall];
   const last = recent[0] ?? null;
   const focus = sortByWeightForSeason(
     sports.filter((s) => s.active),
@@ -148,8 +168,11 @@ export default async function DashboardPage() {
               <span className="font-display text-2xl font-semibold text-ink tabular-nums">{formatHours(sum.seconds)}</span>, Belastung{" "}
               <span className="font-display text-2xl font-semibold text-ink tabular-nums">{sum.load}</span>
             </p>
+            <p className="mt-2">
+              <span className={`font-semibold ${reviewTone}`}>{review.headline}.</span> <span className="text-stone">{review.text}</span>
+            </p>
             <div className="mt-4">
-              <SportBars rows={bySport} caption="Zeit je Sportart in den letzten vier Wochen" />
+              <SportBars rows={bars} caption="Zeit je Sportart in den letzten vier Wochen, Einheiten gegenüber dem Saisonziel" />
             </div>
             {last && (
               <p className="mt-4 text-sm text-stone">
