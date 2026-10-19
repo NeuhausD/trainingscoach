@@ -60,9 +60,20 @@ async function ensureGear(userId: string, accessToken: string, gearId: string, c
     .values({ userId, ...values, notes: "Aus Strava übernommen, Typ bitte prüfen." })
     .onConflictDoNothing({ target: [schema.equipment.userId, schema.equipment.name] })
     .returning({ id: schema.equipment.id });
-  if (!row) return null;
-  cache.set(gearId, row.id);
-  return row.id;
+  if (row) {
+    cache.set(gearId, row.id);
+    return row.id;
+  }
+  // Gleichnamiges Gerät existiert bereits (z. B. «Scott Spark» manuell angelegt): Gear-ID dort nachtragen
+  const [sameName] = await db()
+    .select({ id: schema.equipment.id, stravaGearId: schema.equipment.stravaGearId })
+    .from(schema.equipment)
+    .where(and(eq(schema.equipment.userId, userId), eq(schema.equipment.name, values.name)))
+    .limit(1);
+  if (!sameName) return null;
+  if (!sameName.stravaGearId) await db().update(schema.equipment).set({ stravaGearId: gearId }).where(eq(schema.equipment.id, sameName.id));
+  cache.set(gearId, sameName.id);
+  return sameName.id;
 }
 
 /**
