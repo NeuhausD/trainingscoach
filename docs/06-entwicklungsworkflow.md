@@ -63,6 +63,8 @@ stören sich nicht daran; `CLAUDE.md` bleibt die Regelquelle.
 | `adr` | `/adr <Titel>` | Architecture Decision Record anlegen |
 | `ship` | `/ship` | Abschluss-Checkliste, Commit, Push, PR-Text |
 | `coach-prompt` | `/coach-prompt` | Prompt und Schema des KI-Coaches anpassen und mit Beispieldaten testen |
+| `frontend-design` | `/frontend-design` | Design-Richtung, Typografie und Layout für neue oder überarbeitete UI (Anthropic, Apache 2.0) |
+| `web-design-guidelines` | `/web-design-guidelines <Dateien>` | UI-Code gegen Vercels Web Interface Guidelines prüfen (Barrierefreiheit, Formulare, Fokus, Dark Mode) |
 
 Skills liegen in `.claude/skills/<name>/SKILL.md` und werden mit dem Repo
 versioniert, sind also in jeder Session (Cloud oder lokal) verfügbar.

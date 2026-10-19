@@ -9,10 +9,12 @@ Code, Bezeichner und Commits: Englisch.
 - `docs/01-vision-und-ziele.md` (Was und warum)
 - `docs/02-architektur.md` (Struktur, Abläufe)
 - `docs/05-roadmap.md` (aktuelle Phase)
+- `docs/07-design.md` (Tokens, Typografie, Saisonprofil) vor UI-Arbeit
 - `AGENTS.md` enthält Hinweise von Next.js 16 zu geänderten APIs; vor Next-spezifischem Code `node_modules/next/dist/docs/` konsultieren.
 
 ## Arbeitsweise
 - Feature-Arbeit mit dem Skill `/feature`, Abschluss mit `/ship`, Entscheidungen mit `/adr`.
+- Neue oder überarbeitete UI mit `/frontend-design` planen, vor dem Ship mit `/web-design-guidelines` prüfen.
 - Vor dem Commit: `npm run check` (Lint, Typecheck, Tests) muss grün sein; vor dem PR zusätzlich `npm run build`.
 - Fachlogik gehört nach `src/lib/domain` (ohne Next/DB-Imports) und bekommt Vitest-Tests.
 - Jede Verhaltensänderung aktualisiert die passende Doku in `docs/` im gleichen Commit.

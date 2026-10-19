@@ -7,10 +7,11 @@ description: Abschluss-Checkliste für den Trainingscoach: Qualitätsprüfung, D
 
 1. `git status` und `git diff --stat` prüfen: nur beabsichtigte Dateien, keine `.env*`, keine Secrets, kein `node_modules`.
 2. `npm run check` und `npm run build` ausführen. Rot = nicht shippen, zuerst beheben.
-3. Doku-Abgleich: Für jede geänderte Datei unter `src/` prüfen, ob `docs/02-architektur.md`, `docs/03-datenmodell.md`, `docs/04-integrationen.md` oder `docs/05-roadmap.md` (Checkboxen) angepasst werden müssen.
-4. Commit(s) mit Conventional Commits auf Englisch. Mehrere logische Änderungen → mehrere Commits.
-5. `git push -u origin <branch>`.
-6. PR-Beschreibung (Deutsch) im Chat ausgeben, Struktur:
+3. Bei geänderten UI-Dateien (`src/app/**/*.tsx`, `src/components/`): `/web-design-guidelines` auf diese Dateien, Befunde beheben.
+4. Doku-Abgleich: Für jede geänderte Datei unter `src/` prüfen, ob `docs/02-architektur.md`, `docs/03-datenmodell.md`, `docs/04-integrationen.md`, `docs/05-roadmap.md` (Checkboxen) oder `docs/07-design.md` angepasst werden müssen.
+5. Commit(s) mit Conventional Commits auf Englisch. Mehrere logische Änderungen → mehrere Commits.
+6. `git push -u origin <branch>`.
+7. PR-Beschreibung (Deutsch) im Chat ausgeben, Struktur:
    - Was: 2–4 Sätze
    - Warum: Bezug auf Roadmap-Phase oder Issue
    - Geprüft: welche Befehle, welche manuellen Tests
