@@ -17,3 +17,5 @@ export function db() {
 }
 
 export { schema };
+export { SEASONS, SPORT_CATEGORIES, EQUIPMENT_KINDS } from "./schema";
+export type { Season, SportCategory, EquipmentKind } from "./schema";

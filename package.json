@@ -11,10 +11,11 @@
     "test": "vitest run",
     "check": "npm run lint && npm run typecheck && npm test",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "NODE_USE_ENV_PROXY=1 tsx --env-file-if-exists=.env.local scripts/migrate.ts",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "coach:try": "tsx --env-file=.env.local scripts/coach-try.ts"
+    "db:seed": "NODE_USE_ENV_PROXY=1 tsx --env-file-if-exists=.env.local scripts/seed.ts",
+    "coach:try": "NODE_USE_ENV_PROXY=1 tsx --env-file-if-exists=.env.local scripts/coach-try.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.82",

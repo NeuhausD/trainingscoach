@@ -81,8 +81,8 @@ src/
     dashboard/            Übersicht, Fortschritt
     activities/           Aktivitätenliste, Detail, manuelle Erfassung, FIT-Upload
     plan/                 Wochenplan und KI-Vorschläge
-    sports/               Sportarten und saisonale Präferenzen
-    equipment/            Sportgeräte
+    sports/               Sportarten und saisonale Präferenzen (Liste, new, [id]; actions.ts)
+    equipment/            Sportgeräte (Liste, new, [id]; actions.ts)
     metrics/              Körpergewicht, Leistungswerte
     settings/connectors/  Strava verbinden, KI-Anbieter
     api/auth/[...nextauth] Auth.js Handler
@@ -93,12 +93,15 @@ src/
   proxy.ts                Routen-Schutz (Next.js 16 "Proxy", früher Middleware)
   db/                     Drizzle Schema, Client, Migrationen
   lib/
-    domain/               reine Fachlogik (Saison, Belastung, Trends), gut testbar
+    users.ts              Session -> DB-Benutzer (Upsert)
+    master-data/          DB-Zugriffe für Sportarten, Präferenzen, Geräte, Seed
+    domain/               reine Fachlogik (Saison, Belastung, Präferenzen, Seed-Daten), gut testbar
     strava/               API-Client, Mapping Strava -> Activity
     fit/                  FIT-Parser
     ai/                   Provider-Auswahl, Prompts, Zod-Schemas
     weather/              Open-Meteo Client
-  components/             UI-Bausteine
+  components/             UI-Bausteine (PageHeader, SubmitButton, DeleteButton, Tailwind-Klassen)
+drizzle/                  generierte SQL-Migrationen (db:generate / db:migrate)
 docs/                     Architektur, ADRs, Setup
 .claude/                  Projekt-Skills und Einstellungen für Claude Code
 ```
@@ -119,9 +122,15 @@ sequenceDiagram
     E-->>B: Redirect /api/auth/callback/microsoft-entra-id?code=...
     B->>A: Callback
     A->>E: Code gegen Token tauschen
-    A->>A: Allowlist prüfen (ALLOWED_EMAILS), Benutzer anlegen/aktualisieren
+    A->>A: Allowlist prüfen (ALLOWED_EMAILS)
     A-->>B: Session-Cookie (JWT), Redirect /dashboard
+    B->>A: GET /sports (oder andere Seite mit Daten)
+    A->>A: requireUser(): Benutzer aus Session anlegen/aktualisieren (Upsert entra_oid)
 ```
+
+Seiten und Server Actions, die Daten lesen oder schreiben, holen den Benutzer
+über `lib/users.ts#requireUser()`. Server Actions prüfen die Session damit
+selbst, weil sie per POST direkt erreichbar sind.
 
 ## Ablauf: Strava-Sync
 
