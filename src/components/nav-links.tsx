@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const items = [
   { href: "/dashboard", label: "Übersicht" },
   { href: "/activities", label: "Training" },
-  { href: "/metrics", label: "Werte" },
+  { href: "/progress", label: "Fortschritt" },
   { href: "/sports", label: "Sportarten" },
   { href: "/equipment", label: "Geräte" },
 ];
@@ -16,7 +16,7 @@ export function NavLinks({ bottom = false }: { bottom?: boolean }) {
   return (
     <ul className={bottom ? "grid grid-cols-5" : "flex gap-1"}>
       {items.map((item) => {
-        const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+        const active = pathname === item.href || pathname.startsWith(`${item.href}/`) || (item.href === "/progress" && pathname.startsWith("/metrics"));
         return (
           <li key={item.href} className="min-w-0">
             <Link
