@@ -63,6 +63,8 @@ export default async function ActivityDetailPage({
   if (activity.distanceM) facts.push(["Distanz", `${(Number(activity.distanceM) / 1000).toFixed(1)} km`]);
   if (activity.elevationGainM) facts.push(["Höhenmeter", `${Math.round(Number(activity.elevationGainM))} m`]);
   if (activity.avgHr) facts.push(["Puls", `Ø ${activity.avgHr}${activity.maxHr ? `, max. ${activity.maxHr}` : ""}`]);
+  if (activity.avgPowerW) facts.push(["Leistung", `Ø ${activity.avgPowerW} W`]);
+  const stravaId = activity.source === "strava" && activity.externalId ? activity.externalId.replace("strava:", "") : null;
 
   return (
     <>
@@ -91,6 +93,14 @@ export default async function ActivityDetailPage({
         ))}
       </dl>
       {activity.notes && <p className="mt-4 whitespace-pre-line text-stone">{activity.notes}</p>}
+      {stravaId && (
+        <p className="mt-4 text-sm text-stone">
+          Aus Strava importiert.{" "}
+          <a href={`https://www.strava.com/activities/${stravaId}`} className="font-medium text-moss hover:underline" rel="noreferrer" target="_blank">
+            Auf Strava ansehen
+          </a>
+        </p>
+      )}
 
       {isStrength && (
         <section id="saetze" className="mt-10 flex flex-col gap-4" aria-labelledby="saetze-titel">

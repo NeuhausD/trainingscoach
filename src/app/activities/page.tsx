@@ -16,7 +16,7 @@ export default async function ActivitiesPage() {
     <>
       <PageHeader
         title="Aktivitäten"
-        subtitle="Manuell erfasst; Strava-Import folgt in Phase P3"
+        subtitle="Manuell erfasst oder aus Strava importiert"
         action={
           <Link href="/activities/new" className={buttonPrimary}>
             Erfassen
@@ -35,7 +35,9 @@ export default async function ActivitiesPage() {
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-lg font-semibold">{a.title ?? a.sportName ?? "Training"}</span>
                   <span className="block text-sm text-stone">
-                    {[formatDateTime(a.startedAt), a.title ? a.sportName : null, a.equipmentName].filter(Boolean).join(", ")}
+                    {[formatDateTime(a.startedAt), a.title ? a.sportName : null, a.equipmentName, a.source === "strava" ? "Strava" : null]
+                      .filter(Boolean)
+                      .join(", ")}
                   </span>
                 </span>
                 <span className="shrink-0 text-right">

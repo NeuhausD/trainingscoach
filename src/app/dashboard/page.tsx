@@ -14,10 +14,9 @@ import { requireUser } from "@/lib/users";
 export const metadata = { title: "Übersicht" };
 
 const upcoming = [
-  { title: "Strava und FIT", text: "Automatischer Import der Garmin-Aktivitäten", phase: "P3 und P4" },
+  { title: "FIT-Upload", text: "Zusatzwerte aus Garmin Connect (Trainingsbelastung, VO2max)", phase: "P4" },
   { title: "Fortschritt", text: "Wochenvolumen, Belastungstrend, Gewichtstrend", phase: "P5" },
   { title: "Wochenplan", text: "KI-Vorschläge nach Saison, Wetter und Belastung", phase: "P6 und P7" },
-  { title: "Connectoren", text: "Strava, KI-Anbieter, Wetter-Standort", phase: "P3" },
 ];
 
 export default async function DashboardPage() {

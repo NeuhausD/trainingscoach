@@ -171,17 +171,23 @@ export const performanceMetrics = pgTable("performance_metrics", {
   notes: text("notes"),
 });
 
-export const connectors = pgTable("connectors", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  provider: text("provider", { enum: ["strava", "garmin"] }).notNull(),
-  externalAthleteId: text("external_athlete_id"),
-  accessTokenEnc: text("access_token_enc"),
-  refreshTokenEnc: text("refresh_token_enc"),
-  expiresAt: timestamp("expires_at", { withTimezone: true }),
-  lastSyncAt: timestamp("last_sync_at", { withTimezone: true }),
-  status: text("status", { enum: ["connected", "error", "disconnected"] }).notNull().default("connected"),
-});
+export const connectors = pgTable(
+  "connectors",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    provider: text("provider", { enum: ["strava", "garmin"] }).notNull(),
+    externalAthleteId: text("external_athlete_id"),
+    athleteName: text("athlete_name"),
+    accessTokenEnc: text("access_token_enc"),
+    refreshTokenEnc: text("refresh_token_enc"),
+    expiresAt: timestamp("expires_at", { withTimezone: true }),
+    lastSyncAt: timestamp("last_sync_at", { withTimezone: true }),
+    lastError: text("last_error"),
+    status: text("status", { enum: ["connected", "error", "disconnected"] }).notNull().default("connected"),
+  },
+  (t) => [uniqueIndex("connectors_user_provider_idx").on(t.userId, t.provider)],
+);
 
 export const INTENSITIES = [
   "recovery",
