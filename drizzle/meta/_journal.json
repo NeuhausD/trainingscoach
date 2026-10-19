@@ -15,6 +15,13 @@
       "when": 1792394774677,
       "tag": "0001_lethal_adam_warlock",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792398640016,
+      "tag": "0002_tan_puppet_master",
+      "breakpoints": true
     }
   ]
 }

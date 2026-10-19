@@ -106,6 +106,41 @@ export const activities = pgTable("activities", {
   rawSummary: jsonb("raw_summary"),
 });
 
+export const EXERCISE_SOURCES = ["eisenhorn", "free-exercise-db", "manual"] as const;
+export type ExerciseSource = (typeof EXERCISE_SOURCES)[number];
+
+/** Übungskatalog: user_id NULL = gemeinsamer Katalog (Eisenhorn, Studio), sonst eigene Übung. */
+export const exercises = pgTable(
+  "exercises",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    source: text("source", { enum: EXERCISE_SOURCES }).notNull(),
+    externalRef: text("external_ref"),
+    primaryMuscles: text("primary_muscles").array().notNull().default([]),
+    secondaryMuscles: text("secondary_muscles").array().notNull().default([]),
+    accessories: text("accessories").array().notNull().default([]),
+    requiresCablePulley: boolean("requires_cable_pulley").notNull().default(false),
+    url: text("url"),
+  },
+  (t) => [uniqueIndex("exercises_source_ref_idx").on(t.source, t.externalRef)],
+);
+
+/** Kraftsätze einer Aktivität: Gewicht in kg oder Eisenhorn-Stufe (level). */
+export const exerciseSets = pgTable("exercise_sets", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  activityId: uuid("activity_id").notNull().references(() => activities.id, { onDelete: "cascade" }),
+  exerciseId: uuid("exercise_id").references(() => exercises.id, { onDelete: "set null" }),
+  position: integer("position").notNull(),
+  reps: integer("reps"),
+  weightKg: numeric("weight_kg"),
+  level: numeric("level"),
+  rpe: integer("rpe"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
 export const bodyMetrics = pgTable("body_metrics", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

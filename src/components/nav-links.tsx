@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/dashboard", label: "Übersicht" },
+  { href: "/activities", label: "Training" },
+  { href: "/metrics", label: "Werte" },
   { href: "/sports", label: "Sportarten" },
   { href: "/equipment", label: "Geräte" },
 ];
@@ -12,7 +14,7 @@ const items = [
 export function NavLinks({ bottom = false }: { bottom?: boolean }) {
   const pathname = usePathname();
   return (
-    <ul className={bottom ? "grid grid-cols-3" : "flex gap-1"}>
+    <ul className={bottom ? "grid grid-cols-5" : "flex gap-1"}>
       {items.map((item) => {
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
@@ -22,7 +24,7 @@ export function NavLinks({ bottom = false }: { bottom?: boolean }) {
               aria-current={active ? "page" : undefined}
               className={
                 bottom
-                  ? `block truncate px-2 py-3 text-center text-sm font-medium transition-colors duration-150 ${
+                  ? `block truncate px-1 py-3 text-center text-[13px] font-medium transition-colors duration-150 ${
                       active ? "text-moss shadow-[inset_0_3px_0_0_var(--moss)]" : "text-stone hover:text-ink"
                     }`
                   : `block rounded-control px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${

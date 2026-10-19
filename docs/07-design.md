@@ -45,6 +45,13 @@ Nebel. Erscheint in der Sportarten-Liste, auf der Übersicht und gross im
 Bearbeiten-Formular. Barrierefrei über `role="img"` mit textueller
 Beschreibung.
 
+## Erfassungsformulare
+
+- Sportart als Reihe von Tipp-Flächen (Radio-Buttons mit `peer`-Styling), nicht als Dropdown.
+- RPE als Raster von zehn Flächen mit Zahl in Barlow Condensed und Wortlabel darunter; das mutige Element des Formulars.
+- Dauer mit Schnellauswahl (30, 45, 60, 90, 120 min), Datum und Startzeit sind vorbelegt (heute, jetzt auf 5 min gerundet), Dauer und Gerät aus der letzten Einheit derselben Sportart.
+- Selten gebrauchte Felder (Titel, Distanz, Puls, Notiz) in einem zugeklappten `<details>`.
+
 ## Layout
 
 - App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke,
