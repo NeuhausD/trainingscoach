@@ -14,7 +14,7 @@ import { coachContextSchema, type CoachContext } from "./context";
 import { eq } from "drizzle-orm";
 
 /** Kontext für den Coach aus der DB zusammenstellen (nur Aggregate, ADR 0004). */
-export async function buildContextForUser(userId: string, now: Date, constraints: string[]): Promise<CoachContext> {
+export async function buildContextForUser(userId: string, now: Date, constraints: string[]): Promise<{ context: CoachContext; forecastError: string | null }> {
   const [sports, equipment, activities, body, performance, recentSets, user] = await Promise.all([
     listSports(userId),
     listEquipment(userId),
@@ -26,7 +26,12 @@ export async function buildContextForUser(userId: string, now: Date, constraints
   ]);
   const lat = Number(user[0]?.lat ?? process.env.HOME_LAT ?? 46.743);
   const lon = Number(user[0]?.lon ?? process.env.HOME_LON ?? 7.288);
-  const forecast = await fetchForecast(lat, lon).catch(() => []);
+  let forecastError: string | null = null;
+  const forecast = await fetchForecast(lat, lon).catch((e: unknown) => {
+    forecastError = e instanceof Error ? e.message : String(e);
+    console.error("Open-Meteo forecast failed", e);
+    return [];
+  });
 
   const built = buildCoachContext({
     now,
@@ -42,7 +47,7 @@ export async function buildContextForUser(userId: string, now: Date, constraints
     constraints,
     recentSets,
   });
-  return coachContextSchema.parse(built);
+  return { context: coachContextSchema.parse(built), forecastError };
 }
 
 /** Plan in Vorschläge übersetzen; Sportart über den exakten Namen, Kurz-Einheiten auf die Eisenhorn-Sportart. */
@@ -73,14 +78,14 @@ export function planToSuggestions(plan: WeekPlan, sports: { id: string; name: st
   return items;
 }
 
-export type PlanResult = { count: number; modelId: string; summary: string };
+export type PlanResult = { count: number; modelId: string; summary: string; forecastError: string | null };
 
 /** Wochenplan erzeugen und als Vorschläge speichern; offene Vorschläge ab heute werden ersetzt. */
 export async function createWeekPlan(userId: string, now: Date, constraints: string[]): Promise<PlanResult> {
-  const context = await buildContextForUser(userId, now, constraints);
+  const { context, forecastError } = await buildContextForUser(userId, now, constraints);
   const { plan, modelId } = await generateWeekPlan(context);
   const sports = await listSports(userId);
   const items = planToSuggestions(plan, sports, now.toISOString()).filter((i) => i.plannedOn >= context.today);
   const count = await replacePlan(userId, context.today, items, modelId, context);
-  return { count, modelId, summary: plan.summary };
+  return { count, modelId, summary: plan.summary, forecastError };
 }

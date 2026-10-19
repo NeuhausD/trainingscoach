@@ -14,6 +14,7 @@ import {
   type Connector,
 } from "@/lib/master-data/connectors";
 import { listPerformanceMetrics, latestRestingHr } from "@/lib/master-data/metrics";
+import { fulfilSuggestionForActivity } from "@/lib/master-data/suggestions";
 import { getActivity, getAthleteGear, getGear, listActivities, refreshTokens, type StravaAthleteGear } from "./client";
 
 export type SyncResult = { imported: number; updated: number; gearCreated: number };
@@ -107,7 +108,11 @@ async function upsertActivity(userId: string, m: MappedActivity, equipmentId: st
       .where(eq(schema.activities.id, existing.id));
     return "updated";
   }
-  await db().insert(schema.activities).values({ userId, source: "strava", externalId: m.externalId, sportId: m.sportId, equipmentId, ...measurements });
+  const [row] = await db()
+    .insert(schema.activities)
+    .values({ userId, source: "strava", externalId: m.externalId, sportId: m.sportId, equipmentId, ...measurements })
+    .returning({ id: schema.activities.id });
+  await fulfilSuggestionForActivity(userId, { id: row.id, sportId: m.sportId, startedAt: m.startedAt, durationS: m.durationS });
   return "imported";
 }
 

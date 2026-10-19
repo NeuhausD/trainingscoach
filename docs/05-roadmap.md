@@ -77,7 +77,9 @@ gantt
 - Fertig wenn: Wochenvorschlag passt zu Saison, Wetter und letzter Belastung (mit echtem Key prüfen)
 
 ### P7 – Wochenplan
-- Vorschläge annehmen, verschieben, erledigen; automatische Erfüllung durch importierte Aktivität
+- [x] Vorschläge annehmen, überspringen, verschieben (Datum), erledigen, zurücksetzen
+- [x] Automatische Erfüllung: neue Aktivität (manuell, Strava, FIT) erledigt den passenden offenen Vorschlag (gleiche Sportart, ±1 Tag); «Mit Aktivitäten abgleichen» für bereits importierte; Löschen der Aktivität öffnet den Vorschlag wieder
+- [x] Plan gegen Ist je Kalenderwoche auf der Coach-Seite: erledigte von geplanten Einheiten, trainierte von geplanten Minuten, je Sportart Balken (trainiert) mit Rahmen (geplant)
 - Fertig wenn: Plan vs. Ist pro Woche sichtbar
 
 ### P8 – Später

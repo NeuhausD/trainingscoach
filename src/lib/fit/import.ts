@@ -3,6 +3,7 @@ import { put } from "@vercel/blob";
 import { db, schema } from "@/db";
 import { fillGaps, mapFitActivity, matchExistingActivity, MATCH_START_TOLERANCE_S, type FitSummary } from "@/lib/domain/fit-mapping";
 import { utcToLocalParts } from "@/lib/domain/time";
+import { fulfilSuggestionForActivity } from "@/lib/master-data/suggestions";
 import { mappingContext } from "@/lib/strava/sync";
 import { FitParseError, parseFit } from "./parse";
 
@@ -150,6 +151,7 @@ export async function importFitFile(userId: string, fileName: string, bytes: Uin
       fitUrl,
     })
     .returning({ id: schema.activities.id });
+  await fulfilSuggestionForActivity(userId, { id: row.id, sportId: mapped.sportId, startedAt: mapped.startedAt, durationS: mapped.durationS });
   await recordVo2max(userId, summary);
   return { fileName, status: "created", activityId: row.id, message: "Neue Aktivität angelegt.", vo2max: summary.vo2max };
 }
