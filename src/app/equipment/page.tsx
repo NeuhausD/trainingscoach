@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { buttonSecondary } from "@/components/ui";
+import { describeSettings } from "@/lib/domain/equipment-settings";
 import { KIND_LABELS, listEquipment } from "@/lib/master-data/equipment";
 import { requireUser } from "@/lib/users";
 
@@ -48,8 +49,7 @@ export default async function EquipmentPage() {
                     {item.retired && <span className="ml-2 text-sm font-normal text-stone">ausgemustert</span>}
                   </span>
                   <span className="block text-sm text-stone">
-                    {KIND_LABELS[item.kind]}
-                    {item.notes && `, ${item.notes}`}
+                    {[KIND_LABELS[item.kind], describeSettings(item.settings), item.notes].filter(Boolean).join(", ")}
                   </span>
                 </span>
                 {item.stravaGearId && (

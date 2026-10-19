@@ -1,5 +1,6 @@
 import { and, asc, eq } from "drizzle-orm";
 import { db, schema, type EquipmentKind } from "@/db";
+import type { EquipmentSettingsJson } from "@/db/schema";
 
 export type Equipment = typeof schema.equipment.$inferSelect;
 
@@ -9,6 +10,7 @@ export type EquipmentInput = {
   stravaGearId: string | null;
   retired: boolean;
   notes: string | null;
+  settings: EquipmentSettingsJson | null;
 };
 
 export async function listEquipment(userId: string): Promise<Equipment[]> {

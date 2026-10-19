@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { SEASONS } from "@/db/schema";
+import { equipmentSettingsSchema } from "./equipment-settings";
 import { isValidWeight } from "./preferences";
 import { FALLBACK_SPORT_NAME, SEED_EQUIPMENT, SEED_SPORTS } from "./seed-data";
 
@@ -38,8 +39,14 @@ describe("SEED_SPORTS", () => {
 });
 
 describe("SEED_EQUIPMENT", () => {
-  it("enthält ein XC- und ein Trail-Bike", () => {
-    expect(SEED_EQUIPMENT.map((e) => e.kind).sort()).toEqual(["bike_trail", "bike_xc"]);
+  it("enthält ein XC-Bike, ein Trail-Bike und das Eisenhorn", () => {
+    expect(SEED_EQUIPMENT.map((e) => e.kind).sort()).toEqual(["bike_trail", "bike_xc", "home_gym"]);
     expect(new Set(SEED_EQUIPMENT.map((e) => e.name)).size).toBe(SEED_EQUIPMENT.length);
+  });
+
+  it("beschreibt das Eisenhorn mit Kolben, Stufen und ohne Seilzug", () => {
+    const eisenhorn = SEED_EQUIPMENT.find((e) => e.name === "Eisenhorn")!;
+    expect(eisenhorn.settings).toMatchObject({ piston: "16", levels: 10, cablePulley: false });
+    expect(equipmentSettingsSchema.safeParse(eisenhorn.settings).success).toBe(true);
   });
 });

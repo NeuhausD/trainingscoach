@@ -59,6 +59,17 @@ export const sportPreferences = pgTable(
 export const EQUIPMENT_KINDS = ["bike_xc", "bike_trail", "shoes", "home_gym", "other"] as const;
 export type EquipmentKind = (typeof EQUIPMENT_KINDS)[number];
 
+/** Gerätespezifische Parameter, Struktur und Validierung in lib/domain/equipment-settings.ts. */
+export type EquipmentSettingsJson = {
+  model?: string;
+  piston?: string;
+  levels?: number;
+  halfSteps?: boolean;
+  cablePulley?: boolean;
+  accessories?: string[];
+  kgPerLevel?: Record<string, number>;
+};
+
 export const equipment = pgTable(
   "equipment",
   {
@@ -69,6 +80,7 @@ export const equipment = pgTable(
     stravaGearId: text("strava_gear_id").unique(),
     retired: boolean("retired").notNull().default(false),
     notes: text("notes"),
+    settings: jsonb("settings").$type<EquipmentSettingsJson>(),
   },
   (t) => [uniqueIndex("equipment_user_name_idx").on(t.userId, t.name)],
 );
