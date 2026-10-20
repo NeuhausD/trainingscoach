@@ -81,7 +81,7 @@ gantt
 - [x] Automatische Erfüllung: neue Aktivität (manuell, Strava, FIT) erledigt den passenden offenen Vorschlag (gleiche Sportart, ±1 Tag); «Mit Aktivitäten abgleichen» für bereits importierte; Löschen der Aktivität öffnet den Vorschlag wieder
 - [x] Eigene Einheiten planen (alle Sportarten, auch selbst geplante wie Eishockey): gelten als angenommen, bleiben beim Coach-Plan stehen, der Coach plant um sie herum
 - [x] Plan prüfen lassen: der Coach bewertet die geplante Woche (Belastung, Erholung, Saison, Wetter, Muskel-Balance) und schlägt konkrete Verbesserungen vor; Prüfung wird gespeichert
-- [x] Rückblick auf der Übersicht bewertet die letzten 4 Wochen gegen das Saisonziel (zu wenig, kürzer, weniger intensiv)
+- [x] Rückblick auf der Übersicht bewertet die letzten 4 Wochen nach Leistungsnutzen: Grundlage, Intensität, lange Einheiten, Kraft, Steigerung, Regelmässigkeit, Erholung
 - [x] Plan gegen Ist je Kalenderwoche auf der Coach-Seite: erledigte von geplanten Einheiten, trainierte von geplanten Minuten, je Sportart Balken (trainiert) mit Rahmen (geplant)
 - Fertig wenn: Plan vs. Ist pro Woche sichtbar
 

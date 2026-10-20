@@ -54,7 +54,7 @@ Beschreibung.
 
 ## Diagramme
 
-- Balken je Sportart (`src/components/sport-bars.tsx`): Zeit als Länge, Einheiten als Beschriftung am Balkenende, 20 px dick, 4 px Rundung nur am Datenende, eine Farbe (Moos), Text in Tinte und Stein. Keine zweite Achse, keine Legende bei einer Grösse; die Aktivitätenliste ist die Tabellensicht. Auf der Übersicht trägt jede Zeile das Saisonziel als Hinweis («5 × von 8»): Moos bei erreicht, Warnrot bei zu wenig, Stein ohne Urteil; Sportarten mit Ziel ohne Einheit erscheinen ohne Balken.
+- Balken je Sportart (`src/components/sport-bars.tsx`): Zeit als Länge, Einheiten als Beschriftung am Balkenende, 20 px dick, 4 px Rundung nur am Datenende, eine Farbe (Moos), Text in Tinte und Stein. Keine zweite Achse, keine Legende bei einer Grösse; die Aktivitätenliste ist die Tabellensicht. Die Übersicht zeigt darüber die Bewertung nach Leistungsnutzen als Zeilen: Urteil-Chip (Moos gut, Stein mittel, Warnrot zu wenig oder zu viel), Dimension, Kurzwert und ein Satz zur Wirkung.
 - Säulen (`columns.tsx`): eine Farbe, höchstens 24 px breit, 4 px Rundung an der Kappe, Basislinie als Hairline; nur die hervorgehobene Säule trägt einen Wert, jede Säule einen Hover-Titel.
 - Linie (`line-chart.tsx`): SVG, 2 px, Endpunkt 10 px mit Ring in Papierfarbe, Wert am Ende, Spanne unten.
 - Jahresübersicht als kleine Vielfache je Sportart (eine Reihe Mini-Säulen pro Sportart) statt gestapelter Mehrfarben-Balken; so braucht es keine Farblegende.

@@ -5,11 +5,11 @@ import { SportBars } from "@/components/sport-bars";
 import { buttonPrimary, buttonSecondary } from "@/components/ui";
 import { INTENSITY_LABELS } from "@/lib/domain/intensity";
 import { sortByWeightForSeason } from "@/lib/domain/preferences";
-import { formatHours, sinceDays, totals } from "@/lib/domain/progress";
-import { reviewWindow } from "@/lib/domain/review";
+import { formatHours, sinceDays, summarizeBySport, totals } from "@/lib/domain/progress";
+import { reviewWindow, type Verdict } from "@/lib/domain/review";
 import { SEASON_LABELS, seasonForDate } from "@/lib/domain/season";
 import { formatDate, formatDateTime, formatDuration, utcToLocalParts } from "@/lib/domain/time";
-import { listActivities } from "@/lib/master-data/activities";
+import { listActivities, recentSetsWithMuscles } from "@/lib/master-data/activities";
 import { listSports } from "@/lib/master-data/sports";
 import { listSuggestions, readMeta } from "@/lib/master-data/suggestions";
 import { requireUser } from "@/lib/users";
@@ -21,10 +21,11 @@ export default async function DashboardPage() {
   const now = new Date();
   const season = seasonForDate(now);
   const today = utcToLocalParts(now).date;
-  const [sports, eightWeeks, suggestions] = await Promise.all([
+  const [sports, eightWeeks, suggestions, recentSets] = await Promise.all([
     listSports(user.id),
     listActivities(user.id, { since: sinceDays(now, 56) }),
     listSuggestions(user.id, today),
+    recentSetsWithMuscles(user.id, sinceDays(now, 28)),
   ]);
   const windowStart = sinceDays(now, 28).getTime();
   const recent = eightWeeks.filter((a) => a.startedAt.getTime() >= windowStart);
@@ -32,24 +33,20 @@ export default async function DashboardPage() {
   const open = suggestions.filter((s) => s.status === "suggested" || s.status === "accepted");
   const next = open[0] ?? null;
   const following = open.slice(1, 5);
-  const review = reviewWindow(
-    recent,
-    previous,
-    sports.map((s) => {
-      const pref = s.preferences.find((p) => p.season === season);
-      return { name: s.name, active: s.active, selfPlanned: s.selfPlanned, weight: pref?.weight ?? 0, targetSessionsPerWeek: pref?.targetSessionsPerWeek ?? null };
-    }),
-  );
-  const bars = review.sports.map((s) => ({
-    sport: s.sport,
-    sessions: s.sessions,
-    seconds: s.seconds,
-    load: s.load,
-    hint: s.hint,
-    tone: s.verdict === "gut" ? ("ok" as const) : s.verdict === "zu wenig" ? ("low" as const) : ("neutral" as const),
-  }));
+  const categoryOf = new Map(sports.map((s) => [s.name, s.category]));
+  const forReview = (a: (typeof recent)[number]) => ({
+    sportName: a.sportName,
+    category: a.sportName ? (categoryOf.get(a.sportName) ?? null) : null,
+    durationS: a.durationS,
+    trainingLoad: a.trainingLoad,
+    rpe: a.rpe,
+    startedAt: a.startedAt,
+  });
+  const review = reviewWindow(recent.map(forReview), previous.map(forReview), recentSets, now);
+  const bars = summarizeBySport(recent);
   const sum = totals(recent);
-  const reviewTone = { gut: "text-moss", mittel: "text-ink", "zu wenig": "text-danger", offen: "text-stone" }[review.overall];
+  const reviewTone = { wirksam: "text-moss", "teilweise wirksam": "text-ink", "wenig wirksam": "text-danger", offen: "text-stone" }[review.overall];
+  const verdictTone: Record<Verdict, string> = { gut: "bg-moss/10 text-moss", mittel: "bg-mist/60 text-stone", "zu wenig": "bg-danger/10 text-danger", "zu viel": "bg-danger/10 text-danger", offen: "bg-mist/60 text-stone" };
   const last = recent[0] ?? null;
   const focus = sortByWeightForSeason(
     sports.filter((s) => s.active),
@@ -171,8 +168,20 @@ export default async function DashboardPage() {
             <p className="mt-2">
               <span className={`font-semibold ${reviewTone}`}>{review.headline}.</span> <span className="text-stone">{review.text}</span>
             </p>
+            <ul className="mt-3 divide-y divide-mist border-t border-mist">
+              {review.dimensions.map((d) => (
+                <li key={d.key} className="flex items-start gap-3 py-2">
+                  <span className={`mt-0.5 w-20 shrink-0 rounded-control px-2 py-0.5 text-center text-xs font-semibold ${verdictTone[d.verdict]}`}>{d.verdict}</span>
+                  <span className="min-w-0">
+                    <span className="font-medium">{d.label}</span>
+                    <span className="text-stone"> {d.value}</span>
+                    <span className="block text-sm text-stone">{d.note}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-4">
-              <SportBars rows={bars} caption="Zeit je Sportart in den letzten vier Wochen, Einheiten gegenüber dem Saisonziel" />
+              <SportBars rows={bars} caption="Zeit je Sportart in den letzten vier Wochen" />
             </div>
             {last && (
               <p className="mt-4 text-sm text-stone">
