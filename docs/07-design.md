@@ -64,11 +64,14 @@ Beschreibung.
 
 ## Layout
 
-- App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke,
-  Tab-Navigation unten am Handy (mit Safe-Area), oben ab `sm`. Fünf Tabs:
-  Übersicht, Training, Coach, Fortschritt, Sportarten; Geräte und Werte
-  hängen unter Sportarten bzw. Fortschritt (Tab bleibt aktiv). Inhalte
-  linksbündig, maximal `max-w-2xl`.
+- App-Shell (`src/components/app-shell.tsx`): Kopfzeile mit Wortmarke und
+  darunter die Tab-Reihe, beides oben fixiert (`sticky`, Safe-Area oben).
+  Keine Leiste am unteren Rand: dort liegen auf dem iPhone die Wischgeste
+  zum Home-Bildschirm und die Safari-Adressleiste, Tipps gingen verloren.
+  Fünf Tabs: Übersicht, Training, Coach, Fortschritt, Sportarten; am Handy
+  gleich breit mit Unterstrich in Moos, ab `sm` als Pillen in der Kopfzeile.
+  Geräte und Werte hängen unter Sportarten bzw. Fortschritt (Tab bleibt
+  aktiv). Inhalte linksbündig, maximal `max-w-2xl`.
 - Übersicht: zuerst die Aussicht (nächste Einheit als Titel in Barlow
   Condensed, folgende Tage als Zeilen), dann der Rückblick (vier Wochen mit
   Balken, letzte Einheit). Saison und Schwerpunkte sind eine Statuszeile
