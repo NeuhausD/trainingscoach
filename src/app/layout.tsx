@@ -24,6 +24,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  // Safe-Area-Werte (Notch, Home-Indikator) nur mit viewport-fit=cover verfügbar
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f2f4f1" },
     { media: "(prefers-color-scheme: dark)", color: "#0f1512" },

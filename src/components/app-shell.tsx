@@ -2,8 +2,10 @@ import Link from "next/link";
 import { NavLinks } from "./nav-links";
 
 /**
- * Rahmen aller Seiten: Kopfzeile mit Wortmarke, Tab-Navigation unten am Handy
- * und oben ab Tablet. Ohne Session (Login-Seite) nur die Wortmarke.
+ * Rahmen aller Seiten: Kopfzeile mit Wortmarke und darunter die
+ * Tab-Navigation, beides oben fixiert. Keine Leiste am unteren Rand, weil
+ * dort auf dem iPhone die Wischgeste und die Safari-Adressleiste liegen.
+ * Ohne Session (Login-Seite) nur die Wortmarke.
  */
 export function AppShell({ signedIn, children }: { signedIn: boolean; children: React.ReactNode }) {
   return (
@@ -14,12 +16,9 @@ export function AppShell({ signedIn, children }: { signedIn: boolean; children: 
       >
         Zum Inhalt springen
       </a>
-      <header className="border-b border-mist">
-        <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-4 py-3">
-          <Link
-            href="/dashboard"
-            className="font-display text-xl font-semibold tracking-tight hover:text-moss"
-          >
+      <header className="sticky top-0 z-40 border-b border-mist bg-paper/95 pt-[env(safe-area-inset-top)] backdrop-blur supports-[backdrop-filter]:bg-paper/85">
+        <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-4 pt-3 pb-2 sm:py-3">
+          <Link href="/dashboard" className="font-display text-xl font-semibold tracking-tight hover:text-moss">
             Trainingscoach
           </Link>
           {signedIn && (
@@ -33,18 +32,15 @@ export function AppShell({ signedIn, children }: { signedIn: boolean; children: 
             </div>
           )}
         </div>
+        {signedIn && (
+          <nav aria-label="Hauptnavigation" className="mx-auto max-w-2xl px-2 sm:hidden">
+            <NavLinks />
+          </nav>
+        )}
       </header>
-      <main id="inhalt" className={`mx-auto max-w-2xl px-4 py-6 ${signedIn ? "pb-28 sm:pb-12" : "pb-12"}`}>
+      <main id="inhalt" className="mx-auto max-w-2xl px-4 py-6 pb-[calc(3rem+env(safe-area-inset-bottom))]">
         {children}
       </main>
-      {signedIn && (
-        <nav
-          aria-label="Hauptnavigation"
-          className="fixed inset-x-0 bottom-0 z-40 border-t border-mist bg-paper pb-[env(safe-area-inset-bottom)] sm:hidden"
-        >
-          <NavLinks bottom />
-        </nav>
-      )}
     </>
   );
 }
